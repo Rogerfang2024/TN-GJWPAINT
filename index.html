@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>乾淨世界「我愛我家」兒童著色畫比賽｜活動官網</title>
-  <meta name="description" content="乾淨世界「我愛我家」兒童著色畫比賽｜2026/03/15（日）｜彰南里活動中心 大禮堂｜現場提供底圖｜11:30頒獎" />
-  <meta property="og:title" content="乾淨世界「我愛我家」兒童著色畫比賽｜活動官網" />
-  <meta property="og:description" content="2026/03/15（日）｜彰南里活動中心 大禮堂｜現場提供底圖｜11:30頒獎" />
+  <title>乾淨世界我愛我家兒童著色畫比賽官網</title>
+
+  <meta name="description" content="乾淨世界我愛我家兒童著色畫比賽官網｜2026/03/15（日）｜彰南里活動中心 大禮堂｜現場提供底圖｜11:40 公布並頒獎" />
+  <meta property="og:title" content="乾淨世界我愛我家兒童著色畫比賽官網" />
+  <meta property="og:description" content="2026/03/15（日）｜彰南里活動中心 大禮堂｜現場提供底圖｜11:40 公布並頒獎" />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0ea5e9" />
 
@@ -37,6 +38,7 @@
     }
     a{color:inherit}
     .wrap{max-width:var(--max); margin:0 auto; padding:22px}
+
     .topbar{
       position:sticky; top:0; z-index:20;
       backdrop-filter: blur(10px);
@@ -93,11 +95,6 @@
       color: #fff;
     }
     .btn.primary:hover{box-shadow: 0 18px 40px rgba(14,165,233,.22)}
-    .btn.green{
-      border-color: transparent;
-      background: linear-gradient(135deg, var(--brand2), #86efac);
-      color:#052e16;
-    }
     .btn:disabled{
       opacity:.55;
       cursor:not-allowed;
@@ -144,6 +141,20 @@
       color:var(--muted);
       font-size:14px;
       font-weight:600;
+    }
+
+    .heroPhoto{
+      width:100%;
+      height:280px;
+      object-fit:cover;
+      border-radius:16px;
+      border:1px solid var(--border);
+      margin:10px 0 14px;
+      background:#fff;
+      display:block;
+    }
+    @media (max-width: 520px){
+      .heroPhoto{ height:200px; }
     }
 
     .pillRow{
@@ -259,6 +270,7 @@
     iframe{width:100%; height:300px; border:0}
 
     .muted{color:var(--muted)}
+
     .linkBox{
       border:1px solid var(--border);
       background:#fff;
@@ -276,7 +288,9 @@
       color:#0b1220;
       font-weight:900;
       word-break:break-all;
+      text-decoration:none;
     }
+    .linkText:hover{ text-decoration:underline; }
 
     footer{padding:18px 0 36px; color:var(--muted); font-size:12px}
     .footCard{
@@ -295,7 +309,7 @@
     <div class="wrap">
       <div class="brand" aria-label="網站標題">
         <span class="dot" aria-hidden="true"></span>
-        <span id="siteName">活動官網</span>
+        <span id="siteName">乾淨世界我愛我家兒童著色畫比賽官網</span>
       </div>
 
       <nav aria-label="導覽">
@@ -315,11 +329,14 @@
   <header class="hero">
     <div class="wrap">
       <div class="card heroCard">
-        <div class="kicker" id="kicker">現場提供底圖｜11:30 頒獎</div>
+        <div class="kicker" id="kicker">現場提供底圖｜11:40 公布並頒獎</div>
         <h1 id="title">乾淨世界「我愛我家」兒童著色畫比賽</h1>
         <p class="sub" id="subtitle">
-          一頁看懂：時間、地點、名額、流程與規則。請確定能到再報名（額滿即止）。
+          活動資訊、流程與規則都在這裡。請確定能到再報名（額滿即止）。
         </p>
+
+        <!-- ★圖片：你的 GitHub 結構是 assets/photo.png，這樣寫是正確的 -->
+        <img class="heroPhoto" src="assets/photo.png" alt="活動圖片" loading="lazy" />
 
         <div class="pillRow" aria-label="活動關鍵資訊">
           <div class="pill">
@@ -337,13 +354,12 @@
         </div>
 
         <div class="ctaRow">
-          <a class="btn primary" id="regBtn" href="#" target="_blank" rel="noopener">立即報名</a>
-          <button class="btn green" id="icsBtn" type="button">加入行事曆</button>
+          <a class="btn primary" id="regBtnTop" href="#" target="_blank" rel="noopener">立即報名</a>
           <a class="btn" id="mapBtn" href="#" target="_blank" rel="noopener">開啟地圖</a>
         </div>
 
         <div class="notice" id="notice">
-          收件截止：10:30（作品繳交截止）｜頒獎時間：11:30（公布並頒獎）
+          收件截止：10:30（作品繳交截止）｜公布並頒獎：11:40
         </div>
       </div>
     </div>
@@ -364,7 +380,7 @@
           </div>
           <div class="card infoCard">
             <h3>流程清楚</h3>
-            <p>10:30 收件截止，11:30 公布並頒獎。</p>
+            <p>10:30 收件截止，11:40 公布並頒獎。</p>
           </div>
           <div class="card infoCard">
             <h3>完成就有參加獎</h3>
@@ -391,7 +407,7 @@
             <div class="desc">收件截止（作品繳交截止）</div>
           </div>
           <div class="tlItem">
-            <div class="time">11:30</div>
+            <div class="time">11:40</div>
             <div class="desc">公布並頒獎</div>
           </div>
           <div class="tlItem">
@@ -402,23 +418,24 @@
       </div>
     </section>
 
+    <!-- 報名：同時提供按鈕 + 可點網址 + 可複製 -->
     <section id="register" aria-label="報名資訊">
       <div class="wrap">
         <div class="secTitle">
-          <h2>報名（使用連結網址）</h2>
-          <div class="hint">不使用 QR Code</div>
+          <h2>報名</h2>
+          <div class="hint">按鈕 + 連結網址（不使用 QR Code）</div>
         </div>
 
         <div class="card infoCard">
           <div class="ctaRow" style="margin-top:0">
-            <a class="btn primary" id="regBtn2" href="#" target="_blank" rel="noopener">立即報名</a>
+            <a class="btn primary" id="regBtn" href="#" target="_blank" rel="noopener">立即報名</a>
             <button class="btn" id="copyLinkBtn" type="button">複製報名網址</button>
           </div>
 
           <div style="height:10px"></div>
 
           <div class="linkBox" role="group" aria-label="報名網址">
-            <div class="muted" style="font-weight:800; font-size:13px">報名網址</div>
+            <div class="muted" style="font-weight:800; font-size:13px">報名網址（可點）</div>
             <a class="linkText" id="regUrlText" href="#" target="_blank" rel="noopener">#</a>
           </div>
 
@@ -508,7 +525,7 @@
               <li>佳作：禮券 300 元（各組 2 名）</li>
               <li>參加獎：完成作品即可獲得（數量有限，送完為止）</li>
             </ul>
-            <p class="muted" style="margin-top:10px; font-weight:800">頒獎時間：11:30（公布並頒獎）</p>
+            <p class="muted" style="margin-top:10px; font-weight:800">公布並頒獎：11:40</p>
           </div>
         </div>
       </div>
@@ -561,7 +578,7 @@
           <div class="grid twoCol">
             <div>
               <h3>主辦單位</h3>
-              <p class="muted" style="font-weight:900" id="hostText">乾淨世界推廣團隊</p>
+              <p class="muted" style="font-weight:900" id="hostText">乾淨校園推廣團隊</p>
 
               <div style="height:10px"></div>
               <h3>協辦單位</h3>
@@ -585,8 +602,8 @@
       <div class="wrap">
         <div class="card footCard">
           <div>
-            <div style="font-weight:900; color:#0b1220">乾淨世界「我愛我家」兒童著色畫比賽</div>
-            <div class="muted" style="font-weight:700">一頁式活動官網｜可用 GitHub Pages / Netlify 發佈</div>
+            <div style="font-weight:900; color:#0b1220">乾淨世界我愛我家兒童著色畫比賽官網</div>
+            <div class="muted" style="font-weight:700">一頁式活動官網｜GitHub Pages 發佈</div>
           </div>
           <div class="muted">© <span id="year"></span></div>
         </div>
@@ -597,17 +614,13 @@
   <script>
     // ====== 只改這裡：活動資料（改完就能用）======
     const EVENT = {
-      siteName: "乾淨世界｜活動官網",
+      siteName: "乾淨世界我愛我家兒童著色畫比賽官網",
       title: "乾淨世界「我愛我家」兒童著色畫比賽",
-      kicker: "現場提供底圖｜11:30 頒獎",
-      subtitle: "一頁看懂：時間、地點、名額、流程與規則。請確定能到再報名（額滿即止）。",
+      kicker: "現場提供底圖｜11:40 公布並頒獎",
+      subtitle: "活動資訊、流程與規則都在這裡。請確定能到再報名（額滿即止）。",
 
       dateText: "2026/03/15（日）",
       timeText: "09:00–12:00",
-
-      // ICS 需要用 24 小時制時間 + 時區（台灣 Asia/Taipei）
-      startISO: "2026-03-15T09:00:00+08:00",
-      endISO:   "2026-03-15T12:00:00+08:00",
 
       place: "彰南里活動中心｜大禮堂",
       address: "臺南市南區新建路 12 號",
@@ -618,15 +631,16 @@
       // Google Map 搜尋用（通常用地址就可以）
       mapQuery: "臺南市南區新建路 12 號 彰南里活動中心",
 
-      host: "乾淨世界推廣團隊",
+      host: "乾淨校園推廣團隊",
       cohost: "彰南里活動中心",
       phone: "陳小姐｜0913-837-389",
 
-      notice: "收件截止：10:30（作品繳交截止）｜頒獎時間：11:30（公布並頒獎）"
+      notice: "收件截止：10:30（作品繳交截止）｜公布並頒獎：11:40"
     };
 
     const $ = (id) => document.getElementById(id);
 
+    // 顯示文字
     $("siteName").textContent = EVENT.siteName;
     $("title").textContent = EVENT.title;
     $("kicker").textContent = EVENT.kicker;
@@ -652,8 +666,8 @@
     $("mapBtn2").href = mapUrl;
     $("mapFrame").src = "https://www.google.com/maps?q=" + encodeURIComponent(EVENT.mapQuery) + "&output=embed";
 
-    // 報名連結
-    const regBtns = [$("regBtn"), $("regBtn2")];
+    // 報名連結（按鈕 + 可點網址 + 複製）
+    const regBtns = [ $("regBtnTop"), $("regBtn") ];
     const regUrlText = $("regUrlText");
     const copyLinkBtn = $("copyLinkBtn");
 
@@ -663,9 +677,8 @@
       if (!url || url === "#") {
         regBtns.forEach(b => {
           b.href = "#";
-          b.setAttribute("aria-disabled", "true");
-          b.addEventListener("click", (e)=>e.preventDefault());
           b.style.opacity = "0.6";
+          b.addEventListener("click", (e)=>e.preventDefault());
         });
         regUrlText.textContent = "（尚未設定報名網址）";
         regUrlText.href = "#";
@@ -687,17 +700,6 @@
     }
     setRegistrationUI();
 
-    // 複製地址
-    $("copyAddrBtn").addEventListener("click", async () => {
-      try{
-        await navigator.clipboard.writeText(EVENT.address);
-        $("copyAddrBtn").textContent = "已複製 ✅";
-        setTimeout(()=> $("copyAddrBtn").textContent = "複製地址", 1200);
-      }catch(e){
-        alert("複製失敗，請手動複製：\n" + EVENT.address);
-      }
-    });
-
     // 複製報名連結
     copyLinkBtn.addEventListener("click", async () => {
       const url = (EVENT.registerUrl || "").trim();
@@ -711,52 +713,16 @@
       }
     });
 
-    // ====== 下載 .ics（加入行事曆）======
-    function pad(n){ return String(n).padStart(2,"0"); }
-    function toICSDate(dt){
-      return dt.getFullYear()
-        + pad(dt.getMonth()+1)
-        + pad(dt.getDate())
-        + "T"
-        + pad(dt.getHours())
-        + pad(dt.getMinutes())
-        + "00";
-    }
-    function downloadICS(){
-      const start = new Date(EVENT.startISO);
-      const end = new Date(EVENT.endISO);
-
-      const uid = "cleanworld-" + start.getTime() + "@event";
-      const regLine = (EVENT.registerUrl && EVENT.registerUrl !== "#") ? ("\\n報名：" + EVENT.registerUrl) : "";
-
-      const ics =
-`BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//CleanWorld//Event//ZH
-CALSCALE:GREGORIAN
-METHOD:PUBLISH
-BEGIN:VEVENT
-UID:${uid}
-DTSTAMP:${toICSDate(new Date())}
-DTSTART;TZID=Asia/Taipei:${toICSDate(start)}
-DTEND;TZID=Asia/Taipei:${toICSDate(end)}
-SUMMARY:${EVENT.title}
-LOCATION:${EVENT.place}（${EVENT.address}）
-DESCRIPTION:${EVENT.kicker}\\n${EVENT.notice}${regLine}
-END:VEVENT
-END:VCALENDAR`;
-
-      const blob = new Blob([ics], {type:"text/calendar;charset=utf-8"});
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = "活動行事曆.ics";
-      document.body.appendChild(a);
-      a.click();
-      URL.revokeObjectURL(a.href);
-      a.remove();
-    }
-
-    $("icsBtn").addEventListener("click", downloadICS);
+    // 複製地址
+    $("copyAddrBtn").addEventListener("click", async () => {
+      try{
+        await navigator.clipboard.writeText(EVENT.address);
+        $("copyAddrBtn").textContent = "已複製 ✅";
+        setTimeout(()=> $("copyAddrBtn").textContent = "複製地址", 1200);
+      }catch(e){
+        alert("複製失敗，請手動複製：\n" + EVENT.address);
+      }
+    });
   </script>
 </body>
 </html>
