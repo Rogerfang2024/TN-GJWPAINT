@@ -202,7 +202,7 @@
         <span class="logoDot" aria-hidden="true"></span>
         <span id="siteName">活動報名</span>
       </div>
-      <a class="btn" id="backBtn" href="/">回到報名頁</a>
+      <a class="btn" id="backBtn" href="./">回到報名頁</a>
     </div>
   </div>
 
@@ -296,7 +296,7 @@
     $("ridText").textContent = rid ? rid : "（未取得序號）";
 
     // 回到報名頁（若你不是部署在根目錄，改這裡）
-    const HOME_URL = "/";
+    const HOME_URL = "./";
 
     $("backBtn").href = HOME_URL;
     $("againBtn").href = HOME_URL;
@@ -349,3 +349,4 @@
   </script>
 </body>
 </html>
+
