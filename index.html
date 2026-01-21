@@ -3,82 +3,47 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>活動報名</title>
+  <title>乾淨世界我愛我家兒童著色畫比賽官網</title>
 
-  <meta name="description" content="活動報名｜填完即送出，資料會寫入 Google Sheet" />
-  <meta property="og:title" content="活動報名" />
-  <meta property="og:description" content="填完即送出，資料會寫入 Google Sheet" />
+  <meta name="description" content="乾淨世界我愛我家兒童著色畫比賽官網｜報名、流程、辦法、獎項與地點資訊" />
+  <meta property="og:title" content="乾淨世界我愛我家兒童著色畫比賽官網" />
+  <meta property="og:description" content="一頁式活動官網：報名、流程、參加辦法（可展開）、獎項與地點" />
   <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#fb7185" />
-
-  <script>
-    // ✅ 只要改 PIXEL_ID（沒有就留空），其它不用動
-    const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxDlJ8o8unlRefrLvJM22lPN7E4Z-TevdkT2Lq1O9ROunLKSVKliq8qylOo_jj-FyyDzQ/exec";
-    const THANKS_URL =  "./thanks.html";
-    const PIXEL_ID = ""; // 例如 "1059276802371134"；沒有就留空 ""
-  </script>
-
-  <!-- Meta Pixel（可選） -->
-  <script>
-    (function loadPixel(){
-      if(!PIXEL_ID) return;
-      !function(f,b,e,v,n,t,s){
-        if(f.fbq)return; n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n; n.push=n; n.loaded=!0; n.version='2.0';
-        n.queue=[]; t=b.createElement(e); t.async=!0;
-        t.src=v; s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)
-      }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', PIXEL_ID);
-      fbq('track', 'PageView');
-    })();
-  </script>
+  <meta name="theme-color" content="#0ea5e9" />
 
   <style>
     :root{
-      --bg:#fff7ed;              /* 奶油底 */
+      --bg:#f6f9fc;
       --card:#ffffff;
-      --text:#1f2937;
-      --muted:#6b7280;
-
-      --brand:#fb7185;           /* 親子粉 */
-      --brand2:#60a5fa;          /* 天空藍 */
-      --brand3:#fbbf24;          /* 柔黃點綴 */
-
-      --border: rgba(251, 191, 36, .55);
-      --hair: rgba(31,41,55,.08);
-
-      --shadow: 0 12px 26px rgba(31,41,55,.10);
-      --radius: 22px;
+      --text:#0f172a;
+      --muted:#475569;
+      --brand:#0ea5e9;
+      --brand2:#22c55e;
+      --border:#e2e8f0;
+      --shadow: 0 10px 30px rgba(2, 8, 23, .08);
+      --radius: 18px;
       --max: 980px;
-
-      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
-
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
     body{
       margin:0;
-      font-family: var(--font);
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial;
       color:var(--text);
-      line-height:1.65;
       background:
-        radial-gradient(900px 420px at 15% -10%, rgba(251,113,133,.18), transparent 60%),
-        radial-gradient(900px 420px at 100% 10%, rgba(96,165,250,.16), transparent 55%),
-        radial-gradient(700px 360px at 40% 105%, rgba(251,191,36,.18), transparent 50%),
+        radial-gradient(900px 400px at 15% -10%, rgba(14,165,233,.14), transparent 60%),
+        radial-gradient(900px 420px at 100% 10%, rgba(34,197,94,.10), transparent 55%),
         var(--bg);
+      line-height:1.6;
     }
     a{color:inherit}
     .wrap{max-width:var(--max); margin:0 auto; padding:22px}
-    @media (max-width: 520px){ .wrap{padding:18px} }
 
-    /* Topbar */
     .topbar{
       position:sticky; top:0; z-index:30;
       backdrop-filter: blur(10px);
-      background: rgba(255,247,237,.82);
-      border-bottom: 1px solid rgba(31,41,55,.08);
+      background: rgba(246,249,252,.80);
+      border-bottom:1px solid rgba(226,232,240,.85);
     }
     .topbar .wrap{
       display:flex; align-items:center; justify-content:space-between;
@@ -88,14 +53,14 @@
     .brand{
       display:flex; gap:10px; align-items:center;
       font-weight:900;
-      letter-spacing:.2px;
+      letter-spacing:.3px;
       font-size:14px;
+      white-space:nowrap;
     }
-    .logoDot{
-      width:14px; height:14px; border-radius:999px;
-      background: conic-gradient(from 180deg, var(--brand), var(--brand3), var(--brand2), var(--brand));
-      box-shadow: 0 10px 18px rgba(251,113,133,.18);
-      border: 2px solid rgba(255,255,255,.95);
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background:linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 6px 18px rgba(14,165,233,.20);
       flex:0 0 auto;
     }
     nav{display:flex; gap:8px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
@@ -103,344 +68,330 @@
       text-decoration:none;
       font-size:13px;
       color:var(--muted);
-      padding:7px 10px;
+      padding:7px 9px;
       border-radius:999px;
-      font-weight:800;
     }
-    nav a:hover{background: rgba(251,113,133,.12); color: var(--text)}
-    @media (max-width: 900px){ nav{display:none} }
+    nav a:hover{background:rgba(14,165,233,.10); color:var(--text)}
+    @media (max-width: 900px){
+      nav{display:none}
+    }
 
-    /* Buttons */
     .btn{
       display:inline-flex; align-items:center; justify-content:center;
       gap:8px;
-      border: 1px solid rgba(31,41,55,.10);
+      border:1px solid var(--border);
       background: var(--card);
       padding:10px 12px;
-      border-radius: 14px;
+      border-radius:12px;
       text-decoration:none;
-      font-weight:900;
+      font-weight:800;
       cursor:pointer;
-      transition: transform .06s ease, box-shadow .12s ease, opacity .2s ease, filter .2s ease;
+      transition: transform .06s ease, box-shadow .06s ease, background .2s ease, opacity .2s ease;
       font-size:14px;
-      user-select:none;
-      -webkit-tap-highlight-color: transparent;
     }
-    .btn:hover{transform: translateY(-1px); box-shadow: 0 14px 26px rgba(31,41,55,.10)}
+    .btn:hover{transform: translateY(-1px); box-shadow: 0 12px 24px rgba(2,8,23,.08)}
     .btn.primary{
       border-color: transparent;
-      background: linear-gradient(135deg, var(--brand), var(--brand3));
-      color: #1f2937;
+      background: linear-gradient(135deg, var(--brand), #38bdf8);
+      color: #fff;
     }
-    .btn.primary:hover{filter:saturate(1.05)}
-    .btn:disabled{opacity:.55; cursor:not-allowed; transform:none; box-shadow:none}
+    .btn.primary:hover{box-shadow: 0 18px 40px rgba(14,165,233,.22)}
+    .btn:disabled{
+      opacity:.55;
+      cursor:not-allowed;
+      transform:none;
+      box-shadow:none;
+    }
 
-    /* Cards */
     .card{
       background:var(--card);
-      border: 1px solid rgba(31,41,55,.10);
+      border:1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
     }
 
-    /* Hero */
     header.hero{padding:18px 0 8px}
     .heroCard{padding:20px}
+
     .kicker{
       display:inline-flex;
       gap:10px;
       align-items:center;
       font-size:12px;
-      color:var(--text);
-      background: rgba(251,113,133,.12);
-      border: 1px solid rgba(251,113,133,.20);
+      color:var(--muted);
+      background: rgba(14,165,233,.08);
+      border:1px solid rgba(14,165,233,.16);
       padding:6px 10px;
       border-radius:999px;
-      font-weight:900;
+      font-weight:800;
     }
-    .kicker .spark{
-      width:10px; height:10px; border-radius:999px;
-      background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,.2) 35%, transparent 60%),
-                  linear-gradient(135deg, var(--brand2), var(--brand3));
-      box-shadow: 0 10px 16px rgba(96,165,250,.18);
-    }
-    h1{margin:12px 0 8px; font-size: 30px; line-height:1.2; letter-spacing:.2px}
-    @media (max-width: 520px){ h1{font-size:24px} }
-    .sub{margin:0 0 14px; color:var(--muted); font-size:14px; font-weight:700}
 
-    .heroPhoto{
+    h1{
+      margin:12px 0 8px;
+      font-size: 28px;
+      line-height:1.22;
+      letter-spacing:.2px;
+    }
+    @media (max-width: 520px){
+      h1{font-size:24px}
+    }
+
+    .sub{
+      margin:0 0 14px;
+      color:var(--muted);
+      font-size:14px;
+      font-weight:650;
+    }
+
+    .heroLayout{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:12px;
+      align-items:start;
+    }
+    @media (max-width: 900px){
+      .heroLayout{grid-template-columns:1fr}
+    }
+
+    .poster{
       width:100%;
-      height: 300px;
-      object-fit:cover;
-      border-radius: 18px;
-      border: 1px solid rgba(31,41,55,.10);
-      margin:10px 0 14px;
+      border-radius:16px;
+      border:1px solid var(--border);
       background:#fff;
       display:block;
-      cursor: zoom-in;
+      cursor:zoom-in;
     }
-    @media (max-width: 520px){ .heroPhoto{ height:210px; } }
 
     .pillRow{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1fr;
       gap:10px;
-      margin:14px 0 14px;
+      margin:0 0 12px;
     }
-    @media (max-width: 720px){ .pillRow{grid-template-columns: 1fr} }
-
     .pill{
-      border: 1px solid rgba(251,191,36,.60);
+      border:1px solid var(--border);
       background: #fff;
-      border-radius: 18px;
-      padding:11px 12px;
-      box-shadow: 0 10px 18px rgba(31,41,55,.06);
-      position: relative;
+      border-radius: 14px;
+      padding:10px 12px;
     }
-    .pill:before{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      border-radius: 18px;
-      pointer-events:none;
-      background:
-        radial-gradient(10px 10px at 12% 18%, rgba(251,113,133,.26), transparent 60%),
-        radial-gradient(10px 10px at 88% 22%, rgba(96,165,250,.22), transparent 60%),
-        radial-gradient(12px 12px at 80% 88%, rgba(251,191,36,.22), transparent 60%);
-      opacity:.9;
-      mix-blend-mode: multiply;
+    .pill .t{font-size:12px; color:var(--muted); font-weight:800}
+    .pill .v{font-size:15px; font-weight:900; margin-top:2px}
+
+    .ctaRow{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top: 10px;
+      align-items:center;
     }
-    .pill .t{font-size:12px; color:var(--muted); font-weight:900}
-    .pill .v{font-size:15px; font-weight:950; margin-top:2px}
 
     .notice{
       margin-top:12px;
       padding:10px 12px;
-      border-radius:18px;
-      border:1px dashed rgba(31,41,55,.18);
-      background: rgba(255,255,255,.62);
+      border-radius:14px;
+      border:1px dashed rgba(2,8,23,.18);
+      background: rgba(2,8,23,.03);
       color:var(--muted);
       font-size:13px;
-      font-weight:750;
+      font-weight:700;
     }
 
     section{padding:14px 0}
-    .secTitle{display:flex; align-items:flex-end; justify-content:space-between; gap:10px; margin:8px 0 10px}
-    .secTitle h2{margin:0; font-size:18px; letter-spacing:.2px}
-    .secTitle .hint{color:var(--muted); font-size:12px; font-weight:750}
-
-    .infoCard{padding:14px}
-
-    /* Form */
-    form.grid{display:grid; gap:12px}
-
-    .groupTitle{
-      display:flex; align-items:center; gap:10px;
-      font-weight:950;
-      padding:10px 12px;
-      border-radius:18px;
-      border: 1px solid rgba(31,41,55,.10);
-      background: rgba(255,255,255,.70);
-    }
-    .groupTitle .badge{
-      width:26px; height:26px; border-radius:10px;
-      display:grid; place-items:center;
-      background: linear-gradient(135deg, rgba(251,113,133,.22), rgba(96,165,250,.18));
-      border: 1px solid rgba(31,41,55,.08);
-      font-weight:950;
-    }
-    .groupTitle small{color:var(--muted); font-weight:800}
-
-    .field{
-      width:100%;
-      border:1px solid rgba(31,41,55,.12);
-      border-radius:16px;
-      padding:12px 12px;
-      font-size:14px;
-      font-weight:750;
-      outline:none;
-      background:#fff;
-    }
-    .field:focus{
-      border-color: rgba(251,113,133,.65);
-      box-shadow: 0 0 0 3px rgba(251,113,133,.14);
-    }
-
-    .label{
+    .secTitle{
       display:flex;
-      align-items:center;
+      align-items:flex-end;
       justify-content:space-between;
       gap:10px;
-      font-size:13px;
-      font-weight:950;
-      margin:2px 0 6px;
+      margin: 8px 0 10px;
     }
-    .req{
+    .secTitle h2{
+      margin:0;
+      font-size:18px;
+      letter-spacing:.2px;
+    }
+    .secTitle .hint{
+      color:var(--muted);
       font-size:12px;
-      font-weight:950;
-      color: rgba(251,113,133,.95);
-      background: rgba(251,113,133,.10);
-      border: 1px solid rgba(251,113,133,.18);
-      padding:3px 8px;
+      font-weight:650;
+    }
+
+    .grid{display:grid; gap:12px}
+    .cards3{grid-template-columns: repeat(3, 1fr)}
+    @media (max-width: 900px){
+      .cards3{grid-template-columns: 1fr}
+    }
+    .twoCol{grid-template-columns: 1fr 1fr; align-items:start}
+    @media (max-width: 900px){
+      .twoCol{grid-template-columns:1fr}
+    }
+
+    .infoCard{padding:14px}
+    .infoCard h3{margin:0 0 6px; font-size:15px}
+    .infoCard p{margin:0; color:var(--muted); font-size:13px; font-weight:650}
+
+    .timeline{padding: 10px 14px 14px}
+    .tlItem{
+      display:grid;
+      grid-template-columns: 98px 1fr;
+      gap:12px;
+      padding:10px 0;
+      border-top:1px solid var(--border);
+    }
+    .tlItem:first-child{border-top:none}
+    .time{
+      font-family: var(--mono);
+      font-weight:900;
+      color:#0b1220;
+      font-size:13px;
+    }
+    .tlItem .desc{
+      color:var(--muted);
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .list{margin:0; padding-left:18px; color:var(--muted); font-weight:700; font-size:13px}
+    .list li{margin:7px 0}
+
+    details{border-top:1px solid var(--border); padding:10px 0}
+    details:first-child{border-top:none}
+    summary{
+      cursor:pointer;
+      list-style:none;
+      font-weight:900;
+      padding:4px 0;
+      font-size:14px;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p, details ul{margin:6px 0 0; color:var(--muted); font-weight:700; font-size:13px}
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:2px 8px;
       border-radius:999px;
-      white-space:nowrap;
+      font-size:11px;
+      font-weight:900;
+      border:1px solid rgba(244,63,94,.25);
+      background: rgba(244,63,94,.08);
+      color:#9f1239;
+      margin-left:8px;
+      vertical-align:middle;
     }
 
-    .help{font-size:12px; color:var(--muted); font-weight:750; margin-top:6px}
-
-    .radioRow{display:grid; gap:8px; margin-top:6px}
-    .radioItem{
-      display:flex; gap:10px; align-items:flex-start;
-      padding:12px 12px;
-      border:1px solid rgba(31,41,55,.12);
-      border-radius:16px;
+    .mapBox{
+      border:1px solid var(--border);
+      border-radius: 16px;
+      overflow:hidden;
       background:#fff;
-      transition: box-shadow .12s ease, transform .06s ease, border-color .12s ease;
     }
-    .radioItem:hover{
-      border-color: rgba(96,165,250,.45);
-      box-shadow: 0 12px 22px rgba(31,41,55,.08);
-      transform: translateY(-1px);
-    }
-    .radioItem input{margin-top:2px; accent-color: var(--brand)}
+    iframe{width:100%; height:300px; border:0}
 
-    .checkRow{
-      display:flex; gap:10px; align-items:flex-start;
-      padding:12px 12px;
-      border:1px dashed rgba(31,41,55,.18);
-      border-radius:16px;
-      background: rgba(255,255,255,.60);
-      margin-top:6px;
-    }
-    .checkRow input{accent-color: var(--brand)}
+    .muted{color:var(--muted)}
 
+    .linkBox{
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:14px;
+      padding:12px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:space-between;
+    }
+    .linkText{
+      font-family: var(--mono);
+      font-size:12px;
+      color:#0b1220;
+      font-weight:900;
+      word-break:break-all;
+      text-decoration:none;
+    }
+    .linkText:hover{ text-decoration:underline; }
+
+    /* 表單 */
+    .formGrid{display:grid; gap:12px}
+    .field label{display:block; font-weight:900; font-size:13px; margin-bottom:6px}
+    .field input, .field select, .field textarea{
+      width:100%;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:14px;
+      background:#fff;
+      outline:none;
+    }
+    .field textarea{min-height:90px; resize:vertical}
+    .field small{display:block; margin-top:6px; color:var(--muted); font-weight:650; font-size:12px}
     .inlineAlert{
       display:none;
+      margin-top:10px;
       padding:10px 12px;
-      border-radius:16px;
-      border:1px solid rgba(251,113,133,.26);
-      background: rgba(251,113,133,.10);
-      color: #7f1d1d;
-      font-weight:850;
+      border-radius:14px;
+      border:1px dashed rgba(244,63,94,.35);
+      background: rgba(244,63,94,.06);
+      color:#9f1239;
+      font-weight:900;
       font-size:13px;
     }
     .inlineAlert.show{display:block}
 
-    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:6px; align-items:center}
-    .muted{color:var(--muted)}
     .progress{
-      width:100%;
-      height:10px;
-      border-radius:999px;
-      background: rgba(31,41,55,.08);
-      overflow:hidden;
       display:none;
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(14,165,233,.20);
+      background: rgba(14,165,233,.06);
+      color: var(--muted);
+      font-weight:800;
+      font-size:13px;
     }
     .progress.show{display:block}
-    .bar{
-      width:35%;
-      height:100%;
-      border-radius:999px;
-      background: linear-gradient(90deg, var(--brand2), var(--brand), var(--brand3));
-      animation: loading 1.0s infinite ease-in-out;
-    }
-    @keyframes loading{
-      0%{transform:translateX(-120%)}
-      100%{transform:translateX(360%)}
-    }
 
-    /* Layout helpers */
-    .grid{display:grid; gap:12px}
-    .twoCol{grid-template-columns: 1fr 1fr; align-items:start}
-    @media (max-width: 900px){ .twoCol{grid-template-columns:1fr} }
-
-    footer{padding:18px 0 36px; color:var(--muted); font-size:12px}
-    .footCard{padding:14px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between}
-
-    /* Mobile bottom CTA */
-    .bottomBar{
-      position:fixed;
-      left:0; right:0; bottom:0;
-      z-index:40;
-      padding:10px 14px calc(10px + env(safe-area-inset-bottom));
-      background: rgba(255,247,237,.88);
-      border-top: 1px solid rgba(31,41,55,.08);
-      backdrop-filter: blur(10px);
-      display:none;
-    }
-    .bottomBar .inner{
-      max-width: var(--max);
-      margin: 0 auto;
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-    .bottomBar .meta{
-      flex: 1 1 auto;
-      min-width: 0;
-    }
-    .bottomBar .meta .t{
-      font-weight:950;
-      font-size:13px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-    .bottomBar .meta .s{
-      font-weight:800;
-      font-size:12px;
-      color: var(--muted);
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-    .bottomBar .btn{
-      flex: 0 0 auto;
-      padding:12px 14px;
-      border-radius:16px;
-    }
-    @media (max-width: 900px){
-      .bottomBar{display:block}
-      body{padding-bottom: 88px;} /* avoid bottomBar cover */
-    }
-
-    /* Simple modal for poster */
+    /* 海報放大 */
     .modal{
-      position:fixed;
-      inset:0;
-      background: rgba(17,24,39,.68);
+      position:fixed; inset:0;
+      background: rgba(2,8,23,.60);
       display:none;
-      z-index:60;
-      padding:22px;
+      align-items:center; justify-content:center;
+      padding:18px;
+      z-index:50;
     }
-    .modal.show{display:flex; align-items:center; justify-content:center}
+    .modal.show{display:flex}
     .modalCard{
-      max-width:min(980px, 96vw);
-      max-height: 86vh;
+      max-width: 980px;
+      width: 100%;
       border-radius: 18px;
       overflow:hidden;
-      border: 1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.06);
-      box-shadow: 0 24px 60px rgba(0,0,0,.28);
-      position:relative;
-    }
-    .modalCard img{
-      display:block;
-      max-width: 100%;
-      max-height: 86vh;
-      object-fit: contain;
       background:#fff;
+      border:1px solid rgba(226,232,240,.9);
+      box-shadow: 0 30px 80px rgba(2,8,23,.35);
     }
-    .modalClose{
-      position:absolute;
-      top:10px; right:10px;
-      border:none;
-      cursor:pointer;
+    .modalTop{
+      display:flex; align-items:center; justify-content:space-between;
       padding:10px 12px;
-      border-radius:999px;
-      font-weight:950;
-      background: rgba(255,255,255,.92);
+      border-bottom:1px solid var(--border);
+    }
+    .modalTop .t{font-weight:900}
+    .modalImg{width:100%; display:block}
+    .iconBtn{
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:12px;
+      padding:8px 10px;
+      cursor:pointer;
+      font-weight:900;
+    }
+
+    footer{padding:18px 0 36px; color:var(--muted); font-size:12px}
+    .footCard{
+      padding:14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
     }
   </style>
 </head>
@@ -448,226 +399,404 @@
 <body>
   <div class="topbar">
     <div class="wrap">
-      <div class="brand">
-        <span class="logoDot" aria-hidden="true"></span>
-        <span id="siteName">活動報名</span>
+      <div class="brand" aria-label="網站標題">
+        <span class="dot" aria-hidden="true"></span>
+        <span id="siteName">乾淨世界我愛我家兒童著色畫比賽官網</span>
       </div>
+
       <nav aria-label="導覽">
+        <a href="#highlights">亮點</a>
+        <a href="#schedule">流程</a>
         <a href="#register">報名</a>
-        <a href="#rules">規則</a>
+        <a href="#rules">辦法</a>
+        <a href="#awards">獎項</a>
+        <a href="#location">地點</a>
         <a href="#contact">聯絡</a>
       </nav>
-      <a class="btn primary" href="#register">立即報名</a>
+
+      <a class="btn primary" href="#register">報名</a>
     </div>
   </div>
 
   <header class="hero">
     <div class="wrap">
       <div class="card heroCard">
-        <div class="kicker" id="kicker"><span class="spark" aria-hidden="true"></span>填完即送出｜資料寫入 Google Sheet</div>
-        <h1 id="title">活動報名</h1>
-        <p class="sub" id="subtitle">請確定能到再報名（額滿即止）。</p>
+        <div class="kicker" id="kicker">現場提供底圖｜11:40 公布並頒獎</div>
+        <h1 id="title">乾淨世界「我愛我家」兒童著色畫比賽</h1>
+        <p class="sub" id="subtitle">一頁式活動官網：報名、流程、參加辦法（可展開）、獎項與地點。請確定能到再報名。</p>
 
-        <!-- ✅ 圖片固定用 assets/poster.jpg（你換檔就會換圖） -->
-        <img class="heroPhoto" id="posterImg" src="assets/poster.jpg" alt="活動海報（點擊可放大）" loading="lazy" />
+        <div class="heroLayout">
+          <div>
+            <img class="poster" id="posterImg" src="assets/poster.jpg" alt="活動海報（點擊可放大）" loading="lazy" />
+            <div class="notice">收件截止：10:30（作品繳交截止）｜公布並頒獎：11:40</div>
+          </div>
 
-        <div class="pillRow">
-          <div class="pill">
-            <div class="t">日期</div>
-            <div class="v" id="dateText">2026/03/14（六）</div>
-          </div>
-          <div class="pill">
-            <div class="t">時間</div>
-            <div class="v" id="timeText">09:00–12:00</div>
-          </div>
-          <div class="pill">
-            <div class="t">地點</div>
-            <div class="v" id="placeText">彰南里活動中心｜大禮堂</div>
+          <div>
+            <div class="pillRow" aria-label="活動關鍵資訊">
+              <div class="pill">
+                <div class="t">日期</div>
+                <div class="v" id="dateText">2026/03/15（日）</div>
+              </div>
+              <div class="pill">
+                <div class="t">時間</div>
+                <div class="v" id="timeText">09:00–12:00</div>
+              </div>
+              <div class="pill">
+                <div class="t">地點</div>
+                <div class="v" id="placeText">彰南里活動中心｜大禮堂</div>
+              </div>
+            </div>
+
+            <div class="ctaRow">
+              <a class="btn primary" href="#register">立即報名</a>
+              <a class="btn" id="mapBtnTop" href="#" target="_blank" rel="noopener">開啟地圖</a>
+            </div>
+
+            <div style="height:10px"></div>
+
+            <div class="linkBox" role="group" aria-label="報名網址">
+              <div class="muted" style="font-weight:900; font-size:13px">報名網址（可點）</div>
+              <a class="linkText" id="regUrlText" href="#" target="_blank" rel="noopener">（尚未設定）</a>
+              <button class="btn" id="copyLinkBtn" type="button">複製報名網址</button>
+            </div>
+
+            <div class="muted" style="font-weight:800; font-size:12px; margin-top:10px">
+              填寫資料僅用於活動聯絡，不作其他用途。
+            </div>
           </div>
         </div>
-
-        <div class="notice" id="notice">提醒：作品繳交截止 10:30｜公布並頒獎 11:40</div>
       </div>
     </div>
   </header>
 
   <main>
-    <section id="register">
+    <section id="highlights">
       <div class="wrap">
         <div class="secTitle">
-          <h2>報名</h2>
-          <div class="hint">填完即完成送出</div>
+          <h2>活動亮點</h2>
+          <div class="hint">簡短、好讀</div>
         </div>
 
-        <div class="card infoCard">
-          <form id="signupForm" class="grid" autocomplete="on">
-            <!-- 固定欄位（給 GAS / Sheet） -->
-            <input type="hidden" name="活動代碼" id="event_code" />
-            <input type="hidden" name="活動名稱" id="event_name" />
-            <input type="hidden" name="報名序號" id="reg_id" />
-            <input type="hidden" name="備註" id="note_hidden" />
-
-            <!-- 先問能否全程：避免填到一半才被擋 -->
-            <div class="groupTitle">
-              <div class="badge">1</div>
-              <div>
-                先確認能否全程參與
-                <div><small>避免佔名額，謝謝你</small></div>
-              </div>
-            </div>
-
-            <div>
-              <div class="label">
-                <span>是否能全程參與（9:00–12:00）</span>
-                <span class="req">必填</span>
-              </div>
-              <select class="field" name="是否能全程參與（9:00–12:00）" required id="full_join">
-                <option value="">請選擇</option>
-                <option>是，我能全程參與</option>
-                <option>否（請勿報名）</option>
-              </select>
-              <div class="help">若選「否」，系統會阻止送出（避免佔名額）。</div>
-              <div class="inlineAlert" id="fullJoinAlert">這場活動需要能全程參與（9:00–12:00），因此此選項無法完成報名，謝謝你的理解。</div>
-            </div>
-
-            <div class="groupTitle">
-              <div class="badge">2</div>
-              <div>
-                家長資料
-                <div><small>請填寫可聯絡到的手機</small></div>
-              </div>
-            </div>
-
-            <div>
-              <div class="label">
-                <span>家長姓名</span>
-                <span class="req">必填</span>
-              </div>
-              <input class="field" name="家長姓名" required autocomplete="name" />
-            </div>
-
-            <div>
-              <div class="label">
-                <span>聯絡電話（手機）</span>
-                <span class="req">必填</span>
-              </div>
-              <input class="field" name="聯絡電話（手機）" required type="tel" inputmode="tel" autocomplete="tel" placeholder="例如：0912-345-678" />
-              <div class="help">建議填手機，方便活動通知或臨時聯繫。</div>
-            </div>
-
-            <div class="groupTitle">
-              <div class="badge">3</div>
-              <div>
-                孩子資料
-                <div><small>填寫孩子與組別資訊</small></div>
-              </div>
-            </div>
-
-            <div>
-              <div class="label">
-                <span>孩子姓名</span>
-                <span class="req">必填</span>
-              </div>
-              <input class="field" name="孩子姓名" required autocomplete="off" />
-            </div>
-
-            <div>
-              <div class="label">
-                <span>孩子年級／年齡</span>
-                <span class="req">必填</span>
-              </div>
-              <select class="field" name="孩子年級／年齡" required>
-                <option value="">請選擇</option>
-                <option>幼兒園</option>
-                <option>國小一年級</option>
-                <option>國小二年級</option>
-              </select>
-            </div>
-
-            <div>
-              <div class="label">
-                <span>參賽組別</span>
-                <span class="req">必填</span>
-              </div>
-              <div class="radioRow" role="group" aria-label="參賽組別">
-                <label class="radioItem">
-                  <input type="radio" name="參賽組別" value="幼兒組" required />
-                  <div><b>幼兒組</b><div class="help">家長可適度協助，但不得代畫。</div></div>
-                </label>
-                <label class="radioItem">
-                  <input type="radio" name="參賽組別" value="國小低年級組" required />
-                  <div><b>國小低年級組</b><div class="help">家長請勿動手協助。</div></div>
-                </label>
-              </div>
-            </div>
-
-            <div class="groupTitle">
-              <div class="badge">4</div>
-              <div>
-                其他資訊與同意事項
-                <div><small>最後一步就完成</small></div>
-              </div>
-            </div>
-
-            <div>
-              <div class="label">
-                <span>就讀學校</span>
-                <span class="req" style="color:rgba(31,41,55,.70); background:rgba(31,41,55,.06); border-color:rgba(31,41,55,.10)">選填</span>
-              </div>
-              <input class="field" name="就讀學校" />
-            </div>
-
-            <div>
-              <div class="label">
-                <span>是否為台南市民</span>
-                <span class="req">必填</span>
-              </div>
-              <select class="field" name="是否為台南市民" required>
-                <option value="">請選擇</option>
-                <option>是</option>
-                <option>否</option>
-              </select>
-            </div>
-
-            <label class="checkRow">
-              <input type="checkbox" required />
-              <div><b>我同意</b>活動期間之拍照記錄，僅作為活動紀錄與非商業用途。</div>
-            </label>
-
-            <div class="progress" id="progress"><div class="bar"></div></div>
-
-            <div class="ctaRow">
-              <button class="btn primary" id="submitBtn" type="submit">送出報名</button>
-              <span class="muted" id="submitHint" style="font-weight:900; font-size:13px"></span>
-            </div>
-          </form>
-
-          <div class="notice" style="margin-top:12px">
-            名額有限（額滿即止）。若臨時無法到場，建議盡早取消，讓名額留給需要的家庭。
+        <div class="grid cards3">
+          <div class="card infoCard">
+            <h3>現場提供底圖</h3>
+            <p>到場領取底圖即可開始創作。</p>
+          </div>
+          <div class="card infoCard">
+            <h3>流程清楚</h3>
+            <p>10:30 收件截止，11:40 公布並頒獎。</p>
+          </div>
+          <div class="card infoCard">
+            <h3>完成就有參加獎</h3>
+            <p>參加獎數量有限，送完為止。</p>
           </div>
         </div>
       </div>
     </section>
 
+    <section id="schedule">
+      <div class="wrap">
+        <div class="secTitle">
+          <h2>當日流程</h2>
+          <div class="hint">一目了然</div>
+        </div>
+
+        <div class="card timeline">
+          <div class="tlItem">
+            <div class="time">09:00</div>
+            <div class="desc">報到、領取底圖（開始創作）</div>
+          </div>
+          <div class="tlItem">
+            <div class="time">10:30</div>
+            <div class="desc">收件截止（作品繳交截止）</div>
+          </div>
+          <div class="tlItem">
+            <div class="time">11:40</div>
+            <div class="desc">公布並頒獎</div>
+          </div>
+          <div class="tlItem">
+            <div class="time">12:00</div>
+            <div class="desc">活動結束</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 報名（左表單、右重點三行） -->
+    <section id="register">
+      <div class="wrap">
+        <div class="secTitle">
+          <h2>報名</h2>
+          <div class="hint">按鈕＋網址都可用（不使用 QR）</div>
+        </div>
+
+        <div class="grid twoCol">
+          <!-- 左：表單 -->
+          <div class="card infoCard">
+            <form id="signupForm" class="formGrid" autocomplete="on">
+              <!-- 固定欄位（給 GAS / Sheet） -->
+              <input type="hidden" name="活動代碼" id="event_code" />
+              <input type="hidden" name="活動名稱" id="event_name" />
+              <input type="hidden" name="報名序號" id="reg_id" />
+              <input type="hidden" name="備註" id="note_hidden" />
+              <input type="hidden" name="redirect" id="redirect_url" />
+
+              <div class="field">
+                <label for="full_join">是否能全程參與（必填）</label>
+                <select id="full_join" name="是否能全程參與" required>
+                  <option value="" selected disabled>請選擇</option>
+                  <option>是（我能全程參與）</option>
+                  <option>否（我可能無法全程，請先不要報名）</option>
+                </select>
+                <small>為避免佔名額，無法全程參與者請勿報名。</small>
+                <div class="inlineAlert" id="fullJoinAlert">這場活動需要全程參與：若你可能無法全程，建議先不要報名，謝謝你。</div>
+              </div>
+
+              <div class="field">
+                <label for="resident">是否為臺南市民（必填）</label>
+                <select id="resident" name="是否為臺南市民" required>
+                  <option value="" selected disabled>請選擇</option>
+                  <option>是</option>
+                  <option>否</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="parent_name">家長姓名（必填）</label>
+                <input id="parent_name" name="家長姓名" type="text" required placeholder="例如：王小明" />
+              </div>
+
+              <div class="field">
+                <label for="phone">聯絡手機（必填）</label>
+                <input id="phone" name="聯絡手機" type="tel" inputmode="tel" required placeholder="例如：0912-345-678" />
+              </div>
+
+              <div class="field">
+                <label for="child_name">孩子姓名（必填）</label>
+                <input id="child_name" name="孩子姓名" type="text" required placeholder="例如：小美" />
+              </div>
+
+              <div class="field">
+                <label for="group">參賽組別（必填）</label>
+                <select id="group" name="參賽組別" required>
+                  <option value="" selected disabled>請選擇</option>
+                  <option>幼兒園組</option>
+                  <option>國小低年級組（1–2年級）</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="school">就讀學校（可填）</label>
+                <input id="school" name="就讀學校" type="text" placeholder="例如：成功國小" />
+              </div>
+
+              <div class="field">
+                <label for="note">備註（可填）</label>
+                <textarea id="note" name="備註（家長）" placeholder="例如：需要無障礙動線 / 其他提醒"></textarea>
+              </div>
+
+              <div class="ctaRow" style="margin-top:4px">
+                <button class="btn primary" id="submitBtn" type="submit">送出報名</button>
+                <span class="muted" id="submitHint" style="font-weight:900; font-size:13px"></span>
+              </div>
+
+              <div class="progress" id="progress">送出中…請稍等（寫入成功才會顯示完成頁）</div>
+
+              <div class="muted" style="font-weight:800; font-size:12px; margin-top:6px">
+                填寫資料僅用於活動聯絡，不作其他用途。
+              </div>
+            </form>
+          </div>
+
+          <!-- 右：重點三行 + 快速連結 -->
+          <div class="card infoCard">
+            <h3>報名前先看這三點</h3>
+            <ul class="list">
+              <li><b>名額</b>：幼兒園組 25 人／國小低年級組 25 人（額滿為止）</li>
+              <li><b>收件截止</b>：10:30 前繳交作品，逾時不列入評審</li>
+              <li><b>家長協助</b>：幼兒園可適度協助但不得代畫；國小低年級不得動手協助（違規取消評審資格）</li>
+            </ul>
+
+            <div class="notice" style="margin-top:12px">
+              想看完整規則：請往下到「參加辦法」區塊（可展開）。
+            </div>
+
+            <div class="ctaRow" style="margin-top:12px">
+              <a class="btn" href="#rules">查看參加辦法</a>
+              <a class="btn" href="#awards">查看獎項</a>
+              <a class="btn" href="#location">查看地點</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 參加辦法（折疊） -->
     <section id="rules">
       <div class="wrap">
         <div class="secTitle">
-          <h2>規則提醒</h2>
+          <h2>參加辦法（點開查看）</h2>
+          <div class="hint">先看重點，需要再展開</div>
         </div>
-        <div class="card infoCard">
-          <div class="grid" style="gap:10px">
-            <div class="pill">
-              <div class="t">幼兒組</div>
-              <div class="v" style="font-size:14px; font-weight:900">家長可適度協助，但不得代畫</div>
+
+        <div class="card" style="padding:10px 14px">
+          <details open>
+            <summary>參賽組別與資格</summary>
+            <ul class="list">
+              <li>分兩組：幼兒園組、國小低年級組（1–2 年級）。</li>
+              <li>每位參賽兒童需由一位家長陪同。</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>名額與額滿規則</summary>
+            <ul class="list">
+              <li>幼兒園組 25 人、國小低年級組 25 人，額滿為止。</li>
+              <li>額滿即停止受理（不接受現場加報）。</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>報到與領取底圖</summary>
+            <ul class="list">
+              <li>09:00 起報到，建議 09:20 前完成報到。</li>
+              <li>報到後領取主辦提供之著色底圖，即可開始創作。</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>作品規則與收件截止<span class="tag">重要</span></summary>
+            <ul class="list">
+              <li>必須使用主辦提供之著色底圖完成作品。</li>
+              <li>畫材自備（蠟筆／彩色筆／色鉛筆／水彩等皆可）。</li>
+              <li><b>10:30 前</b>完成並繳交作品；逾時視同放棄評審。</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>家長陪同與協助界線<span class="tag">最常爭議</span></summary>
+            <ul class="list">
+              <li><b>幼兒園組</b>：家長可適度協助（口頭提醒、安撫、協助擺放畫具或轉動紙張等），但不得代為上色、描線或補色。</li>
+              <li><b>國小低年級組</b>：家長可陪同但不得動手協助；違規者取消評審資格。</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>評審與評分方式</summary>
+            <ul class="list">
+              <li>評審：青草國小 曾文欽 校長。</li>
+              <li>評分項目：配色與美感、整潔度與完成度、創意表現、主題符合度。</li>
+              <li>同分處理：以「整潔度與完成度」較佳者優先。</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>獎項（兩組各一套）</summary>
+            <ul class="list">
+              <li>金獎 1 名：<b>800</b> 元＋獎狀</li>
+              <li>銀獎 1 名：<b>500</b> 元＋獎狀</li>
+              <li>銅獎 1 名：<b>300</b> 元＋獎狀</li>
+              <li>佳作 3 名：<b>200</b> 元＋獎狀</li>
+              <li>參加獎：完成作品即可獲得（數量有限，送完為止）</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>得獎公告與領獎</summary>
+            <ul class="list">
+              <li>得獎名單現場公布並頒獎（11:40）。</li>
+              <li>唱名三次未上台者，視同放棄該獎項。</li>
+              <li>若需代領或補領，請依現場公告與窗口指引辦理。</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>作品發表、著作權與影像使用<span class="tag">重要</span></summary>
+            <ul class="list">
+              <li>得獎作品將公布於官方渠道（活動宣傳與成果展示）。</li>
+              <li>主辦單位得就作品進行公開展示、宣傳使用（以活動推廣為目的）。</li>
+              <li>活動現場可能拍照/錄影作為活動紀錄與宣傳使用。</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>其他注意事項</summary>
+            <ul class="list">
+              <li>無全程參與者，取消得獎資格及獎金。</li>
+              <li>主辦單位保留活動調整之權利，若有變動以現場公告為準。</li>
+            </ul>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 獎項卡片（A：分兩張卡） -->
+    <section id="awards">
+      <div class="wrap">
+        <div class="secTitle">
+          <h2>獎項</h2>
+          <div class="hint">兩組各一套（看組別不會看錯）</div>
+        </div>
+
+        <div class="grid twoCol">
+          <div class="card infoCard">
+            <h3>幼兒園組</h3>
+            <ul class="list">
+              <li>金獎 1 名：<b>800</b> 元＋獎狀</li>
+              <li>銀獎 1 名：<b>500</b> 元＋獎狀</li>
+              <li>銅獎 1 名：<b>300</b> 元＋獎狀</li>
+              <li>佳作 3 名：<b>200</b> 元＋獎狀</li>
+            </ul>
+          </div>
+
+          <div class="card infoCard">
+            <h3>國小低年級組（1–2 年級）</h3>
+            <ul class="list">
+              <li>金獎 1 名：<b>800</b> 元＋獎狀</li>
+              <li>銀獎 1 名：<b>500</b> 元＋獎狀</li>
+              <li>銅獎 1 名：<b>300</b> 元＋獎狀</li>
+              <li>佳作 3 名：<b>200</b> 元＋獎狀</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="notice" style="margin-top:12px">
+          參加獎：完成作品即可獲得（數量有限，送完為止）。
+        </div>
+      </div>
+    </section>
+
+    <section id="location">
+      <div class="wrap">
+        <div class="secTitle">
+          <h2>地點</h2>
+          <div class="hint">地址可複製、可直接開地圖</div>
+        </div>
+
+        <div class="grid twoCol">
+          <div class="card infoCard">
+            <h3>活動地點</h3>
+            <p class="muted" style="font-weight:900" id="placeFull">彰南里活動中心｜大禮堂</p>
+            <p class="muted" style="font-weight:900; margin-top:8px" id="addressText">臺南市南區新建路 12 號</p>
+
+            <div class="ctaRow" style="margin-top:12px">
+              <button class="btn" id="copyAddrBtn" type="button">複製地址</button>
+              <a class="btn primary" id="mapBtn2" href="#" target="_blank" rel="noopener">用 Google 地圖開啟</a>
             </div>
-            <div class="pill">
-              <div class="t">國小低年級組</div>
-              <div class="v" style="font-size:14px; font-weight:900">家長請勿動手協助</div>
+
+            <div class="notice" style="margin-top:12px">
+              建議提早到場，避免卡到 10:30 收件截止。
             </div>
-            <div class="pill">
-              <div class="t">作品繳交截止</div>
-              <div class="v" style="font-size:14px; font-weight:900">10:30（逾時將影響收件）</div>
-            </div>
+          </div>
+
+          <div class="mapBox">
+            <iframe
+              id="mapFrame"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src=""
+              title="Google 地圖">
+            </iframe>
           </div>
         </div>
       </div>
@@ -676,21 +805,28 @@
     <section id="contact">
       <div class="wrap">
         <div class="secTitle">
-          <h2>聯絡</h2>
+          <h2>主辦 / 協辦 / 聯絡</h2>
+          <div class="hint">如需取消/更改，請聯絡窗口</div>
         </div>
+
         <div class="card infoCard">
           <div class="grid twoCol">
             <div>
-              <div style="font-weight:950">主辦單位</div>
-              <div class="muted" id="hostText" style="font-weight:850">乾淨校園推廣團隊</div>
+              <h3>主辦單位</h3>
+              <p class="muted" style="font-weight:900" id="hostText">乾淨校園推廣團隊</p>
+
               <div style="height:10px"></div>
-              <div style="font-weight:950">協辦單位</div>
-              <div class="muted" id="cohostText" style="font-weight:850">彰南里活動中心</div>
+              <h3>協辦單位</h3>
+              <p class="muted" style="font-weight:900" id="cohostText">彰南里活動中心</p>
             </div>
+
             <div>
-              <div style="font-weight:950">洽詢電話</div>
-              <div class="muted" id="phoneText" style="font-weight:950; font-size:16px">陳小姐｜0913-837-389</div>
-              <div class="help">如臨時無法到場，建議盡早取消，讓名額留給需要的家庭。</div>
+              <h3>洽詢電話</h3>
+              <p class="muted" style="font-weight:900; font-size:16px" id="phoneText">陳小姐｜0913-837-389</p>
+
+              <div style="height:10px"></div>
+              <h3>提醒</h3>
+              <p class="muted" style="font-weight:800">若臨時無法到場，建議盡早通知，讓名額留給需要的家庭。</p>
             </div>
           </div>
         </div>
@@ -701,8 +837,8 @@
       <div class="wrap">
         <div class="card footCard">
           <div>
-            <div style="font-weight:950; color:#111827" id="footerName">活動報名</div>
-            <div class="muted" style="font-weight:800">一頁式報名網站</div>
+            <div style="font-weight:900; color:#0b1220">乾淨世界我愛我家兒童著色畫比賽官網</div>
+            <div class="muted" style="font-weight:700">一頁式活動官網｜GitHub Pages 發佈</div>
           </div>
           <div class="muted">© <span id="year"></span></div>
         </div>
@@ -710,201 +846,220 @@
     </footer>
   </main>
 
-  <!-- Mobile bottom CTA -->
-  <div class="bottomBar" role="region" aria-label="快速報名">
-    <div class="inner">
-      <div class="meta">
-        <div class="t" id="bottomTitle">活動報名</div>
-        <div class="s" id="bottomSub">點一下跳到報名表單</div>
+  <!-- 海報放大 Modal -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modalCard" role="dialog" aria-modal="true" aria-label="海報放大">
+      <div class="modalTop">
+        <div class="t">活動海報</div>
+        <button class="iconBtn" id="closeModal" type="button">關閉</button>
       </div>
-      <a class="btn primary" href="#register">立即報名</a>
-    </div>
-  </div>
-
-  <!-- Poster modal -->
-  <div class="modal" id="posterModal" aria-hidden="true">
-    <div class="modalCard" role="dialog" aria-label="海報放大檢視">
-      <button class="modalClose" id="modalCloseBtn" type="button">關閉</button>
-      <img id="posterModalImg" src="assets/poster.jpg" alt="活動海報（放大）" />
+      <img class="modalImg" id="modalImg" src="assets/poster.jpg" alt="活動海報放大" />
     </div>
   </div>
 
   <script>
-    // ====== 活動內容（你未來換活動，只要改這一段就好）======
-    const EVENT = {
-      siteName: "活動報名",
-      title: "乾淨世界「我愛我家」兒童著色畫比賽",
-      kicker: "填完即送出｜資料寫入 Google Sheet",
-      subtitle: "請確定能到再報名（額滿即止）。",
+    // ====== 只要改這裡（必改）======
+    // 1) GAS Web App URL（你的 Apps Script 部署網址 /exec）
+    const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxDlJ8o8unlRefrLvJM22lPN7E4Z-TevdkT2Lq1O9ROunLKSVKliq8qylOo_jj-FyyDzQ/exec";
 
-      dateText: "2026/03/14（六）",
+    // 2) 感謝頁（同一個 repo 的檔案名）
+    const THANKS_URL = "thanks.html";
+
+    // 3) 活動代碼/名稱（會寫入試算表，方便你整理）
+    const EVENT_CODE = "GJC2026";
+    const EVENT_NAME = "乾淨世界我愛我家兒童著色畫比賽";
+
+    // 4) 報名網址（可給家長分享；若你用這頁表單，就填這頁的公開網址）
+    const PUBLIC_REGISTER_URL = "https://rogerfang2024.github.io/TN-GJWPAINT/";
+    // =================================
+
+    const EVENT = {
+      siteName: "乾淨世界我愛我家兒童著色畫比賽官網",
+      title: "乾淨世界「我愛我家」兒童著色畫比賽",
+      kicker: "現場提供底圖｜11:40 公布並頒獎",
+      subtitle: "一頁式活動官網：報名、流程、參加辦法（可展開）、獎項與地點。請確定能到再報名。",
+      dateText: "2026/03/15（日）",
       timeText: "09:00–12:00",
       place: "彰南里活動中心｜大禮堂",
-
+      address: "臺南市南區新建路 12 號",
+      mapQuery: "臺南市南區新建路 12 號 彰南里活動中心",
       host: "乾淨校園推廣團隊",
       cohost: "彰南里活動中心",
-      phone: "陳小姐｜0913-837-389",
-
-      notice: "提醒：作品繳交截止 10:30｜公布並頒獎 11:40",
-
-      // ✅ 給 Sheet 的活動代碼（方便篩選）
-      eventCode: "CW-ILOVEHOME-20260314"
+      phone: "陳小姐｜0913-837-389"
     };
 
     const $ = (id) => document.getElementById(id);
 
-    // Render text
+    // 基本文字
     $("siteName").textContent = EVENT.siteName;
     $("title").textContent = EVENT.title;
-    $("kicker").innerHTML = `<span class="spark" aria-hidden="true"></span>${EVENT.kicker}`;
+    $("kicker").textContent = EVENT.kicker;
     $("subtitle").textContent = EVENT.subtitle;
-
     $("dateText").textContent = EVENT.dateText;
     $("timeText").textContent = EVENT.timeText;
     $("placeText").textContent = EVENT.place;
-
+    $("placeFull").textContent = EVENT.place;
+    $("addressText").textContent = EVENT.address;
     $("hostText").textContent = EVENT.host;
     $("cohostText").textContent = EVENT.cohost;
     $("phoneText").textContent = EVENT.phone;
-
-    $("notice").textContent = EVENT.notice;
-
-    $("footerName").textContent = EVENT.siteName;
     $("year").textContent = new Date().getFullYear();
 
-    $("bottomTitle").textContent = EVENT.title || EVENT.siteName;
-    $("bottomSub").textContent = `${EVENT.dateText}｜${EVENT.timeText}`;
+    // 地圖
+    const mapUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(EVENT.mapQuery);
+    $("mapBtnTop").href = mapUrl;
+    $("mapBtn2").href = mapUrl;
+    $("mapFrame").src = "https://www.google.com/maps?q=" + encodeURIComponent(EVENT.mapQuery) + "&output=embed";
 
-    // ====== 海報點擊放大（不用外掛）======
-    (function bindPosterModal(){
-      const img = $("posterImg");
-      const modal = $("posterModal");
-      const closeBtn = $("modalCloseBtn");
-      const modalImg = $("posterModalImg");
-      if(!img || !modal || !closeBtn || !modalImg) return;
-
-      function open(){
-        modal.classList.add("show");
-        modal.setAttribute("aria-hidden", "false");
+    // 報名網址（可點 + 複製）
+    const regUrlText = $("regUrlText");
+    const copyLinkBtn = $("copyLinkBtn");
+    function setPublicUrlUI(){
+      const url = (PUBLIC_REGISTER_URL || "").trim();
+      if (!url || url.includes("（") || url.includes("填")) {
+        regUrlText.textContent = "（請先設定 PUBLIC_REGISTER_URL）";
+        regUrlText.href = "#";
+        copyLinkBtn.disabled = true;
+        copyLinkBtn.textContent = "請先設定網址";
+        return;
       }
-      function close(){
-        modal.classList.remove("show");
-        modal.setAttribute("aria-hidden", "true");
-      }
-
-      img.addEventListener("click", open);
-      closeBtn.addEventListener("click", close);
-      modal.addEventListener("click", (e) => {
-        if(e.target === modal) close();
-      });
-      document.addEventListener("keydown", (e) => {
-        if(e.key === "Escape") close();
-      });
-    })();
-
-    // ====== 送出：防重複 + 報名序號 + UTM/追蹤寫入備註 ======
-    function makeRegId() {
-      const s = Math.random().toString(16).slice(2, 10).toUpperCase();
-      return `TNN-${s}`;
+      regUrlText.textContent = url;
+      regUrlText.href = url;
+      copyLinkBtn.disabled = false;
+      copyLinkBtn.textContent = "複製報名網址";
     }
+    setPublicUrlUI();
 
-    function getTrackingNote() {
+    copyLinkBtn.addEventListener("click", async () => {
+      const url = (PUBLIC_REGISTER_URL || "").trim();
+      if (!url || url === "#" || url.includes("（")) return;
+      try{
+        await navigator.clipboard.writeText(url);
+        copyLinkBtn.textContent = "已複製 ✅";
+        setTimeout(()=> copyLinkBtn.textContent = "複製報名網址", 1200);
+      }catch(e){
+        alert("複製失敗，請手動複製：\n" + url);
+      }
+    });
+
+    // 複製地址
+    $("copyAddrBtn").addEventListener("click", async () => {
+      try{
+        await navigator.clipboard.writeText(EVENT.address);
+        $("copyAddrBtn").textContent = "已複製 ✅";
+        setTimeout(()=> $("copyAddrBtn").textContent = "複製地址", 1200);
+      }catch(e){
+        alert("複製失敗，請手動複製：\n" + EVENT.address);
+      }
+    });
+
+    // 海報放大
+    const modal = $("modal");
+    const posterImg = $("posterImg");
+    const modalImg = $("modalImg");
+    const closeModal = $("closeModal");
+    function openModal(){
+      modal.classList.add("show");
+      modal.setAttribute("aria-hidden","false");
+    }
+    function closeIt(){
+      modal.classList.remove("show");
+      modal.setAttribute("aria-hidden","true");
+    }
+    posterImg.addEventListener("click", openModal);
+    closeModal.addEventListener("click", closeIt);
+    modal.addEventListener("click", (e)=>{ if(e.target === modal) closeIt(); });
+    window.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeIt(); });
+
+    // 追蹤資訊（放進備註 hidden）
+    function getTrackingNote(){
       const p = new URLSearchParams(location.search);
-      const keys = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term","fbclid"];
+      const src = (p.get("src") || "").trim();
+      const utm_source = (p.get("utm_source") || "").trim();
+      const utm_medium = (p.get("utm_medium") || "").trim();
+      const utm_campaign = (p.get("utm_campaign") || "").trim();
       const parts = [];
-      keys.forEach(k => {
-        const v = p.get(k);
-        if (v) parts.push(`${k}=${v}`);
-      });
-      const ref = document.referrer || "";
-      if (ref) parts.push(`ref=${ref}`);
-      if (parts.length === 0) return "";
-      return `【追蹤】${parts.join(";")}`;
+      if (src) parts.push(`src=${src}`);
+      if (utm_source) parts.push(`utm_source=${utm_source}`);
+      if (utm_medium) parts.push(`utm_medium=${utm_medium}`);
+      if (utm_campaign) parts.push(`utm_campaign=${utm_campaign}`);
+      return parts.length ? `【來源】${parts.join("&")}` : "";
     }
 
-    function setFullJoinUI() {
-      const v = $("full_join").value || "";
-      const alertBox = $("fullJoinAlert");
-      const btn = $("submitBtn");
+    function makeRegId(){
+      // 簡單序號：年月日-4碼
+      const d = new Date();
+      const pad = (n)=> String(n).padStart(2,"0");
+      const y = d.getFullYear();
+      const m = pad(d.getMonth()+1);
+      const day = pad(d.getDate());
+      const rnd = Math.floor(Math.random()*9000)+1000;
+      return `${y}${m}${day}-${rnd}`;
+    }
 
+    // 全程參與 UI
+    const fullJoin = $("full_join");
+    const fullJoinAlert = $("fullJoinAlert");
+    const submitBtn = $("submitBtn");
+    function setFullJoinUI(){
+      const v = fullJoin.value || "";
       if (v.startsWith("否")) {
-        alertBox.classList.add("show");
-        btn.disabled = true;
-        $("submitHint").textContent = "因無法全程參與，目前無法送出報名";
+        fullJoinAlert.classList.add("show");
+        submitBtn.disabled = true;
       } else {
-        alertBox.classList.remove("show");
-        btn.disabled = false;
-        $("submitHint").textContent = "";
+        fullJoinAlert.classList.remove("show");
+        submitBtn.disabled = false;
       }
     }
+    fullJoin.addEventListener("change", setFullJoinUI);
 
-    (function bindSubmit(){
-      const form = $("signupForm");
-      if (!form) return;
+    // 表單送出：改成「直接 POST 到 GAS」，GAS 寫入成功才會導回 thanks
+    const form = $("signupForm");
+    form.action = GAS_WEBAPP_URL;
+    form.method = "POST";
+    form.target = "_self";
 
-      // 固定欄位
-      $("event_code").value = EVENT.eventCode || "";
-      $("event_name").value = EVENT.title || "";
-
-      // 即時提示：全程參與
-      $("full_join").addEventListener("change", setFullJoinUI);
-
-      form.addEventListener("submit", async (ev) => {
+    form.addEventListener("submit", (ev) => {
+      // 擋「否」
+      const v = fullJoin.value || "";
+      if (v.startsWith("否")) {
         ev.preventDefault();
+        setFullJoinUI();
+        return;
+      }
 
-        // 若選「否（請勿報名）」直接擋下（保留你原本的保護機制）[Source](https://www.genspark.ai/api/files/s/JpBK0ESo)
-        const full = $("full_join").value || "";
-        if (full.startsWith("否")) {
-          setFullJoinUI();
-          return;
-        }
+      // 簡單防連點
+      if (form.dataset.submitting === "1") {
+        ev.preventDefault();
+        return;
+      }
+      form.dataset.submitting = "1";
 
-        if (form.dataset.submitting === "1") return;
-        form.dataset.submitting = "1";
+      // UI
+      $("submitHint").textContent = "正在送出…";
+      $("progress").classList.add("show");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "送出中…";
 
-        const btn = $("submitBtn");
-        const hint = $("submitHint");
-        const progress = $("progress");
-        const oldText = btn.textContent;
+      // hidden：活動代碼/名稱
+      $("event_code").value = EVENT_CODE;
+      $("event_name").value = EVENT_NAME;
 
-        btn.disabled = true;
-        btn.textContent = "送出中…";
-        hint.textContent = "請稍等，正在送出資料";
-        progress.classList.add("show");
+      // hidden：序號
+      if (!$("reg_id").value) $("reg_id").value = makeRegId();
+      const rid = $("reg_id").value;
 
-        try {
-          // 報名序號
-          if (!$("reg_id").value) $("reg_id").value = makeRegId();
-          const rid = $("reg_id").value;
+      // hidden：追蹤（合併家長備註）
+      const tracking = getTrackingNote();
+      const note = ($("note").value || "").trim();
+      const merged = [note, tracking].filter(Boolean).join(" | ");
+      $("note_hidden").value = merged;
 
-          // 追蹤字串塞進備註（hidden）
-          const tracking = getTrackingNote();
-          if (tracking) $("note_hidden").value = tracking;
-
-          // 送到 GAS（寫入 Sheet）[Source](https://www.genspark.ai/api/files/s/JpBK0ESo)
-          const fd = new FormData(form);
-          await fetch(GAS_WEBAPP_URL, { method:"POST", body: fd, mode:"no-cors" });
-
-          // Pixel：完成報名（可選）[Source](https://www.genspark.ai/api/files/s/JpBK0ESo)
-          if (window.fbq) fbq("track", "CompleteRegistration");
-
-          // 跳感謝頁 [Source](https://www.genspark.ai/api/files/s/JpBK0ESo)
-          location.href = `${THANKS_URL}?rid=${encodeURIComponent(rid)}`;
-        } catch (e) {
-          alert("送出失敗，請稍後再試一次。");
-          btn.disabled = false;
-          btn.textContent = oldText;
-          hint.textContent = "";
-          progress.classList.remove("show");
-          form.dataset.submitting = "0";
-        }
-      });
-
-      // 初始狀態
-      setFullJoinUI();
-    })();
+      // redirect：寫入成功後導回 thanks（帶 rid）
+      const thanksAbs = new URL(THANKS_URL, location.href).href;
+      $("redirect_url").value = `${thanksAbs}?rid=${encodeURIComponent(rid)}`;
+      // 不要 preventDefault：讓瀏覽器把表單送到 GAS
+    });
   </script>
 </body>
-
 </html>
-
