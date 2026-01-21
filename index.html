@@ -414,8 +414,6 @@
         <a href="#contact">聯絡</a>
       </nav>
           <a class="btn primary" href="#register" aria-label="立即報名（跳到報名區）">立即報名</a>
-
-      <a class="btn primary" href="#register">報名</a>
     </div>
   </div>
 
@@ -784,7 +782,7 @@
               id="mapFrame"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
-              src=""
+              src="https://www.google.com/maps?q=%E8%87%BA%E5%8D%97%E5%B8%82%E5%8D%97%E5%8D%80%E6%96%B0%E5%BB%BA%E8%B7%AF%2012%20%E8%99%9F%20%E5%BD%B0%E5%8D%97%E9%87%8C%E6%B4%BB%E5%8B%95%E4%B8%AD%E5%BF%83&output=embed"
               title="Google 地圖">
             </iframe>
           </div>
@@ -914,17 +912,7 @@
     }
 
     
-// （已移除網址展示卡，故停用此段）
-      const url = (PUBLIC_REGISTER_URL || "").trim();
-      if (!url || url === "#" || url.includes("（")) return;
-      try{
-        await navigator.clipboard.writeText(url);
-      }catch(e){
-        alert("複製失敗，請手動複製：\n" + url);
-      }
-    });
-
-    // 複製地址
+// 複製地址
     $("copyAddrBtn").addEventListener("click", async () => {
       try{
         await navigator.clipboard.writeText(EVENT.address);
