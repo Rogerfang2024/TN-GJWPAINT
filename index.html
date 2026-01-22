@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5" />
   <title>乾淨校園我愛我家兒童著色畫比賽官網</title>
 
   <meta name="description" content="乾淨校園我愛我家兒童著色畫比賽官網｜報名、流程、辦法、獎項與地點資訊" />
@@ -423,14 +423,6 @@
           <!-- 表單 -->
           <div class="card formCard">
             <form id="signupForm" class="formGrid" autocomplete="on">
-              <!-- Hidden 欄位 -->
-              <input type="hidden" name="活動代碼" id="event_code" />
-              <input type="hidden" name="活動名稱" id="event_name" />
-              <input type="hidden" name="報名序號" id="reg_id" />
-              <input type="hidden" name="備註" id="note_hidden" />
-              <input type="hidden" name="追蹤" id="tracking_hidden" />
-              <input type="hidden" name="thanks_url" id="thanks_url" />
-
               <div class="field">
                 <label for="full_join">是否能全程參與（必填）</label>
                 <select id="full_join" name="是否能全程參與（9:00–12:00）" required>
@@ -498,7 +490,7 @@
 
               <div class="field">
                 <label for="note">備註（可填）</label>
-                <textarea id="note" placeholder="例如：需要無障礙動線"></textarea>
+                <textarea id="note" name="備註" placeholder="例如：需要無障礙動線"></textarea>
               </div>
 
               <div class="ctaRow">
@@ -712,7 +704,7 @@
   <script>
     // ====== 設定 ======
     const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxDlJ8o8unlRefrLvJM22lPN7E4Z-TevdkT2Lq1O9ROunLKSVKliq8qylOo_jj-FyyDzQ/exec";
-    const THANKS_URL = "thanks.html";
+    const THANKS_URL = "https://rogerfang2024.github.io/TN-GJWPAINT/thanks.html";
     const EVENT_CODE = "GJC2026";
     const EVENT_NAME = "乾淨校園我愛我家兒童著色畫比賽";
 
@@ -897,9 +889,8 @@
       return isValid;
     };
 
-    // 重置表單狀態（驗證失敗或送出失敗時）
+    // 重置表單狀態
     const resetFormState = () => {
-      form.dataset.submitting = "";
       submitBtn.disabled = false;
       submitBtn.textContent = "送出報名";
       $("progress").classList.remove("show");
@@ -920,12 +911,8 @@
       return parts.length ? `【來源】${parts.join("&")}` : "";
     };
 
-    // 設定表單 action 與 method
-    form.action = GAS_WEBAPP_URL;
-    form.method = "POST";
-
-    // 表單送出
-    form.addEventListener("submit", e => {
+    // 表單送出（使用 fetch）
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       // 驗證
@@ -933,36 +920,60 @@
         return;
       }
 
-      // 防止重複送出
-      if (form.dataset.submitting === "1") {
-        return;
-      }
-      form.dataset.submitting = "1";
-
       // 更新 UI
       submitBtn.disabled = true;
       submitBtn.textContent = "送出中…";
       $("progress").classList.add("show");
+      $("formError").classList.remove("show");
 
-      // 填入 hidden 欄位
-      $("event_code").value = EVENT_CODE;
-      $("event_name").value = EVENT_NAME;
-      if (!$("reg_id").value) $("reg_id").value = makeRegId();
+      // 產生報名序號
+      const regId = makeRegId();
 
-      // 追蹤
-      $("tracking_hidden").value = getTracking();
-
-      // 備註
+      // 組裝資料
+      const formData = new FormData();
+      formData.append("活動代碼", EVENT_CODE);
+      formData.append("活動名稱", EVENT_NAME);
+      formData.append("報名序號", regId);
+      formData.append("家長姓名", $("parent_name").value.trim());
+      formData.append("聯絡電話（手機）", $("phone").value.trim());
+      formData.append("孩子姓名", $("child_name").value.trim());
+      formData.append("孩子年級／年齡", $("child_age").value);
+      formData.append("參賽組別", $("group").value);
+      formData.append("是否能全程參與（9:00–12:00）", $("full_join").value);
+      formData.append("就讀學校（選填）", $("school").value.trim());
+      formData.append("是否為台南市民", $("resident").value);
+      
+      // 備註與追蹤
       const userNote = ($("note").value || "").trim();
-      $("note_hidden").value = userNote;
+      const tracking = getTracking();
+      const note = tracking ? (userNote ? `${userNote} ｜${tracking}` : tracking) : userNote;
+      formData.append("備註", note);
+      formData.append("追蹤", tracking);
 
-      // thanks_url
-      const thanksUrl = new URL(THANKS_URL, location.href).href;
-      $("thanks_url").value = `${thanksUrl}?rid=${encodeURIComponent($("reg_id").value)}`;
+      try {
+        const response = await fetch(GAS_WEBAPP_URL, {
+          method: "POST",
+          body: formData
+        });
 
-      // 用原生 form submit
-      form.submit();
+        const text = await response.text();
+
+        if (text.includes("ERROR")) {
+          throw new Error(text.replace("ERROR: ", ""));
+        }
+
+        // 成功：清除表單並跳轉
+        form.reset();
+        window.location.href = `${THANKS_URL}?rid=${encodeURIComponent(regId)}`;
+
+      } catch (err) {
+        // 失敗：顯示錯誤並重置按鈕
+        $("formError").textContent = "送出失敗：" + (err.message || "請稍後再試");
+        $("formError").classList.add("show");
+        resetFormState();
+      }
     });
   </script>
 </body>
 </html>
+
