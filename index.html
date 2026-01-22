@@ -37,9 +37,9 @@
     a{color:inherit}
     .wrap{max-width:var(--max);margin:0 auto;padding:16px}
 
-    /* ===== 頂部導覽 ===== */
+    /* ===== 頂部區塊（品牌+報名按鈕） ===== */
     .topbar{
-      position:sticky;top:0;z-index:30;
+      position:sticky;top:0;z-index:31;
       background:rgba(255,255,255,.95);
       backdrop-filter:blur(10px);
       -webkit-backdrop-filter:blur(10px);
@@ -58,26 +58,35 @@
       width:10px;height:10px;border-radius:50%;flex-shrink:0;
       background:linear-gradient(135deg,var(--brand),var(--brand2));
     }
-    .topBtns{display:flex;gap:6px;align-items:center}
-    .topBtns .btn{padding:8px 12px;font-size:13px}
-    .topBtns .btn.desktop{display:none}
-    @media(min-width:768px){.topBtns .btn.desktop{display:inline-flex}}
+    /* 頂部報名按鈕（滾到報名區會隱藏） */
+    #topRegisterBtn{
+      padding:8px 14px;font-size:13px;
+      transition:opacity .2s,transform .2s;
+    }
+    #topRegisterBtn.hide{
+      opacity:0;
+      pointer-events:none;
+      transform:scale(.9);
+    }
 
-    /* ===== 手機版導覽列（可滑動） ===== */
-    .mobileNav{
+    /* ===== 導覽列（永遠固定） ===== */
+    .navBar{
+      position:sticky;top:52px;z-index:30;
       display:flex;
       overflow-x:auto;
       -webkit-overflow-scrolling:touch;
       gap:6px;
-      padding:10px 16px;
-      background:var(--card);
+      padding:8px 16px;
+      background:rgba(255,255,255,.95);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
       border-bottom:1px solid var(--border);
       scrollbar-width:none;
     }
-    .mobileNav::-webkit-scrollbar{display:none}
-    .mobileNav a{
+    .navBar::-webkit-scrollbar{display:none}
+    .navBar a{
       flex-shrink:0;
-      padding:6px 12px;
+      padding:6px 14px;
       border-radius:20px;
       font-size:13px;
       font-weight:600;
@@ -87,12 +96,11 @@
       border:1px solid var(--border);
       transition:all .15s;
     }
-    .mobileNav a:hover,.mobileNav a:active{
+    .navBar a:hover,.navBar a:active{
       background:rgba(14,165,233,.1);
       border-color:var(--brand);
       color:var(--brand);
     }
-    @media(min-width:768px){.mobileNav{display:none}}
 
     /* ===== 按鈕 ===== */
     .btn{
@@ -130,25 +138,26 @@
     .heroGrid{display:grid;gap:16px}
     @media(min-width:768px){.heroGrid{grid-template-columns:1fr 1fr;gap:24px}}
 
-    /* 海報縮小 */
+    /* 海報（縮小外框） */
     .posterWrap{
-      max-width:280px;
-      margin:0 auto;
+      text-align:center;
     }
-    @media(min-width:768px){.posterWrap{max-width:100%;margin:0}}
     .poster{
       width:100%;
-      max-height:320px;
-      object-fit:contain;
-      border-radius:12px;cursor:zoom-in;
+      max-width:300px;
+      height:auto;
+      border-radius:10px;
+      cursor:zoom-in;
       border:1px solid var(--border);
-      background:#f8f8f8;
     }
-    @media(min-width:768px){.poster{max-height:none}}
+    @media(min-width:768px){
+      .poster{max-width:100%}
+    }
     .notice{
       margin-top:10px;padding:10px 12px;border-radius:10px;
       background:rgba(14,165,233,.06);border:1px dashed rgba(14,165,233,.2);
       color:var(--muted);font-size:12px;font-weight:600;
+      text-align:left;
     }
     .pillRow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
     .pillRow .pill:last-child{grid-column:1/-1}
@@ -289,23 +298,19 @@
 </head>
 
 <body>
-  <!-- 頂部導覽 -->
+  <!-- 頂部（品牌+報名按鈕） -->
   <div class="topbar">
     <div class="wrap">
       <div class="brand">
         <span class="dot"></span>
         <span id="siteName">乾淨校園著色畫比賽</span>
       </div>
-      <div class="topBtns">
-        <a class="btn sm desktop" href="#schedule">流程</a>
-        <a class="btn sm desktop" href="#rules">辦法</a>
-        <a class="btn sm primary" href="#register">立即報名</a>
-      </div>
+      <a class="btn primary" id="topRegisterBtn" href="#register">立即報名</a>
     </div>
   </div>
 
-  <!-- 手機版導覽列（可左右滑動） -->
-  <nav class="mobileNav">
+  <!-- 導覽列（永遠固定） -->
+  <nav class="navBar">
     <a href="#highlights">亮點</a>
     <a href="#schedule">流程</a>
     <a href="#register">報名</a>
@@ -754,7 +759,24 @@
     $("mapBtn2").href = mapUrl;
     $("mapBtn3").href = mapUrl;
 
-    // 複製地址
+    // ====== 頂部報名按鈕：滾到報名區就隱藏 ======
+    const topRegisterBtn = $("topRegisterBtn");
+    const registerSection = $("register");
+
+    const checkRegisterVisible = () => {
+      const rect = registerSection.getBoundingClientRect();
+      // 當報名區塊進入畫面（頂部進入視窗下半部）
+      if (rect.top < window.innerHeight * 0.7) {
+        topRegisterBtn.classList.add("hide");
+      } else {
+        topRegisterBtn.classList.remove("hide");
+      }
+    };
+
+    window.addEventListener("scroll", checkRegisterVisible, { passive: true });
+    checkRegisterVisible(); // 初始檢查
+
+    // ====== 複製地址 ======
     $("copyAddrBtn").addEventListener("click", async () => {
       try {
         await navigator.clipboard.writeText(EVENT.address);
@@ -772,7 +794,7 @@
       }
     });
 
-    // Modal
+    // ====== Modal ======
     const modal = $("modal");
     const openModal = () => { modal.classList.add("show"); document.body.style.overflow = "hidden"; };
     const closeModalFn = () => { modal.classList.remove("show"); document.body.style.overflow = ""; };
@@ -782,7 +804,7 @@
     modal.addEventListener("click", e => { if (e.target === modal) closeModalFn(); });
     document.addEventListener("keydown", e => { if (e.key === "Escape") closeModalFn(); });
 
-    // 表單
+    // ====== 表單 ======
     const form = $("signupForm");
     const fullJoin = $("full_join");
     const submitBtn = $("submitBtn");
