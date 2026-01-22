@@ -2,351 +2,355 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>報名完成｜感謝你</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>報名完成｜乾淨校園我愛我家兒童著色畫比賽</title>
 
   <meta name="description" content="報名完成！已收到你的資料。" />
-  <meta property="og:title" content="報名完成｜感謝你" />
+  <meta property="og:title" content="報名完成｜乾淨校園我愛我家兒童著色畫比賽" />
   <meta property="og:description" content="已收到你的資料，請保留報名序號以便查詢。" />
   <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#fb7185" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <meta name="format-detection" content="telephone=no" />
 
   <style>
     :root{
-      --bg:#fff7ed;
+      --bg:#f6f9fc;
       --card:#ffffff;
-      --text:#1f2937;
-      --muted:#6b7280;
-
-      --brand:#fb7185;
-      --brand2:#60a5fa;
-      --brand3:#fbbf24;
-
-      --shadow: 0 12px 26px rgba(31,41,55,.10);
-      --radius: 22px;
-      --max: 980px;
-
-      --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --text:#0f172a;
+      --muted:#475569;
+      --brand:#0ea5e9;
+      --brand2:#22c55e;
+      --shadow: 0 10px 30px rgba(2,8,23,.08);
+      --radius: 16px;
+      --max: 600px;
     }
-    *{box-sizing:border-box}
+    *{box-sizing:border-box;margin:0}
     html{scroll-behavior:smooth}
     body{
-      margin:0;
-      font-family: var(--font);
-      color: var(--text);
-      line-height: 1.65;
-      background:
-        radial-gradient(900px 420px at 15% -10%, rgba(251,113,133,.18), transparent 60%),
-        radial-gradient(900px 420px at 100% 10%, rgba(96,165,250,.16), transparent 55%),
-        radial-gradient(700px 360px at 40% 105%, rgba(251,191,36,.18), transparent 50%),
-        var(--bg);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+      color:var(--text);
+      background:linear-gradient(135deg,rgba(14,165,233,.08)0%,transparent 50%),linear-gradient(225deg,rgba(34,197,94,.06)0%,transparent 50%),var(--bg);
+      line-height:1.6;
+      min-height:100vh;
+      padding:16px;
     }
-    a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:22px}
-    @media (max-width: 520px){ .wrap{padding:18px} }
+
+    .container{
+      max-width:var(--max);
+      margin:0 auto;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid #e2e8f0;
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:20px;
+      margin-bottom:16px;
+    }
 
     .topbar{
-      position:sticky; top:0; z-index:30;
-      backdrop-filter: blur(10px);
-      background: rgba(255,247,237,.82);
-      border-bottom: 1px solid rgba(31,41,55,.08);
-    }
-    .topbar .wrap{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:12px 22px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:20px;
+      flex-wrap:wrap;
       gap:10px;
     }
     .brand{
-      display:flex; gap:10px; align-items:center;
-      font-weight: 950;
-      letter-spacing: .2px;
-      font-size: 14px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-weight:800;
+      font-size:14px;
     }
-    .logoDot{
-      width:14px; height:14px; border-radius:999px;
-      background: conic-gradient(from 180deg, var(--brand), var(--brand3), var(--brand2), var(--brand));
-      box-shadow: 0 10px 18px rgba(251,113,133,.18);
-      border: 2px solid rgba(255,255,255,.95);
-      flex:0 0 auto;
+    .dot{
+      width:12px;height:12px;border-radius:50%;
+      background:linear-gradient(135deg,var(--brand),var(--brand2));
     }
 
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:8px;
-      border: 1px solid rgba(31,41,55,.10);
-      background: var(--card);
-      padding:10px 12px;
-      border-radius: 14px;
-      text-decoration:none;
-      font-weight:950;
-      cursor:pointer;
-      transition: transform .06s ease, box-shadow .12s ease, opacity .2s ease, filter .2s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      padding:10px 16px;
+      border-radius:10px;
       font-size:14px;
-      user-select:none;
-      -webkit-tap-highlight-color: transparent;
+      font-weight:700;
+      text-decoration:none;
+      cursor:pointer;
+      border:1px solid #e2e8f0;
+      background:var(--card);
+      transition:transform .1s,box-shadow .1s;
     }
-    .btn:hover{transform: translateY(-1px); box-shadow: 0 14px 26px rgba(31,41,55,.10)}
+    .btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+    .btn:active{transform:scale(.98)}
     .btn.primary{
-      border-color: transparent;
-      background: linear-gradient(135deg, var(--brand), var(--brand3));
-      color: #1f2937;
+      background:linear-gradient(135deg,var(--brand),#38bdf8);
+      color:#fff;
+      border:none;
     }
-    .btn.primary:hover{filter:saturate(1.05)}
-    .btn:disabled{opacity:.55; cursor:not-allowed; transform:none; box-shadow:none}
+    .btn.sm{padding:8px 12px;font-size:13px}
 
-    .card{
-      background: var(--card);
-      border: 1px solid rgba(31,41,55,.10);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
+    .success-icon{
+      width:60px;height:60px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--brand2),#4ade80);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin:0 auto 16px;
+      font-size:28px;
     }
-    .hero{padding: 18px 0 8px}
-    .heroCard{padding: 20px}
-    .kicker{
-      display:inline-flex; gap:10px; align-items:center;
+
+    h1{
+      font-size:22px;
+      text-align:center;
+      margin-bottom:8px;
+    }
+    .sub{
+      color:var(--muted);
+      font-size:14px;
+      text-align:center;
+      margin-bottom:20px;
+    }
+
+    .rid-box{
+      background:rgba(14,165,233,.06);
+      border:1px dashed rgba(14,165,233,.3);
+      border-radius:12px;
+      padding:16px;
+      text-align:center;
+      margin-bottom:16px;
+    }
+    .rid-label{
       font-size:12px;
-      color: var(--text);
-      background: rgba(251,113,133,.12);
-      border: 1px solid rgba(251,113,133,.20);
-      padding:6px 10px;
-      border-radius:999px;
-      font-weight:950;
+      color:var(--muted);
+      font-weight:600;
+      margin-bottom:6px;
     }
-    .kicker .spark{
-      width:10px; height:10px; border-radius:999px;
-      background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,.2) 35%, transparent 60%),
-                  linear-gradient(135deg, var(--brand2), var(--brand3));
-      box-shadow: 0 10px 16px rgba(96,165,250,.18);
+    .rid-value{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+      font-size:20px;
+      font-weight:800;
+      color:var(--brand);
+      letter-spacing:1px;
+      word-break:break-all;
     }
-    h1{margin:12px 0 8px; font-size: 30px; line-height: 1.2}
-    @media (max-width: 520px){ h1{font-size:24px} }
-    .sub{margin:0 0 14px; color: var(--muted); font-size:14px; font-weight:800}
 
-    .grid{display:grid; gap:12px}
-    .pill{
-      border: 1px solid rgba(251,191,36,.60);
-      background: #fff;
-      border-radius: 18px;
-      padding:12px 12px;
-      box-shadow: 0 10px 18px rgba(31,41,55,.06);
-      position: relative;
+    .btn-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
     }
-    .pill:before{
-      content:"";
-      position:absolute;
-      inset:-1px;
-      border-radius: 18px;
-      pointer-events:none;
-      background:
-        radial-gradient(10px 10px at 12% 18%, rgba(251,113,133,.26), transparent 60%),
-        radial-gradient(10px 10px at 88% 22%, rgba(96,165,250,.22), transparent 60%),
-        radial-gradient(12px 12px at 80% 88%, rgba(251,191,36,.22), transparent 60%);
-      opacity:.9;
-      mix-blend-mode: multiply;
+
+    .tips{
+      background:rgba(34,197,94,.06);
+      border:1px solid rgba(34,197,94,.2);
+      border-radius:12px;
+      padding:14px;
     }
-    .pill .t{font-size:12px; color: var(--muted); font-weight:950}
-    .pill .v{font-size:16px; font-weight:950; margin-top:4px}
-    .rid{
-      font-family: var(--mono);
-      letter-spacing: .6px;
-      display:inline-block;
-      padding:6px 10px;
-      border-radius: 12px;
-      border: 1px dashed rgba(31,41,55,.18);
-      background: rgba(255,255,255,.65);
+    .tips-title{
+      font-weight:700;
+      font-size:14px;
+      margin-bottom:8px;
+      color:var(--text);
     }
+    .tips-list{
+      font-size:13px;
+      color:var(--muted);
+      padding-left:18px;
+      margin:0;
+    }
+    .tips-list li{margin:4px 0}
 
     .notice{
       margin-top:12px;
-      padding:12px 12px;
-      border-radius:18px;
-      border: 1px dashed rgba(31,41,55,.18);
-      background: rgba(255,255,255,.62);
-      color: var(--muted);
-      font-size:13px;
-      font-weight:850;
+      padding:12px;
+      border-radius:10px;
+      background:rgba(14,165,233,.06);
+      border:1px dashed rgba(14,165,233,.2);
+      color:var(--muted);
+      font-size:12px;
+      text-align:center;
     }
 
-    .twoCol{grid-template-columns: 1fr 1fr; align-items:start}
-    @media (max-width: 900px){ .twoCol{grid-template-columns: 1fr} }
+    .contact-card{
+      display:grid;
+      gap:16px;
+    }
+    @media(min-width:480px){
+      .contact-card{grid-template-columns:1fr 1fr}
+    }
+    .contact-item h3{
+      font-size:14px;
+      margin-bottom:4px;
+    }
+    .contact-item p{
+      font-size:13px;
+      color:var(--muted);
+      margin:0;
+    }
 
-    footer{padding:18px 0 36px; color:var(--muted); font-size:12px}
-    .footCard{padding:14px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:space-between}
+    footer{
+      text-align:center;
+      padding:20px 0;
+      color:var(--muted);
+      font-size:12px;
+    }
 
     .toast{
-      position: fixed;
-      left: 50%;
-      bottom: 18px;
-      transform: translateX(-50%);
-      background: rgba(17,24,39,.92);
-      color: #fff;
-      padding: 10px 12px;
-      border-radius: 999px;
-      font-weight: 900;
-      font-size: 13px;
+      position:fixed;
+      left:50%;bottom:20px;
+      transform:translateX(-50%);
+      background:rgba(15,23,42,.9);
+      color:#fff;
+      padding:10px 16px;
+      border-radius:20px;
+      font-size:13px;
+      font-weight:600;
       display:none;
-      z-index: 50;
-      max-width: min(92vw, 520px);
-      text-align:center;
+      z-index:50;
     }
     .toast.show{display:block}
   </style>
 </head>
 
 <body>
-  <div class="topbar">
-    <div class="wrap">
+  <div class="container">
+    <!-- 頂部 -->
+    <div class="topbar">
       <div class="brand">
-        <span class="logoDot" aria-hidden="true"></span>
-        <span id="siteName">活動報名</span>
+        <span class="dot"></span>
+        <span>乾淨校園著色畫比賽</span>
       </div>
-      <a class="btn" id="backBtn" href="./">回到報名頁</a>
+      <a class="btn sm" href="./">回首頁</a>
     </div>
-  </div>
 
-  <header class="hero">
-    <div class="wrap">
-      <div class="card heroCard">
-        <div class="kicker"><span class="spark" aria-hidden="true"></span>報名完成</div>
-        <h1>謝謝你，我們已收到資料！</h1>
-        <p class="sub">請保留「報名序號」，若需查詢或聯繫主辦可提供此序號。</p>
+    <!-- 主卡片 -->
+    <div class="card">
+      <div class="success-icon">✓</div>
+      <h1>報名完成！</h1>
+      <p class="sub">謝謝你，我們已收到資料</p>
 
-        <div class="grid twoCol">
-          <div class="pill">
-            <div class="t">你的報名序號</div>
-            <div class="v"><span class="rid" id="ridText">（讀取中…）</span></div>
-            <div style="height:10px"></div>
-            <div style="display:flex; gap:10px; flex-wrap:wrap">
-              <button class="btn primary" id="copyBtn" type="button">複製序號</button>
-              <a class="btn" id="openLineBtn" href="#" target="_blank" rel="noopener">傳給家人（複製訊息）</a>
-            </div>
-          </div>
+      <div class="rid-box">
+        <div class="rid-label">你的報名序號</div>
+        <div class="rid-value" id="ridText">（讀取中…）</div>
+      </div>
 
-          <div class="pill">
-            <div class="t">接下來你可以做什麼</div>
-            <div class="v" style="font-size:14px; font-weight:950; line-height:1.55">
-              1) 截圖此頁或複製序號保存<br/>
-              2) 活動前請留意主辦通知<br/>
-              3) 若臨時無法到場，建議盡早取消，讓名額留給其他家庭
-            </div>
-          </div>
-        </div>
+      <div class="btn-row">
+        <button class="btn primary" id="copyBtn" type="button">複製序號</button>
+        <button class="btn" id="shareBtn" type="button">分享給家人</button>
+      </div>
 
-        <div class="notice">
-          小提醒：若你是從 Facebook/LINE 連結進來，請不要關閉瀏覽器太快，避免頁面尚未顯示序號。
-        </div>
+      <div class="notice">
+        請截圖或複製序號保存，若需查詢或聯繫主辦可提供此序號
       </div>
     </div>
-  </header>
 
-  <main>
-    <section>
-      <div class="wrap">
-        <div class="card heroCard">
-          <div class="grid twoCol">
-            <div>
-              <div style="font-weight:950">聯絡方式</div>
-              <div class="sub" style="margin-top:6px">
-                如需詢問或取消，請直接聯繫主辦（並提供報名序號）。
-              </div>
-            </div>
-            <div>
-              <div style="font-weight:950">回到報名頁</div>
-              <div class="sub" style="margin-top:6px">
-                若你要替另一位孩子報名，可回到報名頁重新填寫。
-              </div>
-              <div style="height:10px"></div>
-              <a class="btn primary" href="./" id="againBtn">再報名一位</a>
-            </div>
-          </div>
+    <!-- 提示卡片 -->
+    <div class="card">
+      <div class="tips">
+        <div class="tips-title">接下來你可以…</div>
+        <ul class="tips-list">
+          <li>截圖此頁或複製序號保存</li>
+          <li>活動前請留意主辦通知</li>
+          <li>若臨時無法到場，建議盡早通知讓名額留給其他家庭</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 聯絡與再報名 -->
+    <div class="card">
+      <div class="contact-card">
+        <div class="contact-item">
+          <h3>需要聯繫主辦？</h3>
+          <p>請撥打洽詢電話並提供報名序號</p>
+          <a class="btn sm" href="tel:0913837389" style="margin-top:10px">撥打電話</a>
+        </div>
+        <div class="contact-item">
+          <h3>替另一位孩子報名？</h3>
+          <p>可回到報名頁重新填寫</p>
+          <a class="btn sm primary" href="./" style="margin-top:10px">再報名一位</a>
         </div>
       </div>
-    </section>
+    </div>
 
     <footer>
-      <div class="wrap">
-        <div class="card footCard">
-          <div>
-            <div style="font-weight:950; color:#111827" id="footerName">活動報名</div>
-            <div class="muted" style="font-weight:800">感謝你的參與</div>
-          </div>
-          <div class="muted">© <span id="year"></span></div>
-        </div>
-      </div>
+      <div>乾淨校園我愛我家兒童著色畫比賽</div>
+      <div>© <span id="year"></span></div>
     </footer>
-  </main>
+  </div>
 
   <div class="toast" id="toast">已複製</div>
 
   <script>
-    // 你可以在這裡改活動名稱（會顯示在頁首/頁尾與分享訊息）
-    const EVENT_NAME = "乾淨世界「我愛我家」兒童著色畫比賽";
+    const EVENT_NAME = "乾淨校園我愛我家兒童著色畫比賽";
 
-    const $ = (id) => document.getElementById(id);
+    const $ = id => document.getElementById(id);
 
-    $("siteName").textContent = "活動報名";
-    $("footerName").textContent = "活動報名";
+    // 年份
     $("year").textContent = new Date().getFullYear();
 
     // 讀取 rid
-    const p = new URLSearchParams(location.search);
-    const rid = p.get("rid") || "";
-    $("ridText").textContent = rid ? rid : "（未取得序號）";
-
-    // 回到報名頁（若你不是部署在根目錄，改這裡）
-    const HOME_URL = "./";
-
-    $("backBtn").href = HOME_URL;
-    $("againBtn").href = HOME_URL;
+    const params = new URLSearchParams(location.search);
+    const rid = params.get("rid") || "";
+    $("ridText").textContent = rid || "（未取得序號）";
 
     // Toast
-    function toast(msg){
+    function toast(msg) {
       const t = $("toast");
       t.textContent = msg;
       t.classList.add("show");
       clearTimeout(toast._timer);
-      toast._timer = setTimeout(() => t.classList.remove("show"), 1600);
+      toast._timer = setTimeout(() => t.classList.remove("show"), 2000);
     }
 
-    // Copy rid
+    // 複製序號
     $("copyBtn").addEventListener("click", async () => {
-      try{
-        const text = rid ? rid : $("ridText").textContent;
+      const text = rid || $("ridText").textContent;
+      try {
         await navigator.clipboard.writeText(text);
-        toast("已複製報名序號");
-      }catch(e){
+        toast("已複製報名序號 ✓");
+      } catch (e) {
         // fallback
-        const range = document.createRange();
-        range.selectNode($("ridText"));
-        const sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
-        toast("請手動複製序號");
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        toast("已複製報名序號 ✓");
       }
     });
 
-    // 產生可分享訊息（點「傳給家人」會先複製文字，並開新分頁）
-    (function bindShare(){
-      const shareText =
-`我已完成報名：${EVENT_NAME}
-報名序號：${rid || "（請看截圖）"}`;
-
-      // 點擊後嘗試複製 shareText（不要求一定成功）
-      $("openLineBtn").addEventListener("click", async (ev) => {
-        ev.preventDefault();
-        try{
-          await navigator.clipboard.writeText(shareText);
-          toast("已複製分享訊息");
-        }catch(e){
-          toast("可直接截圖分享");
+    // 分享
+    $("shareBtn").addEventListener("click", async () => {
+      const shareText = `我已完成報名：${EVENT_NAME}\n報名序號：${rid || "（請看截圖）"}`;
+      
+      // 嘗試使用 Web Share API（手機原生分享）
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: "報名完成",
+            text: shareText
+          });
+          return;
+        } catch (e) {
+          // 使用者取消或不支援，改用複製
         }
-        // 開空白頁（讓使用者自行貼到 LINE/FB）
-        window.open("about:blank", "_blank", "noopener");
-      });
-    })();
+      }
+      
+      // fallback: 複製文字
+      try {
+        await navigator.clipboard.writeText(shareText);
+        toast("已複製分享訊息 ✓");
+      } catch (e) {
+        toast("請手動截圖分享");
+      }
+    });
   </script>
 </body>
 </html>
-
