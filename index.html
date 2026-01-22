@@ -23,6 +23,7 @@
       --shadow:0 10px 30px rgba(2,8,23,.08);
       --radius:16px;
       --max:960px;
+          --topbar-h:60px;
     }
     *{box-sizing:border-box;margin:0}
     html{scroll-behavior:smooth}
@@ -47,6 +48,7 @@
     }
     .topbar .wrap{
       display:flex;align-items:center;justify-content:space-between;
+      min-height:var(--topbar-h);
       padding:10px 16px;gap:8px;
     }
     .brand{
@@ -71,7 +73,7 @@
 
     /* ===== 導覽列（永遠固定） ===== */
     .navBar{
-      position:sticky;top:52px;z-index:30;
+      position:sticky;top:var(--topbar-h);z-index:30;
       display:flex;
       overflow-x:auto;
       -webkit-overflow-scrolling:touch;
@@ -289,6 +291,12 @@
       border-top:1px solid var(--border);
     }
     .fixedCta .btn{flex:1}
+
+    /* mobileCtaTight */
+    @media(max-width:767px){
+      .fixedCta{padding:10px 12px;gap:8px}
+      .fixedCta .btn{padding:9px 12px;font-size:13px;border-radius:9px}
+    }
     @media(min-width:768px){.fixedCta{display:none}}
 
     /* ===== Footer ===== */
