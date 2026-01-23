@@ -48,7 +48,6 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-snap-type: y proximity;
     }
 
     body {
@@ -188,24 +187,30 @@
     /* ========== Logo ========== */
     .logo {
       position: fixed;
-      top: 20px;
-      left: 20px;
+      top: 16px;
+      left: 16px;
       z-index: 1001;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 700;
       color: var(--primary-dark);
       letter-spacing: 1px;
+      background: rgba(255,255,255,0.95);
+      padding: 8px 14px;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
     }
 
-    /* ========== 全螢幕區塊 ========== */
+    /* ========== 區塊通用 ========== */
     .section {
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
-      scroll-snap-align: start;
       overflow: hidden;
+      padding: 80px 20px;
     }
 
     .section-bg {
@@ -230,7 +235,8 @@
 
     .section-content {
       max-width: 800px;
-      padding: 32px 20px;
+      width: 100%;
+      padding: 0;
       text-align: center;
       z-index: 1;
     }
@@ -238,6 +244,7 @@
     /* ========== Hero 區 ========== */
     .hero {
       background: linear-gradient(135deg, var(--primary-light) 0%, var(--bg) 100%);
+      padding: 60px 20px;
     }
 
     .hero .section-overlay {
@@ -360,11 +367,12 @@
     /* ========== 海報區 ========== */
     .poster-section {
       background: var(--bg);
-      padding: 0;
+      min-height: auto;
+      padding: 60px 20px;
     }
 
     .poster-section .section-content {
-      max-width: 550px;
+      max-width: 500px;
     }
 
     .poster-frame {
@@ -400,6 +408,8 @@
     /* ========== 資訊區 ========== */
     .info-section {
       background: var(--bg-alt);
+      min-height: auto;
+      padding: 60px 20px;
     }
 
     .info-grid {
@@ -408,13 +418,6 @@
       gap: 16px;
       max-width: 500px;
       margin: 0 auto;
-    }
-
-    @media (max-width: 480px) {
-      .info-grid {
-        grid-template-columns: 1fr;
-        max-width: 280px;
-      }
     }
 
     .info-card {
@@ -453,6 +456,8 @@
     /* ========== 亮點區 ========== */
     .highlights-section {
       background: var(--bg);
+      min-height: auto;
+      padding: 60px 20px;
     }
 
     .section-title {
@@ -471,9 +476,9 @@
 
     .highlights-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 16px;
-      max-width: 800px;
+      max-width: 500px;
       margin: 0 auto;
     }
 
@@ -512,6 +517,8 @@
     /* ========== 流程區 ========== */
     .schedule-section {
       background: var(--bg-alt);
+      min-height: auto;
+      padding: 60px 20px;
     }
 
     .timeline {
@@ -585,14 +592,15 @@
     /* ========== 獎項區 ========== */
     .prizes-section {
       background: var(--bg);
+      min-height: auto;
+      padding: 60px 20px;
     }
 
     .prizes-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 14px;
-      max-width: 700px;
+      max-width: 500px;
       margin: 0 auto;
     }
 
@@ -601,9 +609,8 @@
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       border-radius: var(--radius);
-      padding: 24px 20px;
+      padding: 20px 12px;
       text-align: center;
-      min-width: 120px;
       transition: all 0.3s;
     }
 
@@ -628,20 +635,20 @@
     }
 
     .prize-icon {
-      font-size: 2rem;
-      margin-bottom: 10px;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
     }
 
     .prize-name {
       font-weight: 600;
-      margin-bottom: 6px;
-      font-size: 0.9rem;
+      margin-bottom: 4px;
+      font-size: 0.85rem;
     }
 
     .prize-amount {
       color: var(--primary);
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
 
     /* ========== 報名區 ========== */
@@ -662,12 +669,6 @@
       box-shadow: var(--shadow-lg);
       border-radius: var(--radius);
       padding: 32px 24px;
-    }
-
-    @media (max-width: 480px) {
-      .form-card {
-        padding: 24px 18px;
-      }
     }
 
     .form-group {
@@ -727,12 +728,6 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
-    }
-
-    @media (max-width: 480px) {
-      .form-row {
-        grid-template-columns: 1fr;
-      }
     }
 
     .submit-btn {
@@ -855,12 +850,6 @@
       gap: 14px;
     }
 
-    @media (max-width: 480px) {
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
     .contact-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -885,15 +874,8 @@
     .footer {
       background: var(--bg);
       padding: 28px 20px;
-      padding-bottom: calc(28px + 70px);
       text-align: center;
       border-top: 1px solid var(--border);
-    }
-
-    @media (min-width: 768px) {
-      .footer {
-        padding-bottom: 28px;
-      }
     }
 
     .footer p {
@@ -904,28 +886,6 @@
     /* ========== 手機底部固定按鈕 ========== */
     .mobile-cta {
       display: none;
-    }
-
-    @media (max-width: 767px) {
-      .mobile-cta {
-        display: flex;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: var(--card);
-        border-top: 1px solid var(--border);
-        padding: 12px 16px;
-        gap: 10px;
-        z-index: 998;
-        box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
-      }
-
-      .mobile-cta .btn {
-        flex: 1;
-        padding: 11px 16px;
-        font-size: 0.85rem;
-      }
     }
 
     /* ========== Lightbox ========== */
@@ -1035,121 +995,231 @@
       opacity: 1;
       transform: translateY(0);
     }
-    /* ========== 手機版修正 ========== */
-@media (max-width: 767px) {
-  .section {
-    min-height: auto;
-    padding: 60px 20px;
-  }
-  
-  .hero {
-    min-height: 100vh;
-    min-height: 100dvh;
-  }
-  
-  .poster-section {
-    padding: 40px 20px;
-  }
-  
-  .footer {
-    padding-bottom: calc(28px + 80px);
-  }
-  
-  .register-section {
-    padding-bottom: 100px;
-  }
-  
-  .mobile-cta {
-    padding: 10px 12px;
-    padding-bottom: calc(10px + env(safe-area-inset-bottom));
-  }
-  
-  .mobile-cta .btn {
-    padding: 10px 14px;
-    font-size: 0.8rem;
-  }
-  
-  .scroll-hint {
-    bottom: 20px;
-    font-size: 0.7rem;
-  }
-  
-  .scroll-hint::after {
-    width: 16px;
-    height: 26px;
-  }
-}
 
-@media (max-width: 480px) {
-  .form-card {
-    padding: 20px 16px;
-  }
-  
-  .form-group {
-    margin-bottom: 14px;
-  }
-  
-  .form-group label {
-    font-size: 0.85rem;
-  }
-  
-  .form-control {
-    padding: 10px 12px;
-    font-size: 0.85rem;
-  }
-  
-  .submit-btn {
-    padding: 12px;
-    font-size: 0.9rem;
-  }
-  
-  .info-card {
-    padding: 18px 14px;
-  }
-  
-  .info-icon {
-    font-size: 1.6rem;
-    margin-bottom: 8px;
-  }
-  
-  .info-value {
-    font-size: 0.85rem;
-  }
-  
-  .timeline::before {
-    left: 16px;
-  }
-  
-  .timeline-dot {
-    width: 34px;
-    height: 34px;
-    font-size: 0.85rem;
-  }
-  
-  .timeline-content {
-    padding: 12px;
-  }
-  
-  .timeline-time {
-    font-size: 0.8rem;
-  }
-  
-  .timeline-title {
-    font-size: 0.85rem;
-  }
-  
-  .timeline-desc {
-    font-size: 0.75rem;
-  }
-}
+    /* ========== 手機版 RWD ========== */
+    @media (max-width: 767px) {
+      .section {
+        min-height: auto;
+        padding: 50px 16px;
+      }
+      
+      .hero {
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 80px 16px 60px;
+      }
+      
+      .scroll-hint {
+        bottom: 20px;
+        font-size: 0.7rem;
+      }
+      
+      .scroll-hint::after {
+        width: 16px;
+        height: 26px;
+      }
+      
+      .footer {
+        padding-bottom: calc(28px + 75px);
+      }
+      
+      .register-section {
+        padding-bottom: 100px;
+      }
+      
+      .mobile-cta {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--card);
+        border-top: 1px solid var(--border);
+        padding: 12px 16px;
+        padding-bottom: calc(12px + env(safe-area-inset-bottom));
+        gap: 10px;
+        z-index: 998;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+      }
 
-/* Logo 加背景 */
-.logo {
-  background: rgba(255,255,255,0.9);
-  padding: 8px 12px;
-  border-radius: 20px;
-  box-shadow: var(--shadow);
-}
+      .mobile-cta .btn {
+        flex: 1;
+        padding: 11px 16px;
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section {
+        padding: 40px 14px;
+      }
+      
+      .hero {
+        padding: 70px 14px 50px;
+      }
+      
+      .section-title {
+        font-size: 1.3rem;
+      }
+      
+      .section-subtitle {
+        font-size: 0.85rem;
+        margin-bottom: 28px;
+      }
+      
+      /* 資訊卡片 */
+      .info-grid {
+        gap: 12px;
+      }
+      
+      .info-card {
+        padding: 18px 12px;
+      }
+      
+      .info-icon {
+        font-size: 1.6rem;
+        margin-bottom: 8px;
+      }
+      
+      .info-label {
+        font-size: 0.65rem;
+      }
+      
+      .info-value {
+        font-size: 0.85rem;
+      }
+      
+      /* 亮點卡片 */
+      .highlights-grid {
+        gap: 12px;
+      }
+      
+      .highlight-card {
+        padding: 20px 12px;
+      }
+      
+      .highlight-icon {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+      }
+      
+      .highlight-card h3 {
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+      }
+      
+      .highlight-card p {
+        font-size: 0.75rem;
+      }
+      
+      /* 時間軸 */
+      .timeline::before {
+        left: 16px;
+      }
+      
+      .timeline-dot {
+        width: 34px;
+        height: 34px;
+        font-size: 0.85rem;
+      }
+      
+      .timeline-content {
+        padding: 12px;
+      }
+      
+      .timeline-time {
+        font-size: 0.8rem;
+      }
+      
+      .timeline-title {
+        font-size: 0.85rem;
+      }
+      
+      .timeline-desc {
+        font-size: 0.75rem;
+      }
+      
+      /* 獎項 */
+      .prizes-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+      
+      .prize-card {
+        padding: 16px 8px;
+      }
+      
+      .prize-icon {
+        font-size: 1.5rem;
+        margin-bottom: 6px;
+      }
+      
+      .prize-name {
+        font-size: 0.75rem;
+      }
+      
+      .prize-amount {
+        font-size: 0.8rem;
+      }
+      
+      /* 表單 */
+      .form-card {
+        padding: 24px 18px;
+      }
+      
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      
+      .form-group {
+        margin-bottom: 14px;
+      }
+      
+      .form-group label {
+        font-size: 0.85rem;
+      }
+      
+      .form-control {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+      }
+      
+      .submit-btn {
+        padding: 12px;
+        font-size: 0.9rem;
+      }
+      
+      /* 地點 */
+      .location-card {
+        padding: 24px 20px;
+      }
+      
+      .location-icon {
+        font-size: 2rem;
+      }
+      
+      .location-name {
+        font-size: 1.1rem;
+      }
+      
+      .location-address {
+        font-size: 0.85rem;
+      }
+      
+      /* 聯絡 */
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      
+      .contact-card {
+        padding: 16px;
+      }
+      
+      .contact-card[style*="grid-column"] {
+        grid-column: auto !important;
+      }
+    }
   </style>
 </head>
 <body>
