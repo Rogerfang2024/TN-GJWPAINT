@@ -3,35 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>乾淨校園我愛我家兒童著色畫比賽｜報名</title>
+  <title>乾淨校園我愛我家｜兒童著色畫比賽</title>
   <meta name="description" content="2026 乾淨校園我愛我家兒童著色畫比賽，歡迎幼兒園及國小低年級學童參加！">
   
-  <!-- DNS 預連接（加速 GAS 請求） -->
+  <!-- DNS 預連接 -->
   <link rel="preconnect" href="https://script.google.com">
   <link rel="dns-prefetch" href="https://script.google.com">
-  
-  <!-- 預載入感謝頁 -->
   <link rel="prefetch" href="./thanks.html">
   
   <!-- Open Graph -->
-  <meta property="og:title" content="乾淨校園我愛我家兒童著色畫比賽">
+  <meta property="og:title" content="乾淨校園我愛我家｜兒童著色畫比賽">
   <meta property="og:description" content="2026 兒童著色畫比賽，歡迎報名參加！">
   <meta property="og:type" content="website">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   
   <style>
     /* ========== CSS 變數 ========== */
     :root {
-      --primary: #0d9488;
-      --primary-dark: #0f766e;
-      --primary-light: #ccfbf1;
-      --secondary: #f59e0b;
-      --bg: #f0fdfa;
-      --text: #134e4a;
-      --text-light: #5f7470;
+      --primary: #2dd4bf;
+      --primary-dark: #14b8a6;
+      --secondary: #fbbf24;
+      --dark: #0f172a;
+      --dark-light: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
       --white: #ffffff;
-      --shadow: 0 4px 20px rgba(13, 148, 136, 0.15);
-      --radius: 12px;
-      --header-height: 60px;
+      --overlay: rgba(15, 23, 42, 0.7);
+      --radius: 16px;
     }
 
     /* ========== Reset ========== */
@@ -43,380 +45,652 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: calc(var(--header-height) + 20px);
+      scroll-snap-type: y proximity;
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
-      background: var(--bg);
+      font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--dark);
       color: var(--text);
       line-height: 1.6;
-      min-height: 100vh;
+      overflow-x: hidden;
     }
 
     img {
       max-width: 100%;
       height: auto;
+      display: block;
     }
 
     a {
-      color: var(--primary);
+      color: inherit;
       text-decoration: none;
     }
 
-    /* ========== Header ========== */
-    .header {
-      position: sticky;
-      top: 0;
-      background: var(--white);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      z-index: 1000;
-      height: var(--header-height);
-    }
-
-    .header-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 16px;
-      height: 100%;
+    /* ========== 漢堡選單 ========== */
+    .nav-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1001;
+      width: 50px;
+      height: 50px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      cursor: pointer;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+      gap: 5px;
+      transition: all 0.3s;
     }
 
+    .nav-toggle:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--white);
+      transition: all 0.3s;
+    }
+
+    .nav-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .nav-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* ========== 側邊選單 ========== */
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 300px;
+      height: 100vh;
+      background: var(--dark-light);
+      z-index: 1000;
+      padding: 100px 40px 40px;
+      transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-y: auto;
+    }
+
+    .nav-menu.active {
+      right: 0;
+    }
+
+    .nav-menu a {
+      display: block;
+      padding: 16px 0;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s;
+    }
+
+    .nav-menu a:hover {
+      color: var(--primary);
+      padding-left: 10px;
+    }
+
+    .nav-menu .nav-cta {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 14px 32px;
+      background: var(--primary);
+      color: var(--dark);
+      border-radius: 30px;
+      font-weight: 700;
+      transition: all 0.3s;
+    }
+
+    .nav-menu .nav-cta:hover {
+      background: var(--secondary);
+      padding-left: 32px;
+    }
+
+    .nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+
+    .nav-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* ========== Logo ========== */
     .logo {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1001;
       font-size: 1.1rem;
       font-weight: 700;
-      color: var(--primary);
-      white-space: nowrap;
-    }
-
-    .nav {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      padding: 4px 0;
-    }
-
-    .nav::-webkit-scrollbar {
-      display: none;
-    }
-
-    .nav a {
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      white-space: nowrap;
-      transition: background 0.2s;
-    }
-
-    .nav a:hover {
-      background: var(--primary-light);
-    }
-
-    .header-cta {
-      background: var(--primary);
-      color: var(--white) !important;
-      padding: 8px 16px !important;
-      border-radius: 8px !important;
-      font-weight: 600;
-    }
-
-    .header-cta:hover {
-      background: var(--primary-dark) !important;
-    }
-
-    /* ========== Hero ========== */
-    .hero {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      padding: 40px 16px;
-    }
-
-    .hero-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-      text-align: center;
       color: var(--white);
+      letter-spacing: 2px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    /* ========== 全螢幕區塊 ========== */
+    .section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      scroll-snap-align: start;
+      overflow: hidden;
+    }
+
+    .section-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .section-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--overlay);
+      z-index: -1;
+    }
+
+    .section-content {
+      max-width: 900px;
+      padding: 40px 24px;
+      text-align: center;
+      z-index: 1;
+    }
+
+    /* ========== Hero 區 ========== */
+    .hero {
+      background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+    }
+
+    .hero .section-overlay {
+      background: linear-gradient(to bottom, transparent 0%, var(--dark) 100%);
     }
 
     .hero-kicker {
       display: inline-block;
+      padding: 8px 24px;
       background: var(--secondary);
-      color: #000;
-      padding: 4px 16px;
-      border-radius: 20px;
+      color: var(--dark);
       font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 16px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      border-radius: 30px;
+      margin-bottom: 24px;
+      animation: fadeInDown 1s ease;
     }
 
     .hero h1 {
-      font-size: clamp(1.8rem, 5vw, 2.5rem);
-      margin-bottom: 8px;
-      line-height: 1.3;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      letter-spacing: -2px;
+      animation: fadeInUp 1s ease 0.2s both;
+    }
+
+    .hero h1 span {
+      display: block;
+      color: var(--primary);
     }
 
     .hero-subtitle {
-      font-size: 1.1rem;
-      opacity: 0.9;
-      margin-bottom: 24px;
-    }
-
-    .hero-poster {
-      max-width: 600px;
-      margin: 0 auto 24px;
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      cursor: zoom-in;
-    }
-
-    .hero-poster img {
-      display: block;
-      width: 100%;
-      transition: transform 0.3s;
-    }
-
-    .hero-poster:hover img {
-      transform: scale(1.02);
-    }
-
-    .hero-info {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px 32px;
-      margin-bottom: 24px;
-      font-size: 1rem;
-    }
-
-    .hero-info-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: clamp(1rem, 3vw, 1.3rem);
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      animation: fadeInUp 1s ease 0.4s both;
     }
 
     .hero-buttons {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 12px;
+      gap: 16px;
+      animation: fadeInUp 1s ease 0.6s both;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      padding: 14px 28px;
-      border-radius: 10px;
+      gap: 10px;
+      padding: 16px 36px;
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: 700;
+      border-radius: 50px;
       border: none;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .btn-primary {
-      background: var(--secondary);
-      color: #000;
+      background: var(--primary);
+      color: var(--dark);
     }
 
     .btn-primary:hover {
-      background: #d97706;
-      transform: translateY(-2px);
+      background: var(--secondary);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 40px rgba(45, 212, 191, 0.3);
     }
 
     .btn-outline {
       background: transparent;
       color: var(--white);
-      border: 2px solid var(--white);
+      border: 2px solid rgba(255,255,255,0.3);
     }
 
     .btn-outline:hover {
       background: var(--white);
-      color: var(--primary);
+      color: var(--dark);
+      border-color: var(--white);
     }
 
-    /* ========== Section 通用 ========== */
-    .section {
-      padding: 60px 16px;
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      animation: bounce 2s infinite;
     }
 
-    .section-inner {
-      max-width: 900px;
+    .scroll-hint::after {
+      content: '';
+      width: 24px;
+      height: 40px;
+      border: 2px solid var(--text-muted);
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .scroll-hint::before {
+      content: '';
+      position: absolute;
+      bottom: 28px;
+      width: 4px;
+      height: 8px;
+      background: var(--primary);
+      border-radius: 2px;
+      animation: scrollDot 2s infinite;
+    }
+
+    /* ========== 海報區 ========== */
+    .poster-section {
+      background: var(--dark);
+      padding: 0;
+    }
+
+    .poster-section .section-content {
+      max-width: 700px;
+    }
+
+    .poster-frame {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+      cursor: zoom-in;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .poster-frame:hover {
+      transform: scale(1.02);
+    }
+
+    .poster-frame img {
+      width: 100%;
+      display: block;
+    }
+
+    .poster-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--secondary);
+      color: var(--dark);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    /* ========== 資訊區 ========== */
+    .info-section {
+      background: linear-gradient(180deg, var(--dark) 0%, var(--dark-light) 100%);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 600px;
       margin: 0 auto;
     }
 
-    .section-title {
-      font-size: 1.8rem;
-      text-align: center;
-      margin-bottom: 32px;
-      color: var(--primary-dark);
+    @media (max-width: 500px) {
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
-    /* ========== 活動亮點 ========== */
-    .highlights {
+    .info-card {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .info-card:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-5px);
+    }
+
+    .info-icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+
+    .info-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .info-value {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    /* ========== 亮點區 ========== */
+    .highlights-section {
+      background: var(--dark-light);
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 48px;
+    }
+
+    .highlights-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
     .highlight-card {
-      background: var(--white);
-      padding: 24px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: var(--radius);
+      padding: 40px 24px;
       text-align: center;
-      box-shadow: var(--shadow);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .highlight-card:hover {
+      background: rgba(45, 212, 191, 0.1);
+      border-color: var(--primary);
+      transform: translateY(-10px);
     }
 
     .highlight-icon {
-      font-size: 2.5rem;
-      margin-bottom: 12px;
+      font-size: 3rem;
+      margin-bottom: 20px;
     }
 
     .highlight-card h3 {
-      font-size: 1.1rem;
-      margin-bottom: 8px;
-      color: var(--primary-dark);
+      font-size: 1.2rem;
+      margin-bottom: 12px;
     }
 
     .highlight-card p {
+      color: var(--text-muted);
       font-size: 0.95rem;
-      color: var(--text-light);
     }
 
-    /* ========== 流程時間軸 ========== */
+    /* ========== 流程區 ========== */
+    .schedule-section {
+      background: var(--dark);
+    }
+
     .timeline {
+      max-width: 600px;
+      margin: 0 auto;
       position: relative;
-      padding-left: 30px;
     }
 
     .timeline::before {
       content: '';
       position: absolute;
-      left: 8px;
+      left: 24px;
       top: 0;
       bottom: 0;
-      width: 3px;
-      background: var(--primary-light);
-      border-radius: 3px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--primary), var(--secondary));
     }
 
     .timeline-item {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 32px;
       position: relative;
-      padding-bottom: 24px;
     }
 
     .timeline-item:last-child {
-      padding-bottom: 0;
+      margin-bottom: 0;
     }
 
     .timeline-dot {
-      position: absolute;
-      left: -26px;
-      top: 4px;
-      width: 14px;
-      height: 14px;
-      background: var(--primary);
+      width: 50px;
+      height: 50px;
+      background: var(--dark-light);
+      border: 3px solid var(--primary);
       border-radius: 50%;
-      border: 3px solid var(--white);
-      box-shadow: 0 0 0 3px var(--primary-light);
-    }
-
-    .timeline-time {
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      z-index: 1;
     }
 
     .timeline-content {
-      background: var(--white);
-      padding: 16px;
+      flex: 1;
+      background: rgba(255,255,255,0.03);
       border-radius: var(--radius);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      padding: 24px;
+      text-align: left;
+    }
+
+    .timeline-time {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .timeline-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .timeline-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* ========== 獎項區 ========== */
+    .prizes-section {
+      background: linear-gradient(135deg, var(--dark-light) 0%, var(--dark) 100%);
+    }
+
+    .prizes-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .prize-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      text-align: center;
+      min-width: 140px;
+      transition: all 0.3s;
+    }
+
+    .prize-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .prize-card.gold {
+      border-color: #fbbf24;
+      background: rgba(251, 191, 36, 0.1);
+    }
+
+    .prize-card.silver {
+      border-color: #94a3b8;
+      background: rgba(148, 163, 184, 0.1);
+    }
+
+    .prize-card.bronze {
+      border-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.1);
+    }
+
+    .prize-icon {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+
+    .prize-name {
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .prize-amount {
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 1.1rem;
     }
 
     /* ========== 報名區 ========== */
     .register-section {
-      background: var(--white);
+      background: var(--dark);
+      min-height: auto;
+      padding: 80px 24px;
     }
 
-    .register-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 40px;
+    .register-container {
+      max-width: 600px;
+      margin: 0 auto;
     }
 
-    @media (min-width: 768px) {
-      .register-grid {
-        grid-template-columns: 1fr 1.5fr;
+    .form-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 40px 32px;
+    }
+
+    @media (max-width: 500px) {
+      .form-card {
+        padding: 32px 20px;
       }
     }
 
-    .register-info h3 {
-      font-size: 1.3rem;
-      margin-bottom: 16px;
-      color: var(--primary-dark);
-    }
-
-    .register-info ul {
-      list-style: none;
-    }
-
-    .register-info li {
-      padding: 12px 0;
-      border-bottom: 1px solid #e5e7eb;
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-    }
-
-    .register-info li::before {
-      content: '✓';
-      color: var(--primary);
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    /* ========== 表單 ========== */
-    .form-card {
-      background: var(--bg);
-      padding: 32px;
-      border-radius: var(--radius);
-    }
-
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
     .form-group label {
       display: block;
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       color: var(--text);
     }
 
     .form-group label .required {
-      color: #ef4444;
+      color: var(--secondary);
     }
 
     .form-control {
       width: 100%;
-      padding: 12px 16px;
-      border: 2px solid #e5e7eb;
-      border-radius: 8px;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.05);
+      border: 2px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      color: var(--text);
       font-size: 1rem;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      background: var(--white);
+      font-family: inherit;
+      transition: all 0.3s;
     }
 
     .form-control:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px var(--primary-light);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .form-control::placeholder {
+      color: var(--text-muted);
     }
 
     .form-control.error {
@@ -426,18 +700,12 @@
     .error-msg {
       color: #ef4444;
       font-size: 0.85rem;
-      margin-top: 6px;
+      margin-top: 8px;
       display: none;
     }
 
     .error-msg.show {
       display: block;
-    }
-
-    .form-hint {
-      font-size: 0.85rem;
-      color: var(--text-light);
-      margin-top: 6px;
     }
 
     .form-row {
@@ -454,33 +722,35 @@
 
     .submit-btn {
       width: 100%;
-      padding: 16px;
+      padding: 18px;
       background: var(--primary);
-      color: var(--white);
+      color: var(--dark);
       border: none;
-      border-radius: 10px;
+      border-radius: 50px;
       font-size: 1.1rem;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.3s;
     }
 
     .submit-btn:hover:not(:disabled) {
-      background: var(--primary-dark);
+      background: var(--secondary);
       transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(45, 212, 191, 0.3);
     }
 
     .submit-btn:disabled {
-      opacity: 0.7;
+      opacity: 0.6;
       cursor: not-allowed;
     }
 
     .form-error {
-      background: #fef2f2;
-      color: #dc2626;
-      padding: 12px 16px;
-      border-radius: 8px;
-      margin-bottom: 16px;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+      padding: 14px 18px;
+      border-radius: 12px;
+      margin-bottom: 20px;
       display: none;
     }
 
@@ -490,9 +760,9 @@
 
     .progress {
       height: 4px;
-      background: var(--primary-light);
+      background: rgba(255,255,255,0.1);
       border-radius: 2px;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       overflow: hidden;
       display: none;
     }
@@ -503,133 +773,41 @@
 
     .progress-bar {
       height: 100%;
-      background: var(--primary);
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
       animation: progress 1.5s infinite;
     }
 
-    @keyframes progress {
-      0% { width: 0; margin-left: 0; }
-      50% { width: 60%; margin-left: 20%; }
-      100% { width: 0; margin-left: 100%; }
+    /* ========== 地點區 ========== */
+    .location-section {
+      background: var(--dark-light);
+      min-height: auto;
+      padding: 80px 24px;
     }
 
-    /* ========== 參加辦法折疊 ========== */
-    .rules-section {
-      background: linear-gradient(180deg, var(--white) 0%, var(--bg) 100%);
-    }
-
-    .rules-details {
-      background: var(--white);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .rules-details summary {
-      padding: 20px 24px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      list-style: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--primary-light);
-      color: var(--primary-dark);
-    }
-
-    .rules-details summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .rules-details summary::after {
-      content: '▼';
-      font-size: 0.8rem;
-      transition: transform 0.3s;
-    }
-
-    .rules-details[open] summary::after {
-      transform: rotate(180deg);
-    }
-
-    .rules-content {
-      padding: 24px;
-    }
-
-    .rules-content h4 {
-      color: var(--primary);
-      margin: 20px 0 12px;
-      font-size: 1.05rem;
-    }
-
-    .rules-content h4:first-child {
-      margin-top: 0;
-    }
-
-    .rules-content p, .rules-content li {
-      color: var(--text-light);
-      margin-bottom: 8px;
-    }
-
-    .rules-content ul {
-      padding-left: 20px;
-    }
-
-    /* ========== 獎項 ========== */
-    .prizes {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 16px;
-    }
-
-    .prize-card {
-      background: var(--white);
-      padding: 24px 16px;
-      border-radius: var(--radius);
-      text-align: center;
-      box-shadow: var(--shadow);
-      border-top: 4px solid var(--primary);
-    }
-
-    .prize-card.gold { border-top-color: #fbbf24; }
-    .prize-card.silver { border-top-color: #9ca3af; }
-    .prize-card.bronze { border-top-color: #d97706; }
-
-    .prize-icon {
-      font-size: 2rem;
-      margin-bottom: 8px;
-    }
-
-    .prize-name {
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .prize-amount {
-      color: var(--primary);
-      font-weight: 600;
-    }
-
-    /* ========== 地點 ========== */
     .location-card {
-      background: var(--white);
-      padding: 32px;
+      max-width: 500px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      padding: 40px;
       text-align: center;
+    }
+
+    .location-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
     }
 
     .location-name {
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       font-weight: 700;
-      color: var(--primary-dark);
       margin-bottom: 8px;
     }
 
     .location-address {
-      color: var(--text-light);
-      margin-bottom: 20px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
     }
 
     .location-buttons {
@@ -640,40 +818,68 @@
     }
 
     .btn-sm {
-      padding: 10px 20px;
+      padding: 12px 24px;
       font-size: 0.95rem;
     }
 
-    /* ========== 聯絡 ========== */
+    /* ========== 聯絡區 ========== */
+    .contact-section {
+      background: var(--dark);
+      min-height: auto;
+      padding: 80px 24px;
+    }
+
+    .contact-grid {
+      max-width: 600px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 500px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .contact-card {
-      background: var(--white);
-      padding: 32px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      padding: 28px;
       text-align: center;
     }
 
-    .contact-info {
-      margin-bottom: 20px;
+    .contact-label {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 8px;
     }
 
-    .contact-info p {
-      margin-bottom: 8px;
+    .contact-value {
+      font-weight: 600;
+      font-size: 1.1rem;
     }
 
     /* ========== Footer ========== */
     .footer {
-      background: var(--primary-dark);
-      color: var(--white);
+      background: var(--dark-light);
+      padding: 40px 24px;
+      padding-bottom: calc(40px + 80px);
       text-align: center;
-      padding: 24px 16px;
-      padding-bottom: calc(24px + 70px);
+      border-top: 1px solid rgba(255,255,255,0.05);
     }
 
     @media (min-width: 768px) {
       .footer {
-        padding-bottom: 24px;
+        padding-bottom: 40px;
       }
+    }
+
+    .footer p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
     }
 
     /* ========== 手機底部固定按鈕 ========== */
@@ -688,16 +894,16 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background: var(--white);
-        padding: 12px 16px;
+        background: var(--dark-light);
+        border-top: 1px solid rgba(255,255,255,0.1);
+        padding: 16px 20px;
         gap: 12px;
-        box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
-        z-index: 999;
+        z-index: 998;
       }
 
       .mobile-cta .btn {
         flex: 1;
-        padding: 12px 16px;
+        padding: 14px 20px;
         font-size: 0.95rem;
       }
     }
@@ -710,7 +916,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0,0,0,0.9);
+      background: rgba(0,0,0,0.95);
       z-index: 2000;
       justify-content: center;
       align-items: center;
@@ -732,19 +938,22 @@
       position: absolute;
       top: 20px;
       right: 20px;
-      background: var(--white);
+      background: rgba(255,255,255,0.1);
       border: none;
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       font-size: 1.5rem;
+      color: var(--white);
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      transition: all 0.3s;
     }
 
-    /* ========== 隱藏元素（蜜罐） ========== */
+    .lightbox-close:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* ========== 蜜罐 ========== */
     .honeypot-field {
       position: absolute;
       left: -9999px;
@@ -755,295 +964,226 @@
       opacity: 0;
       pointer-events: none;
     }
+
+    /* ========== 動畫 ========== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-10px); }
+    }
+
+    @keyframes scrollDot {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(12px); opacity: 0; }
+    }
+
+    @keyframes progress {
+      0% { width: 0; margin-left: 0; }
+      50% { width: 60%; margin-left: 20%; }
+      100% { width: 0; margin-left: 100%; }
+    }
+
+    /* ========== 滾動動畫 ========== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
 
-  <!-- ========== Header ========== -->
-  <header class="header">
-    <div class="header-inner">
-      <div class="logo">乾淨校園</div>
-      <nav class="nav">
-        <a href="#highlights">活動亮點</a>
-        <a href="#schedule">當日流程</a>
-        <a href="#prizes">獎項</a>
-        <a href="#location">地點</a>
-        <a href="#register" class="header-cta">立即報名</a>
-      </nav>
-    </div>
-  </header>
+  <!-- ========== Logo ========== -->
+  <div class="logo">乾淨校園</div>
 
-  <!-- ========== Hero ========== -->
-  <section class="hero">
-    <div class="hero-inner">
+  <!-- ========== 漢堡選單按鈕 ========== -->
+  <button class="nav-toggle" id="navToggle" aria-label="開啟選單">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- ========== 側邊選單 ========== -->
+  <nav class="nav-menu" id="navMenu">
+    <a href="#poster">活動海報</a>
+    <a href="#info">活動資訊</a>
+    <a href="#highlights">活動亮點</a>
+    <a href="#schedule">當日流程</a>
+    <a href="#prizes">獎項</a>
+    <a href="#register">報名</a>
+    <a href="#location">地點</a>
+    <a href="#contact">聯絡我們</a>
+    <a href="#register" class="nav-cta">立即報名</a>
+  </nav>
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <!-- ========== Hero 區 ========== -->
+  <section class="section hero" id="hero">
+    <img src="assets/photo.jpg" alt="" class="section-bg" decoding="async">
+    <div class="section-overlay"></div>
+    <div class="section-content">
       <span class="hero-kicker">2026 兒童著色畫比賽</span>
-      <h1>乾淨校園我愛我家</h1>
-      <p class="hero-subtitle">兒童著色畫比賽，歡迎幼兒園及國小低年級學童參加！</p>
-      
-      <div class="hero-poster" id="posterTrigger">
-        <img src="assets/photo.jpg" alt="活動海報" decoding="async">
-      </div>
-      
-      <div class="hero-info">
-        <div class="hero-info-item">
-          <span>📅</span>
-          <span>2026 年 3 月 15 日（六）</span>
-        </div>
-        <div class="hero-info-item">
-          <span>⏰</span>
-          <span>09:00 - 12:00</span>
-        </div>
-        <div class="hero-info-item">
-          <span>📍</span>
-          <span>彰南里活動中心 大禮堂</span>
-        </div>
-      </div>
-      
+      <h1>乾淨校園<span>我愛我家</span></h1>
+      <p class="hero-subtitle">歡迎幼兒園及國小低年級學童參加</p>
       <div class="hero-buttons">
         <a href="#register" class="btn btn-primary">立即報名</a>
-        <a href="https://www.google.com/maps/search/?api=1&query=台南市南區新建路12號" target="_blank" rel="noopener" class="btn btn-outline">開啟地圖</a>
+        <a href="#poster" class="btn btn-outline">查看海報</a>
+      </div>
+    </div>
+    <div class="scroll-hint">往下滑動</div>
+  </section>
+
+  <!-- ========== 海報區 ========== -->
+  <section class="section poster-section" id="poster">
+    <div class="section-content fade-in">
+      <div class="poster-frame" id="posterTrigger">
+        <img src="assets/photo.jpg" alt="活動海報" decoding="async">
+        <span class="poster-badge">免費參加</span>
       </div>
     </div>
   </section>
 
-  <!-- ========== 活動亮點 ========== -->
-  <section class="section" id="highlights">
-    <div class="section-inner">
-      <h2 class="section-title">活動亮點</h2>
-      <div class="highlights">
+  <!-- ========== 資訊區 ========== -->
+  <section class="section info-section" id="info">
+    <div class="section-content">
+      <h2 class="section-title fade-in">活動資訊</h2>
+      <div class="info-grid fade-in">
+        <div class="info-card">
+          <div class="info-icon">📅</div>
+          <div class="info-label">日期</div>
+          <div class="info-value">2026 年 3 月 15 日（六）</div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">⏰</div>
+          <div class="info-label">時間</div>
+          <div class="info-value">09:00 - 12:00</div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">📍</div>
+          <div class="info-label">地點</div>
+          <div class="info-value">彰南里活動中心</div>
+        </div>
+        <div class="info-card">
+          <div class="info-icon">👥</div>
+          <div class="info-label">名額</div>
+          <div class="info-value">限額 50 名</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 亮點區 ========== -->
+  <section class="section highlights-section" id="highlights">
+    <div class="section-content">
+      <h2 class="section-title fade-in">活動亮點</h2>
+      <p class="section-subtitle fade-in">精彩內容等你來體驗</p>
+      <div class="highlights-grid fade-in">
         <div class="highlight-card">
           <div class="highlight-icon">🎨</div>
-          <h3>免費提供底圖</h3>
-          <p>現場領取精美著色底圖，直接參賽</p>
+          <h3>免費底圖</h3>
+          <p>現場領取精美著色底圖</p>
         </div>
         <div class="highlight-card">
           <div class="highlight-icon">🏆</div>
           <h3>豐富獎項</h3>
-          <p>金銀銅獎及佳作，完成就有參加獎</p>
+          <p>金銀銅獎及多項佳作</p>
         </div>
         <div class="highlight-card">
           <div class="highlight-icon">👨‍👩‍👧</div>
           <h3>親子同樂</h3>
-          <p>家長陪同參與，共度美好時光</p>
+          <p>與孩子共度美好時光</p>
         </div>
         <div class="highlight-card">
           <div class="highlight-icon">🎁</div>
           <h3>參加獎</h3>
-          <p>完成作品即可獲得參加獎（數量有限）</p>
+          <p>完成作品即可獲得</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== 當日流程 ========== -->
-  <section class="section" id="schedule" style="background: var(--white);">
-    <div class="section-inner">
-      <h2 class="section-title">當日流程</h2>
-      <div class="timeline">
+  <!-- ========== 流程區 ========== -->
+  <section class="section schedule-section" id="schedule">
+    <div class="section-content">
+      <h2 class="section-title fade-in">當日流程</h2>
+      <p class="section-subtitle fade-in">活動安排一目瞭然</p>
+      <div class="timeline fade-in">
         <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-time">09:00</div>
+          <div class="timeline-dot">📋</div>
           <div class="timeline-content">
-            <strong>報到 / 領取底圖</strong>
-            <p>請準時報到，領取著色底圖與畫具</p>
+            <div class="timeline-time">09:00</div>
+            <div class="timeline-title">報到 / 領取底圖</div>
+            <div class="timeline-desc">請準時報到，領取著色底圖</div>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-time">09:00 - 10:30</div>
+          <div class="timeline-dot">🎨</div>
           <div class="timeline-content">
-            <strong>著色創作時間</strong>
-            <p>發揮創意，完成你的作品！</p>
+            <div class="timeline-time">09:00 - 10:30</div>
+            <div class="timeline-title">著色創作時間</div>
+            <div class="timeline-desc">發揮創意，完成你的作品</div>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-time">10:30</div>
+          <div class="timeline-dot">📤</div>
           <div class="timeline-content">
-            <strong>作品收件截止</strong>
-            <p>請務必在此時間前繳交作品</p>
+            <div class="timeline-time">10:30</div>
+            <div class="timeline-title">作品收件截止</div>
+            <div class="timeline-desc">請務必在此時間前繳交</div>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-time">11:40</div>
+          <div class="timeline-dot">🏆</div>
           <div class="timeline-content">
-            <strong>公布得獎名單 / 頒獎</strong>
-            <p>評審結果公布，進行頒獎典禮</p>
+            <div class="timeline-time">11:40</div>
+            <div class="timeline-title">公布得獎 / 頒獎</div>
+            <div class="timeline-desc">評審結果公布，進行頒獎</div>
           </div>
         </div>
         <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-time">12:00</div>
+          <div class="timeline-dot">🎉</div>
           <div class="timeline-content">
-            <strong>活動結束</strong>
-            <p>感謝參與，期待下次再見！</p>
+            <div class="timeline-time">12:00</div>
+            <div class="timeline-title">活動結束</div>
+            <div class="timeline-desc">感謝參與，期待下次再見</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== 報名區 ========== -->
-  <section class="section register-section" id="register">
-    <div class="section-inner">
-      <h2 class="section-title">立即報名</h2>
-      <div class="register-grid">
-        <div class="register-info">
-          <h3>報名須知</h3>
-          <ul>
-            <li>參加對象：幼兒園及國小低年級學童</li>
-            <li>每位孩子需由一位家長陪同參加</li>
-            <li>需全程參與活動（9:00-12:00），未全程參與者取消得獎資格</li>
-            <li>各組名額有限（幼兒園組 25 人、國小低年級組 25 人），額滿為止</li>
-            <li>現場提供著色底圖，請自備著色工具（色鉛筆、彩色筆等）</li>
-          </ul>
-        </div>
-        
-        <div class="form-card">
-          <div class="progress" id="progress">
-            <div class="progress-bar"></div>
-          </div>
-          <div class="form-error" id="formError"></div>
-          
-          <form id="registerForm" novalidate>
-            <!-- 蜜罐欄位（防機器人，對人類不可見） -->
-            <div class="honeypot-field" aria-hidden="true">
-              <label for="website">請勿填寫此欄</label>
-              <input type="text" name="website" id="honeypot" tabindex="-1" autocomplete="off">
-            </div>
-            
-            <div class="form-row">
-              <div class="form-group">
-                <label for="full_join">是否能全程參與 <span class="required">*</span></label>
-                <select id="full_join" name="是否能全程參與（9:00–12:00）" class="form-control" required>
-                  <option value="">請選擇</option>
-                  <option value="是">是，可全程參與 9:00-12:00</option>
-                  <option value="否">否，無法全程參與</option>
-                </select>
-                <div class="error-msg" id="full_join_error">請選擇是否能全程參與</div>
-              </div>
-              <div class="form-group">
-                <label for="resident">是否為台南市民 <span class="required">*</span></label>
-                <select id="resident" name="是否為台南市民" class="form-control" required>
-                  <option value="">請選擇</option>
-                  <option value="是">是</option>
-                  <option value="否">否</option>
-                </select>
-                <div class="error-msg" id="resident_error">請選擇是否為台南市民</div>
-              </div>
-            </div>
-            
-            <div class="form-row">
-              <div class="form-group">
-                <label for="parent_name">家長姓名 <span class="required">*</span></label>
-                <input type="text" id="parent_name" name="家長姓名" class="form-control" required placeholder="請輸入家長姓名">
-                <div class="error-msg" id="parent_name_error">請填寫家長姓名</div>
-              </div>
-              <div class="form-group">
-                <label for="phone">聯絡手機 <span class="required">*</span></label>
-                <input type="tel" id="phone" name="聯絡電話（手機）" class="form-control" required placeholder="0912345678" pattern="[0-9]{10}" inputmode="numeric">
-                <div class="error-msg" id="phone_error">請填寫正確的 10 碼手機號碼</div>
-              </div>
-            </div>
-            
-            <div class="form-row">
-              <div class="form-group">
-                <label for="child_name">孩子姓名 <span class="required">*</span></label>
-                <input type="text" id="child_name" name="孩子姓名" class="form-control" required placeholder="請輸入孩子姓名">
-                <div class="error-msg" id="child_name_error">請填寫孩子姓名</div>
-              </div>
-              <div class="form-group">
-                <label for="child_age">孩子年級 <span class="required">*</span></label>
-                <select id="child_age" name="孩子年級／年齡" class="form-control" required>
-                  <option value="">請選擇</option>
-                  <option value="幼兒園">幼兒園</option>
-                  <option value="國小低年級">國小低年級</option>
-                </select>
-                <div class="error-msg" id="child_age_error">請選擇孩子年級</div>
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <label for="group">參賽組別 <span class="required">*</span></label>
-              <select id="group" name="參賽組別" class="form-control" required>
-                <option value="">請選擇組別</option>
-                <option value="幼兒園組">幼兒園組（限 25 名）</option>
-                <option value="國小低年級組">國小低年級組（限 25 名）</option>
-              </select>
-              <div class="error-msg" id="group_error">請選擇參賽組別</div>
-            </div>
-            
-            <div class="form-group">
-              <label for="school">就讀學校（選填）</label>
-              <input type="text" id="school" name="就讀學校（選填）" class="form-control" placeholder="例如：台南市○○國小">
-            </div>
-            
-            <div class="form-group">
-              <label for="note">備註（選填）</label>
-              <textarea id="note" name="備註" class="form-control" rows="2" placeholder="如有其他需求請在此說明"></textarea>
-            </div>
-            
-            <button type="submit" class="submit-btn" id="submitBtn">確認報名</button>
-            <p class="form-hint" style="text-align: center; margin-top: 12px;">送出後將跳轉至感謝頁，並顯示您的報名序號</p>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== 參加辦法 ========== -->
-  <section class="section rules-section" id="rules">
-    <div class="section-inner">
-      <details class="rules-details">
-        <summary>參加辦法與注意事項</summary>
-        <div class="rules-content">
-          <h4>參加資格</h4>
-          <ul>
-            <li>幼兒園及國小低年級學童（需由家長陪同）</li>
-            <li>每位參賽者限報名一個組別</li>
-          </ul>
-          
-          <h4>報名方式</h4>
-          <ul>
-            <li>採線上報名，填寫完整資料後送出</li>
-            <li>各組名額：幼兒園組 25 人、國小低年級組 25 人</li>
-            <li>名額有限，額滿即停止受理</li>
-          </ul>
-          
-          <h4>比賽規則</h4>
-          <ul>
-            <li>著色底圖由現場提供</li>
-            <li>請自備著色工具（色鉛筆、彩色筆、蠟筆等）</li>
-            <li>作品須於 10:30 前完成並繳交</li>
-            <li>逾時繳交者不列入評審</li>
-          </ul>
-          
-          <h4>評審與獎項</h4>
-          <ul>
-            <li>評審：青草國小 曾文欽 校長</li>
-            <li>各組獎項：金獎 1 名（800 元）、銀獎 1 名（500 元）、銅獎 1 名（300 元）、佳作 3 名（各 200 元）</li>
-            <li>完成作品並全程參與者可獲得參加獎（數量有限，送完為止）</li>
-          </ul>
-          
-          <h4>注意事項</h4>
-          <ul>
-            <li>未全程參與者（9:00-12:00）將取消得獎資格</li>
-            <li>得獎作品可能公開於官方宣傳管道</li>
-            <li>現場可能進行拍照或錄影</li>
-            <li>主辦單位保留活動調整之權利</li>
-          </ul>
-        </div>
-      </details>
-    </div>
-  </section>
-
-  <!-- ========== 獎項 ========== -->
-  <section class="section" id="prizes" style="background: var(--white);">
-    <div class="section-inner">
-      <h2 class="section-title">獎項</h2>
-      <p style="text-align: center; margin-bottom: 24px; color: var(--text-light);">各組皆設有以下獎項</p>
-      <div class="prizes">
+  <!-- ========== 獎項區 ========== -->
+  <section class="section prizes-section" id="prizes">
+    <div class="section-content">
+      <h2 class="section-title fade-in">獎項</h2>
+      <p class="section-subtitle fade-in">各組皆設有以下獎項</p>
+      <div class="prizes-grid fade-in">
         <div class="prize-card gold">
           <div class="prize-icon">🥇</div>
           <div class="prize-name">金獎</div>
@@ -1073,32 +1213,133 @@
     </div>
   </section>
 
-  <!-- ========== 地點 ========== -->
-  <section class="section" id="location">
-    <div class="section-inner">
-      <h2 class="section-title">活動地點</h2>
-      <div class="location-card">
+  <!-- ========== 報名區 ========== -->
+  <section class="section register-section" id="register">
+    <div class="register-container">
+      <h2 class="section-title fade-in" style="text-align: center; margin-bottom: 32px;">立即報名</h2>
+      <div class="form-card fade-in">
+        <div class="progress" id="progress">
+          <div class="progress-bar"></div>
+        </div>
+        <div class="form-error" id="formError"></div>
+        
+        <form id="registerForm" novalidate>
+          <!-- 蜜罐 -->
+          <div class="honeypot-field" aria-hidden="true">
+            <input type="text" name="website" id="honeypot" tabindex="-1" autocomplete="off">
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="full_join">是否能全程參與 <span class="required">*</span></label>
+              <select id="full_join" name="是否能全程參與（9:00–12:00）" class="form-control" required>
+                <option value="">請選擇</option>
+                <option value="是">是</option>
+                <option value="否">否</option>
+              </select>
+              <div class="error-msg" id="full_join_error">請選擇是否能全程參與</div>
+            </div>
+            <div class="form-group">
+              <label for="resident">是否為台南市民 <span class="required">*</span></label>
+              <select id="resident" name="是否為台南市民" class="form-control" required>
+                <option value="">請選擇</option>
+                <option value="是">是</option>
+                <option value="否">否</option>
+              </select>
+              <div class="error-msg" id="resident_error">請選擇是否為台南市民</div>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="parent_name">家長姓名 <span class="required">*</span></label>
+              <input type="text" id="parent_name" name="家長姓名" class="form-control" required placeholder="請輸入家長姓名">
+              <div class="error-msg" id="parent_name_error">請填寫家長姓名</div>
+            </div>
+            <div class="form-group">
+              <label for="phone">聯絡手機 <span class="required">*</span></label>
+              <input type="tel" id="phone" name="聯絡電話（手機）" class="form-control" required placeholder="0912345678" inputmode="numeric">
+              <div class="error-msg" id="phone_error">請填寫正確的 10 碼手機號碼</div>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="child_name">孩子姓名 <span class="required">*</span></label>
+              <input type="text" id="child_name" name="孩子姓名" class="form-control" required placeholder="請輸入孩子姓名">
+              <div class="error-msg" id="child_name_error">請填寫孩子姓名</div>
+            </div>
+            <div class="form-group">
+              <label for="child_age">孩子年級 <span class="required">*</span></label>
+              <select id="child_age" name="孩子年級／年齡" class="form-control" required>
+                <option value="">請選擇</option>
+                <option value="幼兒園">幼兒園</option>
+                <option value="國小低年級">國小低年級</option>
+              </select>
+              <div class="error-msg" id="child_age_error">請選擇孩子年級</div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="group">參賽組別 <span class="required">*</span></label>
+            <select id="group" name="參賽組別" class="form-control" required>
+              <option value="">請選擇組別</option>
+              <option value="幼兒園組">幼兒園組（限 25 名）</option>
+              <option value="國小低年級組">國小低年級組（限 25 名）</option>
+            </select>
+            <div class="error-msg" id="group_error">請選擇參賽組別</div>
+          </div>
+          
+          <div class="form-group">
+            <label for="school">就讀學校（選填）</label>
+            <input type="text" id="school" name="就讀學校（選填）" class="form-control" placeholder="例如：台南市○○國小">
+          </div>
+          
+          <div class="form-group">
+            <label for="note">備註（選填）</label>
+            <textarea id="note" name="備註" class="form-control" rows="2" placeholder="如有其他需求請在此說明"></textarea>
+          </div>
+          
+          <button type="submit" class="submit-btn" id="submitBtn">確認報名</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 地點區 ========== -->
+  <section class="section location-section" id="location">
+    <div class="section-content">
+      <h2 class="section-title fade-in" style="margin-bottom: 32px;">活動地點</h2>
+      <div class="location-card fade-in">
+        <div class="location-icon">📍</div>
         <div class="location-name">彰南里活動中心 大禮堂</div>
         <div class="location-address">台南市南區新建路12號</div>
         <div class="location-buttons">
           <button type="button" class="btn btn-primary btn-sm" id="copyAddressBtn">複製地址</button>
-          <a href="https://www.google.com/maps/search/?api=1&query=台南市南區新建路12號" target="_blank" rel="noopener" class="btn btn-outline btn-sm" style="border-color: var(--primary); color: var(--primary);">開啟 Google 地圖</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=台南市南區新建路12號" target="_blank" rel="noopener" class="btn btn-outline btn-sm">開啟地圖</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== 聯絡 ========== -->
-  <section class="section" id="contact" style="background: var(--white);">
-    <div class="section-inner">
-      <h2 class="section-title">聯絡我們</h2>
-      <div class="contact-card">
-        <div class="contact-info">
-          <p><strong>主辦單位：</strong>乾淨校園推廣團隊</p>
-          <p><strong>協辦單位：</strong>彰南里活動中心</p>
-          <p><strong>洽詢電話：</strong>陳小姐 0913-837-389</p>
+  <!-- ========== 聯絡區 ========== -->
+  <section class="section contact-section" id="contact">
+    <div class="section-content">
+      <h2 class="section-title fade-in" style="margin-bottom: 32px;">聯絡我們</h2>
+      <div class="contact-grid fade-in">
+        <div class="contact-card">
+          <div class="contact-label">主辦單位</div>
+          <div class="contact-value">乾淨校園推廣團隊</div>
         </div>
-        <a href="tel:0913837389" class="btn btn-primary">撥打電話</a>
+        <div class="contact-card">
+          <div class="contact-label">協辦單位</div>
+          <div class="contact-value">彰南里活動中心</div>
+        </div>
+        <div class="contact-card" style="grid-column: 1 / -1;">
+          <div class="contact-label">洽詢電話</div>
+          <div class="contact-value" style="margin-bottom: 16px;">陳小姐 0913-837-389</div>
+          <a href="tel:0913837389" class="btn btn-primary btn-sm">撥打電話</a>
+        </div>
       </div>
     </div>
   </section>
@@ -1106,13 +1347,13 @@
   <!-- ========== Footer ========== -->
   <footer class="footer">
     <p>© 2026 乾淨校園我愛我家兒童著色畫比賽</p>
-    <p style="margin-top: 8px; opacity: 0.8; font-size: 0.9rem;">主辦：乾淨校園推廣團隊</p>
+    <p style="margin-top: 8px;">主辦：乾淨校園推廣團隊</p>
   </footer>
 
   <!-- ========== 手機底部固定按鈕 ========== -->
   <div class="mobile-cta">
     <a href="#register" class="btn btn-primary">立即報名</a>
-    <a href="tel:0913837389" class="btn btn-outline" style="border-color: var(--primary); color: var(--primary);">撥打電話</a>
+    <a href="tel:0913837389" class="btn btn-outline">撥打電話</a>
   </div>
 
   <!-- ========== Lightbox ========== -->
@@ -1132,7 +1373,6 @@
     // ========== 工具函式 ==========
     const $ = (id) => document.getElementById(id);
 
-    // 產生報名序號
     function makeRegId() {
       const now = new Date();
       const y = now.getFullYear();
@@ -1145,20 +1385,17 @@
       return `${EVENT_CODE}-${y}${m}${d}${h}${mi}${s}-${rand}`;
     }
 
-    // 取得追蹤來源
     function getTracking() {
       const params = new URLSearchParams(window.location.search);
       const source = params.get('utm_source') || params.get('source') || '';
       const medium = params.get('utm_medium') || params.get('medium') || '';
       const campaign = params.get('utm_campaign') || params.get('campaign') || '';
       const ref = document.referrer ? new URL(document.referrer).hostname : '';
-      
       const parts = [];
       if (source) parts.push(`來源:${source}`);
       if (medium) parts.push(`媒介:${medium}`);
       if (campaign) parts.push(`活動:${campaign}`);
       if (ref && !source) parts.push(`參照:${ref}`);
-      
       return parts.join(' | ');
     }
 
@@ -1199,7 +1436,6 @@
         }
       });
 
-      // 檢查全程參與
       if ($('full_join').value === '否') {
         $('formError').textContent = '很抱歉，本活動需全程參與（9:00-12:00），未能全程參與者無法報名。';
         $('formError').classList.add('show');
@@ -1211,7 +1447,6 @@
       return isValid;
     }
 
-    // 重置表單狀態
     function resetFormState() {
       $('submitBtn').disabled = false;
       $('submitBtn').textContent = '確認報名';
@@ -1220,8 +1455,28 @@
 
     // ========== 主程式 ==========
     document.addEventListener('DOMContentLoaded', function() {
-      const form = $('registerForm');
-      const submitBtn = $('submitBtn');
+      // 漢堡選單
+      const navToggle = $('navToggle');
+      const navMenu = $('navMenu');
+      const navOverlay = $('navOverlay');
+
+      function closeNav() {
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        navOverlay.classList.remove('active');
+      }
+
+      navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        navOverlay.classList.toggle('active');
+      });
+
+      navOverlay.addEventListener('click', closeNav);
+
+      navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeNav);
+      });
 
       // 海報 Lightbox
       const posterTrigger = $('posterTrigger');
@@ -1254,11 +1509,8 @@
           try {
             await navigator.clipboard.writeText(address);
             copyAddressBtn.textContent = '已複製！';
-            setTimeout(() => {
-              copyAddressBtn.textContent = '複製地址';
-            }, 2000);
+            setTimeout(() => { copyAddressBtn.textContent = '複製地址'; }, 2000);
           } catch (err) {
-            // 降級方案
             const textArea = document.createElement('textarea');
             textArea.value = address;
             document.body.appendChild(textArea);
@@ -1266,9 +1518,7 @@
             document.execCommand('copy');
             document.body.removeChild(textArea);
             copyAddressBtn.textContent = '已複製！';
-            setTimeout(() => {
-              copyAddressBtn.textContent = '複製地址';
-            }, 2000);
+            setTimeout(() => { copyAddressBtn.textContent = '複製地址'; }, 2000);
           }
         });
       }
@@ -1288,25 +1538,34 @@
         });
       }
 
+      // 滾動動畫
+      const fadeElements = document.querySelectorAll('.fade-in');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      fadeElements.forEach(el => observer.observe(el));
+
       // 表單送出
+      const form = $('registerForm');
+      const submitBtn = $('submitBtn');
+
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // 驗證
-        if (!validateForm()) {
-          return;
-        }
+        if (!validateForm()) return;
 
-        // 更新 UI
         submitBtn.disabled = true;
         submitBtn.textContent = '送出中…';
         $('progress').classList.add('show');
         $('formError').classList.remove('show');
 
-        // 產生報名序號
         const regId = makeRegId();
 
-        // 組裝資料
         const formData = new URLSearchParams();
         formData.append("活動代碼", EVENT_CODE);
         formData.append("活動名稱", EVENT_NAME);
@@ -1320,50 +1579,34 @@
         formData.append("就讀學校（選填）", $("school").value.trim());
         formData.append("是否為台南市民", $("resident").value);
         
-        // 備註與追蹤
         const userNote = ($("note").value || "").trim();
         const tracking = getTracking();
         const note = tracking ? (userNote ? `${userNote} ｜${tracking}` : tracking) : userNote;
         formData.append("備註", note);
         formData.append("追蹤", tracking);
-        
-        // 蜜罐欄位
         formData.append("website", $("honeypot").value);
 
         try {
-          // 使用 sendBeacon 背景送出（最快）
           const sent = navigator.sendBeacon(GAS_WEBAPP_URL, formData);
-          
           if (!sent) {
-            // 降級使用 fetch
-            await fetch(GAS_WEBAPP_URL, {
-              method: "POST",
-              mode: "no-cors",
-              body: formData
-            });
+            await fetch(GAS_WEBAPP_URL, { method: "POST", mode: "no-cors", body: formData });
           }
-
-          // 清除表單並跳轉
           form.reset();
           window.location.href = `${THANKS_URL}?rid=${encodeURIComponent(regId)}`;
-
         } catch (err) {
-          // 失敗：顯示錯誤並重置按鈕
           $('formError').textContent = "送出失敗，請稍後再試";
           $('formError').classList.add('show');
           resetFormState();
         }
       });
 
-      // 即時驗證：清除錯誤狀態
+      // 即時驗證
       const formInputs = form.querySelectorAll('input, select, textarea');
       formInputs.forEach(input => {
         input.addEventListener('input', function() {
           this.classList.remove('error');
           const errorEl = $(this.id + '_error');
-          if (errorEl) {
-            errorEl.classList.remove('show');
-          }
+          if (errorEl) errorEl.classList.remove('show');
         });
       });
     });
