@@ -227,7 +227,7 @@
         <span class="dot"></span>
         <span>乾淨校園著色畫比賽</span>
       </div>
-      <a class="btn sm" href="https://rogerfang2024.github.io/TN-GJWPAINT/">回首頁</a>
+      <a class="btn sm" href="./">回首頁</a>
     </div>
 
     <!-- 主卡片 -->
@@ -274,7 +274,7 @@
         <div class="contact-item">
           <h3>替另一位孩子報名？</h3>
           <p>可回到報名頁重新填寫</p>
-          <a class="btn sm primary" href="https://rogerfang2024.github.io/TN-GJWPAINT/" style="margin-top:10px">再報名一位</a>
+          <a class="btn sm primary" href="./" style="margin-top:10px">再報名一位</a>
         </div>
       </div>
     </div>
@@ -289,11 +289,10 @@
 
   <script>
     const EVENT_NAME = "乾淨校園我愛我家兒童著色畫比賽";
-    const HOME_URL = "https://rogerfang2024.github.io/TN-GJWPAINT/";
+    const HOME_URL = "./";
 
     const $ = id => document.getElementById(id);
 
-    // 年份
     $("year").textContent = new Date().getFullYear();
 
     // 讀取 rid
@@ -333,10 +332,7 @@
       
       if (navigator.share) {
         try {
-          await navigator.share({
-            title: "報名完成",
-            text: shareText
-          });
+          await navigator.share({ title: "報名完成", text: shareText });
           return;
         } catch (e) {}
       }
