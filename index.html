@@ -248,7 +248,7 @@
     }
 
     .hero .section-overlay {
-      background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%, var(--bg) 100%);
+      background: linear-gradient(to bottom, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.9) 100%);
     }
 
     .hero-kicker {
@@ -282,8 +282,38 @@
     .hero-subtitle {
       font-size: clamp(0.9rem, 2vw, 1rem);
       color: var(--text-muted);
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       animation: fadeInUp 1s ease 0.4s both;
+    }
+
+    /* ========== 理念文字 ========== */
+    .hero-message {
+      max-width: 380px;
+      margin: 0 auto 28px;
+      padding: 20px 24px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: var(--shadow);
+      animation: fadeInUp 1s ease 0.5s both;
+    }
+
+    .hero-message p {
+      color: var(--text);
+      font-size: 0.88rem;
+      line-height: 1.9;
+      margin-bottom: 12px;
+    }
+
+    .hero-message p:first-child {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--primary-dark);
+    }
+
+    .hero-message p:last-child {
+      margin-bottom: 0;
     }
 
     .hero-buttons {
@@ -405,9 +435,47 @@
       font-weight: 700;
     }
 
+    /* ========== 底圖展示區 ========== */
+    .coloring-section {
+      background: var(--bg-alt);
+      min-height: auto;
+      padding: 60px 20px;
+    }
+
+    .coloring-card {
+      max-width: 550px;
+      margin: 0 auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .coloring-card img {
+      width: 100%;
+      display: block;
+    }
+
+    .coloring-text {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .coloring-text h3 {
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+      margin-bottom: 8px;
+    }
+
+    .coloring-text p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
     /* ========== 資訊區 ========== */
     .info-section {
-      background: var(--bg-alt);
+      background: var(--bg);
       min-height: auto;
       padding: 60px 20px;
     }
@@ -455,7 +523,7 @@
 
     /* ========== 亮點區 ========== */
     .highlights-section {
-      background: var(--bg);
+      background: var(--bg-alt);
       min-height: auto;
       padding: 60px 20px;
     }
@@ -516,7 +584,7 @@
 
     /* ========== 流程區 ========== */
     .schedule-section {
-      background: var(--bg-alt);
+      background: var(--bg);
       min-height: auto;
       padding: 60px 20px;
     }
@@ -591,7 +659,7 @@
 
     /* ========== 獎項區 ========== */
     .prizes-section {
-      background: var(--bg);
+      background: var(--bg-alt);
       min-height: auto;
       padding: 60px 20px;
     }
@@ -653,7 +721,7 @@
 
     /* ========== 報名區 ========== */
     .register-section {
-      background: var(--bg-alt);
+      background: var(--bg);
       min-height: auto;
       padding: 60px 20px;
     }
@@ -790,7 +858,7 @@
 
     /* ========== 地點區 ========== */
     .location-section {
-      background: var(--bg);
+      background: var(--bg-alt);
       min-height: auto;
       padding: 60px 20px;
     }
@@ -837,7 +905,7 @@
 
     /* ========== 聯絡區 ========== */
     .contact-section {
-      background: var(--bg-alt);
+      background: var(--bg);
       min-height: auto;
       padding: 60px 20px;
     }
@@ -872,7 +940,7 @@
 
     /* ========== Footer ========== */
     .footer {
-      background: var(--bg);
+      background: var(--bg-alt);
       padding: 28px 20px;
       text-align: center;
       border-top: 1px solid var(--border);
@@ -1067,6 +1135,38 @@
         margin-bottom: 28px;
       }
       
+      /* 理念文字 */
+      .hero-message {
+        padding: 16px 18px;
+        margin-bottom: 24px;
+      }
+      
+      .hero-message p {
+        font-size: 0.82rem;
+        line-height: 1.8;
+      }
+      
+      .hero-message p:first-child {
+        font-size: 0.88rem;
+      }
+      
+      /* 底圖展示區 */
+      .coloring-section {
+        padding: 40px 14px;
+      }
+      
+      .coloring-text {
+        padding: 16px;
+      }
+      
+      .coloring-text h3 {
+        font-size: 1rem;
+      }
+      
+      .coloring-text p {
+        font-size: 0.85rem;
+      }
+      
       /* 資訊卡片 */
       .info-grid {
         gap: 12px;
@@ -1237,6 +1337,7 @@
   <!-- ========== 側邊選單 ========== -->
   <nav class="nav-menu" id="navMenu">
     <a href="#poster">活動海報</a>
+    <a href="#coloring">底圖展示</a>
     <a href="#info">活動資訊</a>
     <a href="#highlights">活動亮點</a>
     <a href="#schedule">當日流程</a>
@@ -1250,12 +1351,19 @@
 
   <!-- ========== Hero 區 ========== -->
   <section class="section hero" id="hero">
-    <img src="assets/photo.jpg" alt="" class="section-bg" decoding="async">
+    <img src="assets/poster.png" alt="" class="section-bg" decoding="async">
     <div class="section-overlay"></div>
     <div class="section-content">
       <span class="hero-kicker">2026 兒童著色畫比賽</span>
       <h1>乾淨校園<span>我愛我家</span></h1>
       <p class="hero-subtitle">歡迎幼兒園及國小低年級學童參加</p>
+      
+      <div class="hero-message">
+        <p>這不只是一場著色比賽。</p>
+        <p>我們希望孩子在畫畫的過程中，<br>用顏色表達對家人的愛，<br>也慢慢理解「家」與「地球」的珍貴。</p>
+        <p>在這三個小時裡，<br>讓孩子靜心創作，<br>也讓大人，陪孩子好好在一起。</p>
+      </div>
+      
       <div class="hero-buttons">
         <a href="#register" class="btn btn-primary">立即報名</a>
         <a href="#poster" class="btn btn-outline">查看海報</a>
@@ -1268,8 +1376,23 @@
   <section class="section poster-section" id="poster">
     <div class="section-content fade-in">
       <div class="poster-frame" id="posterTrigger">
-        <img src="assets/photo.jpg" alt="活動海報" decoding="async">
+        <img src="assets/poster.png" alt="活動海報" decoding="async">
         <span class="poster-badge">免費參加</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 底圖展示區 ========== -->
+  <section class="section coloring-section" id="coloring">
+    <div class="section-content">
+      <h2 class="section-title fade-in">現場提供底圖</h2>
+      <p class="section-subtitle fade-in">讓孩子發揮創意，畫出心中的愛</p>
+      <div class="coloring-card fade-in">
+        <img src="assets/coloring.jpg" alt="著色前 vs 著色後" decoding="async">
+        <div class="coloring-text">
+          <h3>著色前 → 著色後</h3>
+          <p>現場提供底圖，孩子自由上色創作</p>
+        </div>
       </div>
     </div>
   </section>
@@ -1564,7 +1687,7 @@
   <!-- ========== Lightbox ========== -->
   <div class="lightbox" id="lightbox">
     <button type="button" class="lightbox-close" id="lightboxClose">✕</button>
-    <img src="assets/photo.jpg" alt="活動海報大圖">
+    <img src="assets/poster.png" alt="活動海報大圖">
   </div>
 
   <!-- ========== JavaScript ========== -->
