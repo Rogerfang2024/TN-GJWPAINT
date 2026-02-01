@@ -335,15 +335,16 @@
       position: relative;
     }
 
-    .hero-message::before {
-      content: '💕';
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 1.3rem;
-      background: var(--bg);
-      padding: 0 10px;
+  .hero-message::before {
+  content: '💕';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, #fff5f8 0%, #ffeef4 100%);
+  padding: 2px 12px;
+  border-radius: 10px;
     }
 
     .hero-message p {
@@ -930,16 +931,18 @@
       position: relative;
     }
 
-    .form-card::before {
-      content: '📝';
-      position: absolute;
-      top: -18px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 1.8rem;
-      background: var(--bg);
-      padding: 0 15px;
-    }
+   .form-card::before {
+  content: '📝';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, #fff5f8 0%, #ffeef4 100%);
+  padding: 4px 14px;
+  border-radius: 12px;
+  z-index: 1;
+}
 
     .form-group {
       margin-bottom: 18px;
@@ -1178,10 +1181,11 @@
     }
 
     .contact-value-sub {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
+  font-size: 0.85rem;
+  color: var(--text);
+  margin-top: 8px;
+  font-weight: 700;
+   }
 
     /* ========== Footer ========== */
     .footer {
