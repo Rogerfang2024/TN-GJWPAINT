@@ -884,6 +884,23 @@
       text-align: left;
     }
 
+   .register-notice-extra {
+  background: linear-gradient(135deg, #fef3c7 0%, #fff5f8 100%);
+  border: 2px dashed #f59e0b;
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.register-notice-title {
+  color: var(--primary-dark);  /* 粉色 */
+}
+
+.register-notice-extra .register-notice-title {
+  color: #d97706;  /* 橘色 */
+}
+
     .register-notice-title {
       font-size: 1rem;
       font-weight: 800;
@@ -2013,6 +2030,85 @@
     const EVENT_CODE = "GJC2026";
     const EVENT_NAME = "乾淨校園我愛我家兒童著色畫比賽";
 
+    // ========== 組別狀態 ==========
+let groupStatusData = {};
+
+// 狀態對應文字
+const STATUS_TEXT = {
+  'open': '（限 25 名）',
+  'waitlist': '（已額滿，接受候補）',
+  'nextround': '（已額滿，報名下一場）'
+};
+
+// 查詢各組狀態
+async function checkGroupStatus() {
+  try {
+    const response = await fetch(GAS_WEBAPP_URL + '?action=checkStatus');
+    if (response.ok) {
+      groupStatusData = await response.json();
+      updateGroupOptions();
+      updateFormNotice();
+    }
+  } catch (err) {
+    console.log('無法取得組別狀態', err);
+  }
+}
+
+// 更新下拉選單顯示
+function updateGroupOptions() {
+  const groupSelect = $('group');
+  if (!groupSelect) return;
+  
+  const options = groupSelect.querySelectorAll('option');
+  options.forEach(option => {
+    const value = option.value;
+    if (groupStatusData[value]) {
+      const status = groupStatusData[value].status;
+      const text = STATUS_TEXT[status] || '（限 25 名）';
+      
+      if (value === '幼兒園組') {
+        option.textContent = '幼兒園組' + text;
+      } else if (value === '國小低年級組') {
+        option.textContent = '國小低年級組' + text;
+      }
+      
+      // 加上視覺提示
+      if (status === 'waitlist') {
+        option.style.color = '#f59e0b';
+      } else if (status === 'nextround') {
+        option.style.color = '#8b5cf6';
+      }
+    }
+  });
+}
+
+// 更新報名須知提示
+function updateFormNotice() {
+  const noticeEl = document.querySelector('.register-notice');
+  if (!noticeEl) return;
+  
+  let hasWaitlist = false;
+  let hasNextround = false;
+  
+  Object.keys(groupStatusData).forEach(group => {
+    if (groupStatusData[group].status === 'waitlist') hasWaitlist = true;
+    if (groupStatusData[group].status === 'nextround') hasNextround = true;
+  });
+  
+  // 如果有候補或下一場，新增額外提示
+  if (hasWaitlist || hasNextround) {
+    const extraNotice = document.createElement('div');
+    extraNotice.className = 'register-notice-extra';
+    extraNotice.innerHTML = `
+      <div class="register-notice-title">📢 名額狀態說明</div>
+      <ul class="register-notice-list">
+        ${hasWaitlist ? '<li>標示「接受候補」的組別，正取已滿，報名將列入候補名單</li>' : ''}
+        ${hasNextround ? '<li>標示「報名下一場」的組別，本次已額滿，報名將列入下一場優先通知名單</li>' : ''}
+      </ul>
+    `;
+    noticeEl.parentNode.insertBefore(extraNotice, noticeEl.nextSibling);
+  }
+}
     // ========== 工具函式 ==========
     const $ = (id) => document.getElementById(id);
 
@@ -2098,7 +2194,10 @@
 
     // ========== 主程式 ==========
     document.addEventListener('DOMContentLoaded', function() {
-      // 漢堡選單
+  // 查詢組別狀態
+  checkGroupStatus();
+  
+  // 漢堡選單
       const navToggle = $('navToggle');
       const navMenu = $('navMenu');
       const navOverlay = $('navOverlay');
@@ -2230,13 +2329,30 @@
         formData.append("website", $("honeypot").value);
 
         try {
-          const sent = navigator.sendBeacon(GAS_WEBAPP_URL, formData);
-          if (!sent) {
-            await fetch(GAS_WEBAPP_URL, { method: "POST", mode: "no-cors", body: formData });
-          }
-          form.reset();
-          window.location.href = `${THANKS_URL}?rid=${encodeURIComponent(regId)}`;
-        } catch (err) {
+           // 改用 fetch 以取得回傳狀態
+  const response = await fetch(GAS_WEBAPP_URL, {
+    method: "POST",
+    body: formData
+  });
+  
+  let regStatus = '已報名';
+  
+  if (response.ok) {
+    const result = await response.text();
+    // 回傳格式：OK:序號:狀態
+    if (result.startsWith('OK:')) {
+      const parts = result.split(':');
+      if (parts.length >= 3) {
+        regStatus = parts[2];
+      }
+    } else if (result.startsWith('ERROR:')) {
+      throw new Error(result.replace('ERROR:', ''));
+    }
+  }
+  
+  form.reset();
+  window.location.href = `${THANKS_URL}?rid=${encodeURIComponent(regId)}&status=${encodeURIComponent(regStatus)}`;
+} catch (err) {
           $('formError').textContent = "送出失敗，請稍後再試";
           $('formError').classList.add('show');
           resetFormState();
