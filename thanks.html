@@ -1,261 +1,409 @@
-<!doctype html>
-<html lang="zh-Hant">
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5" />
-  <title>報名完成｜乾淨校園我愛我家兒童著色畫比賽</title>
-
-  <meta name="description" content="報名完成！已收到你的資料。" />
-  <meta property="og:title" content="報名完成｜乾淨校園我愛我家兒童著色畫比賽" />
-  <meta property="og:description" content="已收到你的資料，請保留報名序號以便查詢。" />
-  <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#0ea5e9" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>報名完成｜乾淨校園我愛我家</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  
   <style>
-    :root{
-      --bg:#f6f9fc;
-      --card:#ffffff;
-      --text:#0f172a;
-      --muted:#475569;
-      --brand:#0ea5e9;
-      --brand2:#22c55e;
-      --border:#e2e8f0;
-      --shadow:0 10px 30px rgba(2,8,23,.08);
-      --radius:16px;
-      --max:600px;
-    }
-    *{box-sizing:border-box;margin:0}
-    html{scroll-behavior:smooth}
-    body{
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
-      color:var(--text);
-      background:linear-gradient(135deg,rgba(14,165,233,.08)0%,transparent 50%),linear-gradient(225deg,rgba(34,197,94,.06)0%,transparent 50%),var(--bg);
-      line-height:1.6;
-      min-height:100vh;
-      padding:16px;
+    :root {
+      --primary: #ff6b9d;
+      --primary-dark: #e91e7a;
+      --primary-light: #ffe4ef;
+      --secondary: #ffb347;
+      --accent: #a8e6cf;
+      --bg: #fff5f8;
+      --bg-gradient: linear-gradient(135deg, #fff5f8 0%, #ffeef4 50%, #fff9fb 100%);
+      --card: #ffffff;
+      --text: #4a3f4c;
+      --text-muted: #8b7d8e;
+      --border: #ffd1e3;
+      --border-dashed: #ffb6d3;
+      --shadow: 0 4px 20px rgba(255, 107, 157, 0.12);
+      --shadow-lg: 0 8px 30px rgba(255, 107, 157, 0.18);
+      --radius: 20px;
+      --waitlist-color: #f59e0b;
+      --nextround-color: #8b5cf6;
     }
 
-    .container{
-      max-width:var(--max);
-      margin:0 auto;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:20px;
-      margin-bottom:16px;
+    body {
+      font-family: 'Nunito', 'Noto Sans TC', sans-serif;
+      background: var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      line-height: 1.7;
     }
 
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom:20px;
-      flex-wrap:wrap;
-      gap:10px;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      font-weight:800;
-      font-size:14px;
-    }
-    .dot{
-      width:12px;height:12px;border-radius:50%;
-      background:linear-gradient(135deg,var(--brand),var(--brand2));
+    .container {
+      max-width: 480px;
+      width: 100%;
     }
 
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:6px;
-      padding:10px 16px;
-      border-radius:10px;
-      font-size:14px;
-      font-weight:700;
-      text-decoration:none;
-      cursor:pointer;
-      border:1px solid var(--border);
-      background:var(--card);
-      transition:transform .1s,box-shadow .1s;
-    }
-    .btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
-    .btn:active{transform:scale(.98)}
-    .btn.primary{
-      background:linear-gradient(135deg,var(--brand),#38bdf8);
-      color:#fff;
-      border:none;
-    }
-    .btn.sm{padding:8px 12px;font-size:13px}
-
-    .success-icon{
-      width:60px;height:60px;
-      border-radius:50%;
-      background:linear-gradient(135deg,var(--brand2),#4ade80);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      margin:0 auto 16px;
-      font-size:28px;
-      color:#fff;
+    .card {
+      background: var(--card);
+      border: 3px dashed var(--border-dashed);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      margin-bottom: 20px;
     }
 
-    h1{
-      font-size:22px;
-      text-align:center;
-      margin-bottom:8px;
-    }
-    .sub{
-      color:var(--muted);
-      font-size:14px;
-      text-align:center;
-      margin-bottom:20px;
+    .card.waitlist {
+      border-color: var(--waitlist-color);
     }
 
-    .rid-box{
-      background:rgba(14,165,233,.06);
-      border:1px dashed rgba(14,165,233,.3);
-      border-radius:12px;
-      padding:16px;
-      text-align:center;
-      margin-bottom:16px;
-    }
-    .rid-label{
-      font-size:12px;
-      color:var(--muted);
-      font-weight:600;
-      margin-bottom:6px;
-    }
-    .rid-value{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
-      font-size:20px;
-      font-weight:800;
-      color:var(--brand);
-      letter-spacing:1px;
-      word-break:break-all;
+    .card.nextround {
+      border-color: var(--nextround-color);
     }
 
-    .btn-row{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:center;
+    .icon {
+      font-size: 4rem;
+      margin-bottom: 16px;
+      animation: bounce 1s ease infinite;
     }
 
-    .tips{
-      background:rgba(34,197,94,.06);
-      border:1px solid rgba(34,197,94,.2);
-      border-radius:12px;
-      padding:14px;
-    }
-    .tips-title{
-      font-weight:700;
-      font-size:14px;
-      margin-bottom:8px;
-      color:var(--text);
-    }
-    .tips-list{
-      font-size:13px;
-      color:var(--muted);
-      padding-left:18px;
-      margin:0;
-    }
-    .tips-list li{margin:4px 0}
-
-    .notice{
-      margin-top:12px;
-      padding:12px;
-      border-radius:10px;
-      background:rgba(14,165,233,.06);
-      border:1px dashed rgba(14,165,233,.2);
-      color:var(--muted);
-      font-size:12px;
-      text-align:center;
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
 
-    .contact-card{
-      display:grid;
-      gap:16px;
-    }
-    @media(min-width:480px){
-      .contact-card{grid-template-columns:1fr 1fr}
-    }
-    .contact-item h3{
-      font-size:14px;
-      margin-bottom:4px;
-    }
-    .contact-item p{
-      font-size:13px;
-      color:var(--muted);
-      margin:0;
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 8px;
     }
 
-    footer{
-      text-align:center;
-      padding:20px 0;
-      color:var(--muted);
-      font-size:12px;
+    .card.waitlist h1 {
+      color: var(--waitlist-color);
     }
 
-    .toast{
-      position:fixed;
-      left:50%;bottom:20px;
-      transform:translateX(-50%);
-      background:rgba(15,23,42,.9);
-      color:#fff;
-      padding:10px 16px;
-      border-radius:20px;
-      font-size:13px;
-      font-weight:600;
-      display:none;
-      z-index:50;
+    .card.nextround h1 {
+      color: var(--nextround-color);
     }
-    .toast.show{display:block}
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+
+    /* 狀態標籤 */
+    .status-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .status-badge.confirmed {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    .status-badge.waitlist {
+      background: #fef3c7;
+      color: #d97706;
+    }
+
+    .status-badge.nextround {
+      background: #ede9fe;
+      color: #7c3aed;
+    }
+
+    /* 序號區 */
+    .rid-section {
+      background: var(--bg);
+      border: 2px dashed var(--border-dashed);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .rid-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .rid-value {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--primary);
+      word-break: break-all;
+      margin-bottom: 12px;
+    }
+
+    .card.waitlist .rid-value {
+      color: var(--waitlist-color);
+    }
+
+    .card.nextround .rid-value {
+      color: var(--nextround-color);
+    }
+
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .copy-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .card.waitlist .copy-btn {
+      background: var(--waitlist-color);
+    }
+
+    .card.nextround .copy-btn {
+      background: var(--nextround-color);
+    }
+
+    /* 狀態說明區 */
+    .status-info {
+      background: #fef3c7;
+      border: 2px dashed #fbbf24;
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .status-info.nextround {
+      background: #ede9fe;
+      border-color: #a78bfa;
+    }
+
+    .status-info-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #d97706;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-info.nextround .status-info-title {
+      color: #7c3aed;
+    }
+
+    .status-info ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .status-info li {
+      font-size: 0.85rem;
+      color: var(--text);
+      margin-bottom: 6px;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .status-info li::before {
+      content: '•';
+      position: absolute;
+      left: 4px;
+      color: #d97706;
+      font-weight: 900;
+    }
+
+    .status-info.nextround li::before {
+      color: #7c3aed;
+    }
+
+    /* 接下來你可以 */
+    .next-steps {
+      background: #f0fdf4;
+      border: 2px dashed #86efac;
+      border-radius: 16px;
+      padding: 18px 20px;
+      text-align: left;
+    }
+
+    .next-steps-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #16a34a;
+      margin-bottom: 10px;
+    }
+
+    .next-steps ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .next-steps li {
+      font-size: 0.85rem;
+      color: var(--text);
+      margin-bottom: 6px;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .next-steps li::before {
+      content: '•';
+      position: absolute;
+      left: 4px;
+      color: #16a34a;
+      font-weight: 900;
+    }
+
+    .next-steps li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 按鈕 */
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 24px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+    }
+
+    .btn-outline {
+      background: var(--card);
+      color: var(--primary);
+      border: 2px dashed var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary-light);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-top: 20px;
+    }
+
+    /* RWD */
+    @media (max-width: 480px) {
+      body {
+        padding: 30px 16px;
+      }
+
+      .card {
+        padding: 28px 20px;
+      }
+
+      .icon {
+        font-size: 3rem;
+      }
+
+      h1 {
+        font-size: 1.4rem;
+      }
+
+      .rid-value {
+        font-size: 0.95rem;
+      }
+
+      .status-info,
+      .next-steps {
+        padding: 14px 16px;
+      }
+
+      .status-info li,
+      .next-steps li {
+        font-size: 0.82rem;
+      }
+    }
   </style>
 </head>
-
 <body>
   <div class="container">
-    <!-- 頂部 -->
-    <div class="topbar">
-      <div class="brand">
-        <span class="dot"></span>
-        <span>乾淨校園著色畫比賽</span>
+    <div class="card" id="mainCard">
+      <div class="icon" id="icon">🎉</div>
+      <h1 id="title">報名成功！</h1>
+      <p class="subtitle" id="subtitle">感謝您的報名</p>
+      
+      <!-- 狀態標籤 -->
+      <div class="status-badge confirmed" id="statusBadge">已報名</div>
+      
+      <!-- 序號區 -->
+      <div class="rid-section">
+        <div class="rid-label">您的報名序號</div>
+        <div class="rid-value" id="ridValue">載入中...</div>
+        <button class="copy-btn" id="copyBtn">📋 複製序號</button>
       </div>
-      <a class="btn sm" href="./">回首頁</a>
-    </div>
-
-    <!-- 主卡片 -->
-    <div class="card">
-      <div class="success-icon">✓</div>
-      <h1>報名完成！</h1>
-      <p class="sub">謝謝你，我們已收到資料</p>
-
-      <div class="rid-box">
-        <div class="rid-label">你的報名序號</div>
-        <div class="rid-value" id="ridText">（讀取中…）</div>
+      
+      <!-- 狀態說明（候補/下一場才顯示）-->
+      <div class="status-info" id="statusInfo" style="display: none;">
+        <div class="status-info-title" id="statusInfoTitle">📋 候補說明</div>
+        <ul id="statusInfoList">
+          <li>本組名額已滿，您目前為候補名單</li>
+          <li>若有名額釋出，將依報名順序通知</li>
+          <li>請保持電話暢通</li>
+        </ul>
       </div>
-
-      <div class="btn-row">
-        <button class="btn primary" id="copyBtn" type="button">複製序號</button>
-        <button class="btn" id="shareBtn" type="button">分享給家人</button>
-      </div>
-
-      <div class="notice">
-        請截圖或複製序號保存，若需查詢或聯繫主辦可提供此序號
-      </div>
-    </div>
-
-    <!-- 提示卡片 -->
-    <div class="card">
-      <div class="tips">
-        <div class="tips-title">接下來你可以…</div>
-        <ul class="tips-list">
+      
+      <!-- 接下來你可以 -->
+      <div class="next-steps">
+        <div class="next-steps-title">📌 接下來你可以...</div>
+        <ul id="nextStepsList">
           <li>截圖此頁或複製序號保存</li>
           <li>工作人員確認後，將以電話或簡訊通知報名結果</li>
           <li>活動前請留意主辦通知</li>
@@ -263,89 +411,118 @@
         </ul>
       </div>
     </div>
-
-    <!-- 聯絡與再報名 -->
-    <div class="card">
-      <div class="contact-card">
-        <div class="contact-item">
-          <h3>需要聯繫主辦？</h3>
-          <p>請撥打洽詢電話並提供報名序號</p>
-          <a class="btn sm" href="tel:0913837389" style="margin-top:10px">撥打電話</a>
-        </div>
-        <div class="contact-item">
-          <h3>替另一位孩子報名？</h3>
-          <p>可回到報名頁重新填寫</p>
-          <a class="btn sm primary" href="./" style="margin-top:10px">再報名一位</a>
-        </div>
-      </div>
+    
+    <div class="buttons">
+      <a href="./index.html" class="btn btn-primary">🏠 返回首頁</a>
+      <a href="./index.html#register" class="btn btn-outline">👶 再報名一位</a>
     </div>
-
-    <footer>
-      <div>乾淨校園我愛我家兒童著色畫比賽</div>
-      <div>© <span id="year"></span></div>
-    </footer>
+    
+    <div class="footer">
+      <p>💕 乾淨校園我愛我家｜兒童著色畫比賽</p>
+    </div>
   </div>
 
-  <div class="toast" id="toast">已複製</div>
-
   <script>
-    const EVENT_NAME = "乾淨校園我愛我家兒童著色畫比賽";
-    const HOME_URL = "./";
-
-    const $ = id => document.getElementById(id);
-
-    $("year").textContent = new Date().getFullYear();
-
-    // 讀取 rid
-    const params = new URLSearchParams(location.search);
-    const rid = params.get("rid") || "";
-    $("ridText").textContent = rid || "（未取得序號）";
-
-    // Toast
-    function toast(msg) {
-      const t = $("toast");
-      t.textContent = msg;
-      t.classList.add("show");
-      clearTimeout(toast._timer);
-      toast._timer = setTimeout(() => t.classList.remove("show"), 2000);
+    // 取得 URL 參數
+    const urlParams = new URLSearchParams(window.location.search);
+    const rid = urlParams.get('rid') || '無法取得序號';
+    const status = urlParams.get('status') || '已報名';
+    
+    // DOM 元素
+    const mainCard = document.getElementById('mainCard');
+    const icon = document.getElementById('icon');
+    const title = document.getElementById('title');
+    const subtitle = document.getElementById('subtitle');
+    const statusBadge = document.getElementById('statusBadge');
+    const ridValue = document.getElementById('ridValue');
+    const statusInfo = document.getElementById('statusInfo');
+    const statusInfoTitle = document.getElementById('statusInfoTitle');
+    const statusInfoList = document.getElementById('statusInfoList');
+    const nextStepsList = document.getElementById('nextStepsList');
+    const copyBtn = document.getElementById('copyBtn');
+    
+    // 顯示序號
+    ridValue.textContent = rid;
+    
+    // 根據狀態調整顯示
+    if (status === '候補') {
+      // 候補狀態
+      mainCard.classList.add('waitlist');
+      icon.textContent = '📋';
+      title.textContent = '已收到您的報名資料！';
+      subtitle.textContent = '目前為候補名單';
+      statusBadge.textContent = '候補';
+      statusBadge.className = 'status-badge waitlist';
+      
+      // 顯示候補說明
+      statusInfo.style.display = 'block';
+      statusInfoTitle.textContent = '📋 候補說明';
+      statusInfoList.innerHTML = `
+        <li>本組名額已滿，您目前為候補名單</li>
+        <li>若有名額釋出，將依報名順序通知</li>
+        <li>請保持電話暢通</li>
+      `;
+      
+      // 調整接下來步驟
+      nextStepsList.innerHTML = `
+        <li>截圖此頁或複製序號保存</li>
+        <li>工作人員確認後，將以電話或簡訊通知報名結果</li>
+        <li>活動前請留意主辦通知</li>
+      `;
+      
+    } else if (status === '預約下一場') {
+      // 預約下一場狀態
+      mainCard.classList.add('nextround');
+      icon.textContent = '📅';
+      title.textContent = '已收到您的報名資料！';
+      subtitle.textContent = '已列入下一場優先通知名單';
+      statusBadge.textContent = '預約下一場';
+      statusBadge.className = 'status-badge nextround';
+      
+      // 顯示下一場說明
+      statusInfo.style.display = 'block';
+      statusInfo.classList.add('nextround');
+      statusInfoTitle.textContent = '📅 下一場說明';
+      statusInfoList.innerHTML = `
+        <li>本次活動名額已全數額滿</li>
+        <li>您已列入下一場優先通知名單</li>
+        <li>下一場開放報名時，將優先通知您</li>
+      `;
+      
+      // 調整接下來步驟
+      nextStepsList.innerHTML = `
+        <li>截圖此頁或複製序號保存</li>
+        <li>追蹤我們的粉專，掌握最新活動資訊</li>
+      `;
+      
+    } else {
+      // 正常報名（已報名）
+      statusBadge.textContent = '已報名';
+      statusBadge.className = 'status-badge confirmed';
     }
-
-    // 複製序號
-    $("copyBtn").addEventListener("click", async () => {
-      const text = rid || $("ridText").textContent;
+    
+    // 複製序號功能
+    copyBtn.addEventListener('click', async () => {
       try {
-        await navigator.clipboard.writeText(text);
-        toast("已複製報名序號 ✓");
-      } catch (e) {
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        document.body.removeChild(ta);
-        toast("已複製報名序號 ✓");
-      }
-    });
-
-    // 分享
-    $("shareBtn").addEventListener("click", async () => {
-      const shareText = `我已完成報名：${EVENT_NAME}\n報名序號：${rid || "（請看截圖）"}`;
-      
-      if (navigator.share) {
-        try {
-          await navigator.share({ title: "報名完成", text: shareText });
-          return;
-        } catch (e) {}
-      }
-      
-      try {
-        await navigator.clipboard.writeText(shareText);
-        toast("已複製分享訊息 ✓");
-      } catch (e) {
-        toast("請手動截圖分享");
+        await navigator.clipboard.writeText(rid);
+        copyBtn.innerHTML = '✅ 已複製！';
+        setTimeout(() => {
+          copyBtn.innerHTML = '📋 複製序號';
+        }, 2000);
+      } catch (err) {
+        // 備用方法
+        const textArea = document.createElement('textarea');
+        textArea.value = rid;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        copyBtn.innerHTML = '✅ 已複製！';
+        setTimeout(() => {
+          copyBtn.innerHTML = '📋 複製序號';
+        }, 2000);
       }
     });
   </script>
 </body>
-
 </html>
