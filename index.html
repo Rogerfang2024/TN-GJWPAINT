@@ -2061,351 +2061,372 @@
 
   <!-- ========== JavaScript ========== -->
   <script>
-    // ========== 設定區 ==========
-    const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxDlJ8o8unlRefrLvJM22lPN7E4Z-TevdkT2Lq1O9ROunLKSVKliq8qylOo_jj-FyyDzQ/exec";
-    const THANKS_URL = "./thanks.html";
-    const EVENT_CODE = "GJC2026";
-    const EVENT_NAME = "乾淨校園我愛我家兒童著色畫比賽";
+   (function() {
+  'use strict';
 
-    // ========== 組別狀態 ==========
-let groupStatusData = {};
+  // ========== 設定區 ==========
+  const GAS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbxDlJ8o8unlRefrLvJM22lPN7E4Z-TevdkT2Lq1O9ROunLKSVKliq8qylOo_jj-FyyDzQ/exec';
+  const THANKS_URL = 'thanks.html';
+  const EVENT_CODE = 'GJC2026';
+  const EVENT_NAME = '乾淨校園我愛我家 - 兒童著色畫比賽';
 
-// 狀態對應文字
-const STATUS_TEXT = {
-  'open': '（限 25 名）',
-  'waitlist': '（已額滿，接受候補）',
-  'nextround': '（已額滿，報名下一場）'
-};
+  // ========== 組別狀態 ==========
+  let groupStatusData = {};
+  const STATUS_TEXT = {
+    open: '（限 25 名）',
+    waitlist: '（已額滿，接受候補）',
+    nextround: '（已額滿，報名下一場）'
+  };
 
-// 查詢各組狀態
-async function checkGroupStatus() {
-  try {
-    const response = await fetch(GAS_WEBAPP_URL + '?action=checkStatus');
-    if (response.ok) {
-      groupStatusData = await response.json();
-      updateGroupOptions();
-      updateFormNotice();
-    }
-  } catch (err) {
-    console.log('無法取得組別狀態', err);
+  // ========== 工具函式 ==========
+  const $ = id => document.getElementById(id);
+
+  function makeRegId() {
+    const now = new Date();
+    const pad = n => String(n).padStart(2, '0');
+    const ts = `${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(now.getDate())}${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`;
+    const rand = Math.random().toString(36).substring(2, 6).toUpperCase();
+    return `${EVENT_CODE}-${ts}-${rand}`;
   }
-}
 
-// 更新下拉選單顯示
-function updateGroupOptions() {
-  const groupSelect = $('group');
-  if (!groupSelect) return;
-  
-  const options = groupSelect.querySelectorAll('option');
-  options.forEach(option => {
-    const value = option.value;
-    if (groupStatusData[value]) {
-      const status = groupStatusData[value].status;
-      const text = STATUS_TEXT[status] || '（限 25 名）';
-      
-      if (value === '幼兒園組') {
-        option.textContent = '幼兒園組' + text;
-      } else if (value === '國小低年級組') {
-        option.textContent = '國小低年級組' + text;
-      }
-      
-      // 加上視覺提示
-      if (status === 'waitlist') {
-        option.style.color = '#f59e0b';
-      } else if (status === 'nextround') {
-        option.style.color = '#8b5cf6';
-      }
-    }
-  });
-}
-
-// 更新報名須知提示
-function updateFormNotice() {
-  const noticeEl = document.querySelector('.register-notice');
-  if (!noticeEl) return;
-  
-  let hasWaitlist = false;
-  let hasNextround = false;
-  
-  Object.keys(groupStatusData).forEach(group => {
-    if (groupStatusData[group].status === 'waitlist') hasWaitlist = true;
-    if (groupStatusData[group].status === 'nextround') hasNextround = true;
-  });
-  
-  // 如果有候補或下一場，新增額外提示
-  if (hasWaitlist || hasNextround) {
-    const extraNotice = document.createElement('div');
-    extraNotice.className = 'register-notice-extra';
-    extraNotice.innerHTML = `
-      <div class="register-notice-title">📢 名額狀態說明</div>
-      <ul class="register-notice-list">
-        ${hasWaitlist ? '<li>標示「接受候補」的組別，正取已滿，報名將列入候補名單</li>' : ''}
-        ${hasNextround ? '<li>標示「報名下一場」的組別，本次已額滿，報名將列入下一場優先通知名單</li>' : ''}
-      </ul>
-    `;
-    noticeEl.parentNode.insertBefore(extraNotice, noticeEl.nextSibling);
+  function getTracking() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+      utm_source: params.get('utm_source') || '',
+      utm_medium: params.get('utm_medium') || '',
+      utm_campaign: params.get('utm_campaign') || '',
+      referrer: document.referrer || ''
+    };
   }
-}
-    // ========== 工具函式 ==========
-    const $ = (id) => document.getElementById(id);
 
-    function makeRegId() {
-      const now = new Date();
-      const y = now.getFullYear();
-      const m = String(now.getMonth() + 1).padStart(2, '0');
-      const d = String(now.getDate()).padStart(2, '0');
-      const h = String(now.getHours()).padStart(2, '0');
-      const mi = String(now.getMinutes()).padStart(2, '0');
-      const s = String(now.getSeconds()).padStart(2, '0');
-      const rand = Math.random().toString(36).substring(2, 6).toUpperCase();
-      return `${EVENT_CODE}-${y}${m}${d}${h}${mi}${s}-${rand}`;
-    }
-
-    function getTracking() {
-      const params = new URLSearchParams(window.location.search);
-      const source = params.get('utm_source') || params.get('source') || '';
-      const medium = params.get('utm_medium') || params.get('medium') || '';
-      const campaign = params.get('utm_campaign') || params.get('campaign') || '';
-      const ref = document.referrer ? new URL(document.referrer).hostname : '';
-      const parts = [];
-      if (source) parts.push(`來源:${source}`);
-      if (medium) parts.push(`媒介:${medium}`);
-      if (campaign) parts.push(`活動:${campaign}`);
-      if (ref && !source) parts.push(`參照:${ref}`);
-      return parts.join(' | ');
-    }
-
-    // ========== 表單驗證 ==========
-    function validateForm() {
-      let isValid = true;
-      const fields = [
-        { id: 'full_join', errorId: 'full_join_error', type: 'select' },
-        { id: 'resident', errorId: 'resident_error', type: 'select' },
-        { id: 'parent_name', errorId: 'parent_name_error', type: 'text' },
-        { id: 'phone', errorId: 'phone_error', type: 'phone' },
-        { id: 'child_name', errorId: 'child_name_error', type: 'text' },
-        { id: 'child_age', errorId: 'child_age_error', type: 'select' },
-        { id: 'group', errorId: 'group_error', type: 'select' }
-      ];
-
-      fields.forEach(field => {
-        const el = $(field.id);
-        const errorEl = $(field.errorId);
-        let valid = true;
-
-        if (field.type === 'phone') {
-          const digits = el.value.replace(/\D/g, '');
-          valid = digits.length === 10;
-        } else if (field.type === 'select') {
-          valid = el.value !== '';
-        } else {
-          valid = el.value.trim() !== '';
-        }
-
-        if (!valid) {
-          el.classList.add('error');
-          errorEl.classList.add('show');
-          isValid = false;
-        } else {
-          el.classList.remove('error');
-          errorEl.classList.remove('show');
-        }
-      });
-
-      if ($('full_join').value === '否') {
-        $('formError').textContent = '很抱歉，本活動需全程參與（9:00-12:00），未能全程參與者無法報名。';
-        $('formError').classList.add('show');
-        isValid = false;
-      } else {
-        $('formError').classList.remove('show');
+  // ========== 組別狀態檢查 ==========
+  async function checkGroupStatus() {
+    try {
+      const response = await fetch(GAS_WEBAPP_URL + '?action=checkStatus');
+      if (response.ok) {
+        groupStatusData = await response.json();
+        updateGroupOptions();
+        updateFormNotice();
       }
-
-      return isValid;
+    } catch (e) {
+      console.log('無法取得組別狀態', e);
     }
+  }
 
-    function resetFormState() {
-      $('submitBtn').disabled = false;
-      $('submitBtn').innerHTML = '🎉 確認報名';
-      $('progress').classList.remove('show');
-    }
+  function updateGroupOptions() {
+    const sel = $('group');
+    if (!sel) return;
 
-    // ========== 主程式 ==========
-    document.addEventListener('DOMContentLoaded', function() {
-  // 查詢組別狀態
-  checkGroupStatus();
-  
-  // 漢堡選單
-      const navToggle = $('navToggle');
-      const navMenu = $('navMenu');
-      const navOverlay = $('navOverlay');
-
-      function closeNav() {
-        navToggle.classList.remove('active');
-        navMenu.classList.remove('active');
-        navOverlay.classList.remove('active');
-      }
-
-      navToggle.addEventListener('click', () => {
-        navToggle.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        navOverlay.classList.toggle('active');
-      });
-
-      navOverlay.addEventListener('click', closeNav);
-
-      navMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', closeNav);
-      });
-
-      // 海報 Lightbox
-      const posterTrigger = $('posterTrigger');
-      const lightbox = $('lightbox');
-      const lightboxClose = $('lightboxClose');
-
-      if (posterTrigger && lightbox) {
-        posterTrigger.addEventListener('click', () => {
-          lightbox.classList.add('show');
-        });
-
-        lightbox.addEventListener('click', (e) => {
-          if (e.target === lightbox || e.target === lightboxClose) {
-            lightbox.classList.remove('show');
-          }
-        });
-
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && lightbox.classList.contains('show')) {
-            lightbox.classList.remove('show');
-          }
-        });
-      }
-
-      // 複製地址
-      const copyAddressBtn = $('copyAddressBtn');
-      if (copyAddressBtn) {
-        copyAddressBtn.addEventListener('click', async () => {
-          const address = '台南市南區新建路12號';
-          try {
-            await navigator.clipboard.writeText(address);
-            copyAddressBtn.innerHTML = '✅ 已複製！';
-            setTimeout(() => { copyAddressBtn.innerHTML = '📋 複製地址'; }, 2000);
-          } catch (err) {
-            const textArea = document.createElement('textarea');
-            textArea.value = address;
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
-            copyAddressBtn.innerHTML = '✅ 已複製！';
-            setTimeout(() => { copyAddressBtn.innerHTML = '📋 複製地址'; }, 2000);
-          }
-        });
-      }
-
-      // 年級與組別連動
-      const childAgeSelect = $('child_age');
-      const groupSelect = $('group');
+    sel.querySelectorAll('option').forEach(option => {
+      const value = option.value;
+      const info = groupStatusData[value];
       
-      if (childAgeSelect && groupSelect) {
-        childAgeSelect.addEventListener('change', function() {
-          const age = this.value;
-          if (age === '幼兒園') {
-            groupSelect.value = '幼兒園組';
-          } else if (age === '國小低年級') {
-            groupSelect.value = '國小低年級組';
-          }
+      if (info) {
+        const statusText = STATUS_TEXT[info.status] || '';
+        option.textContent = value + statusText;
+        
+        if (info.status === 'waitlist') {
+          option.style.color = '#f59e0b';
+        } else if (info.status === 'nextround') {
+          option.style.color = '#8b5cf6';
+        }
+      }
+    });
+  }
+
+  function updateFormNotice() {
+    const notice = document.querySelector('.register-notice');
+    if (!notice) return;
+
+    // 移除既有的額外提示（避免重複）
+    const existingExtra = document.querySelector('.register-notice-extra');
+    if (existingExtra) existingExtra.remove();
+
+    const hasWaitlist = Object.values(groupStatusData).some(g => g.status === 'waitlist');
+    const hasNextround = Object.values(groupStatusData).some(g => g.status === 'nextround');
+
+    if (hasWaitlist || hasNextround) {
+      const extra = document.createElement('div');
+      extra.className = 'register-notice-extra';
+      
+      let html = '<div class="register-notice-title">📢 名額狀態說明</div>';
+      html += '<ul class="register-notice-list">';
+      
+      if (hasWaitlist) {
+        html += '<li>標示「接受候補」的組別，正取已滿，報名將列入候補名單</li>';
+      }
+      if (hasNextround) {
+        html += '<li>標示「報名下一場」的組別，本次已額滿，報名將列入下一場優先通知名單</li>';
+      }
+      
+      html += '</ul>';
+      extra.innerHTML = html;
+      
+      notice.parentNode.insertBefore(extra, notice.nextSibling);
+    }
+  }
+
+  // ========== 表單驗證 ==========
+  function validateForm(form) {
+    const errors = [];
+    
+    const parent = form.querySelector('[name="家長姓名"]');
+    const phone = form.querySelector('[name="聯絡電話"]');
+    const child = form.querySelector('[name="兒童姓名"]');
+    const age = form.querySelector('[name="兒童年齡"]');
+    const group = form.querySelector('[name="參賽組別"]');
+    const fullJoin = form.querySelector('[name="是否能全程參與"]');
+
+    if (!parent?.value.trim()) errors.push('請填寫家長姓名');
+    if (!phone?.value.trim()) errors.push('請填寫聯絡電話');
+    if (phone?.value && !/^09\d{8}$/.test(phone.value.trim())) {
+      errors.push('請填寫正確的手機號碼格式（09xxxxxxxx）');
+    }
+    if (!child?.value.trim()) errors.push('請填寫兒童姓名');
+    if (!age?.value) errors.push('請選擇兒童年齡');
+    if (!group?.value) errors.push('請選擇參賽組別');
+    if (!fullJoin?.value) errors.push('請確認是否能全程參與');
+    if (fullJoin?.value === '否') {
+      errors.push('本活動需全程參與（約 3.5 小時），若無法配合請等待下次活動');
+    }
+
+    return errors;
+  }
+
+  function showFormError(form, messages) {
+    let errorDiv = form.querySelector('.form-error');
+    if (!errorDiv) {
+      errorDiv = document.createElement('div');
+      errorDiv.className = 'form-error';
+      form.insertBefore(errorDiv, form.firstChild);
+    }
+    errorDiv.innerHTML = messages.map(m => `<p>⚠️ ${m}</p>`).join('');
+    errorDiv.style.display = 'block';
+    errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function hideFormError(form) {
+    const errorDiv = form.querySelector('.form-error');
+    if (errorDiv) errorDiv.style.display = 'none';
+  }
+
+  // ========== 主程式 ==========
+  document.addEventListener('DOMContentLoaded', function() {
+    
+    // 記錄瀏覽次數
+    fetch(GAS_WEBAPP_URL + '?action=logView').catch(() => {});
+
+    // 檢查組別狀態
+    checkGroupStatus();
+
+    // ===== 漢堡選單 =====
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const overlay = document.querySelector('.nav-overlay');
+
+    if (hamburger && navLinks) {
+      hamburger.addEventListener('click', function() {
+        this.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        if (overlay) overlay.classList.toggle('active');
+        document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+      });
+
+      // 點擊連結後關閉選單
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          navLinks.classList.remove('active');
+          if (overlay) overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+      });
+
+      // 點擊遮罩關閉選單
+      if (overlay) {
+        overlay.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          navLinks.classList.remove('active');
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
         });
       }
+    }
 
-      // 滾動動畫
-      const fadeElements = document.querySelectorAll('.fade-in');
+    // ===== 海報燈箱 =====
+    const posterTrigger = document.querySelector('.poster-trigger');
+    const lightbox = document.querySelector('.lightbox');
+    const lightboxClose = document.querySelector('.lightbox-close');
+    const lightboxOverlay = document.querySelector('.lightbox-overlay');
+
+    if (posterTrigger && lightbox) {
+      posterTrigger.addEventListener('click', () => {
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+
+      const closeLightbox = () => {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      };
+
+      if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+      if (lightboxOverlay) lightboxOverlay.addEventListener('click', closeLightbox);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+          closeLightbox();
+        }
+      });
+    }
+
+    // ===== 複製地址按鈕 =====
+    const copyBtn = document.querySelector('.copy-btn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async function() {
+        const address = this.getAttribute('data-address');
+        try {
+          await navigator.clipboard.writeText(address);
+          const originalText = this.textContent;
+          this.textContent = '✅ 已複製';
+          this.style.background = 'var(--accent)';
+          setTimeout(() => {
+            this.textContent = originalText;
+            this.style.background = '';
+          }, 2000);
+        } catch (e) {
+          alert('複製失敗，請手動複製地址');
+        }
+      });
+    }
+
+    // ===== 年齡與組別連動 =====
+    const ageSelect = $('age');
+    const groupSelect = $('group');
+
+    if (ageSelect && groupSelect) {
+      ageSelect.addEventListener('change', function() {
+        const age = parseInt(this.value);
+        if (!isNaN(age)) {
+          // 取得原始組別名稱（不含狀態文字）
+          const targetGroup = age <= 6 ? '幼兒園組' : '國小低年級組';
+          
+          // 找到對應的 option
+          groupSelect.querySelectorAll('option').forEach(option => {
+            if (option.value === targetGroup) {
+              groupSelect.value = targetGroup;
+            }
+          });
+        }
+      });
+    }
+
+    // ===== 滾動淡入動畫 =====
+    const fadeElements = document.querySelectorAll('.fade-in');
+    
+    if (fadeElements.length > 0 && 'IntersectionObserver' in window) {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.1 });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      });
 
       fadeElements.forEach(el => observer.observe(el));
+    } else {
+      // 不支援 IntersectionObserver 時直接顯示
+      fadeElements.forEach(el => el.classList.add('visible'));
+    }
 
-      // 表單送出
-      const form = $('registerForm');
-      const submitBtn = $('submitBtn');
-
-      form.addEventListener('submit', async (e) => {
+    // ===== 表單提交 =====
+    const form = document.querySelector('.register-form');
+    
+    if (form) {
+      form.addEventListener('submit', async function(e) {
         e.preventDefault();
-
-        if (!validateForm()) return;
-
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '⏳ 送出中…';
-        $('progress').classList.add('show');
-        $('formError').classList.remove('show');
-
-        const regId = makeRegId();
-
-        const formData = new URLSearchParams();
-        formData.append("活動代碼", EVENT_CODE);
-        formData.append("活動名稱", EVENT_NAME);
-        formData.append("報名序號", regId);
-        formData.append("家長姓名", $("parent_name").value.trim());
-        formData.append("聯絡電話（手機）", $("phone").value.trim());
-        formData.append("孩子姓名", $("child_name").value.trim());
-        formData.append("孩子年級／年齡", $("child_age").value);
-        formData.append("參賽組別", $("group").value);
-        formData.append("是否能全程參與（9:00–12:00）", $("full_join").value);
-        formData.append("就讀學校（選填）", $("school").value.trim());
-        formData.append("是否為台南市民", $("resident").value);
         
-        const userNote = ($("note").value || "").trim();
+        // 驗證表單
+        const errors = validateForm(form);
+        if (errors.length > 0) {
+          showFormError(form, errors);
+          return;
+        }
+        hideFormError(form);
+
+        // 取得按鈕並顯示載入狀態
+        const submitBtn = form.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = '報名中...';
+
+        // 準備資料
+        const regId = makeRegId();
         const tracking = getTracking();
-        const note = tracking ? (userNote ? `${userNote} ｜${tracking}` : tracking) : userNote;
-        formData.append("備註", note);
-        formData.append("追蹤", tracking);
-        formData.append("website", $("honeypot").value);
+        
+        const formData = new URLSearchParams();
+        formData.append('活動代碼', EVENT_CODE);
+        formData.append('活動名稱', EVENT_NAME);
+        formData.append('報名序號', regId);
+        formData.append('家長姓名', form.querySelector('[name="家長姓名"]').value.trim());
+        formData.append('聯絡電話', form.querySelector('[name="聯絡電話"]').value.trim());
+        formData.append('兒童姓名', form.querySelector('[name="兒童姓名"]').value.trim());
+        formData.append('兒童年齡', form.querySelector('[name="兒童年齡"]').value);
+        formData.append('參賽組別', form.querySelector('[name="參賽組別"]').value);
+        formData.append('是否能全程參與', form.querySelector('[name="是否能全程參與"]').value);
+        formData.append('學校/幼兒園', form.querySelector('[name="學校/幼兒園"]')?.value.trim() || '');
+        formData.append('居住區域', form.querySelector('[name="居住區域"]')?.value.trim() || '');
+        formData.append('備註', form.querySelector('[name="備註"]')?.value.trim() || '');
+        formData.append('utm_source', tracking.utm_source);
+        formData.append('utm_medium', tracking.utm_medium);
+        formData.append('utm_campaign', tracking.utm_campaign);
+        formData.append('referrer', tracking.referrer);
+        
+        // 蜜罐欄位
+        const honeypot = form.querySelector('[name="website"]');
+        formData.append('website', honeypot ? honeypot.value : '');
 
         try {
-           // 改用 fetch 以取得回傳狀態
-  const response = await fetch(GAS_WEBAPP_URL, {
-    method: "POST",
-    body: formData
-  });
-  
-  let regStatus = '已報名';
-  
-  if (response.ok) {
-    const result = await response.text();
-    // 回傳格式：OK:序號:狀態
-    if (result.startsWith('OK:')) {
-      const parts = result.split(':');
-      if (parts.length >= 3) {
-        regStatus = parts[2];
-      }
-    } else if (result.startsWith('ERROR:')) {
-      throw new Error(result.replace('ERROR:', ''));
-    }
-  }
-  
-  form.reset();
-  window.location.href = `${THANKS_URL}?rid=${encodeURIComponent(regId)}&status=${encodeURIComponent(regStatus)}`;
-} catch (err) {
-          $('formError').textContent = "送出失敗，請稍後再試";
-          $('formError').classList.add('show');
-          resetFormState();
+          const response = await fetch(GAS_WEBAPP_URL, {
+            method: 'POST',
+            body: formData
+          });
+
+          let regStatus = '已報名';
+
+          if (response.ok) {
+            const responseText = await response.text();
+            
+            if (responseText.startsWith('OK:')) {
+              const parts = responseText.split(':');
+              if (parts.length >= 3) {
+                regStatus = parts[2];
+              }
+            } else if (responseText.startsWith('ERROR:')) {
+              throw new Error(responseText.replace('ERROR:', ''));
+            }
+          }
+
+          // 成功，跳轉感謝頁
+          form.reset();
+          window.location.href = `${THANKS_URL}?rid=${encodeURIComponent(regId)}&status=${encodeURIComponent(regStatus)}`;
+
+        } catch (error) {
+          console.error('報名失敗', error);
+          showFormError(form, ['報名過程發生錯誤，請稍後再試或聯繫主辦單位']);
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
         }
       });
+    }
 
-      // 即時驗證
-      const formInputs = form.querySelectorAll('input, select, textarea');
-      formInputs.forEach(input => {
-        input.addEventListener('input', function() {
-          this.classList.remove('error');
-          const errorEl = $(this.id + '_error');
-          if (errorEl) errorEl.classList.remove('show');
-        });
-      });
-    });
+  }); // end DOMContentLoaded
+
+})();
   </script>
 </body>
 </html>
